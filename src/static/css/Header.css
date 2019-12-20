@@ -1,0 +1,19 @@
+header {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    background: yellowgreen;
+    height:70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header > * {
+    margin:10px;
+}
+
+a.title {
+    text-decoration: none;
+    color:black;
+}
