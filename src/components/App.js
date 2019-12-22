@@ -15,7 +15,7 @@ import Search from "./Search";
 
 class App extends Component{
   render (){
-      return (<div>
+      return (<div style={{whiteSpace:"pre-wrap"}}>
         <Header/>
         <BrowserRouter>
           <div className="mainContainer">

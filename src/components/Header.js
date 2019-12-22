@@ -161,7 +161,7 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography className={classes.title} variant="h6" noWrap href="/">
             <a href="/" className={classes.link}>MarWeb</a>
