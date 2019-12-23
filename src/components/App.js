@@ -12,9 +12,9 @@ import Channel from "./Channel";
 import CreateChannel from "./CreateChannel";
 import Notifications from "./Notifications";
 import Search from "./Search";
+import Post from "./post/Post";
 
 class App extends Component {
-
     state = {
       my_name : 'reza'
     };
@@ -34,6 +34,7 @@ class App extends Component {
                         <Route path="/createchannel" component={CreateChannel}/>
                         <Route path="/notifications" component={Notifications}/>
                         <Route path="/search/:searchQuery" component={Search}/>
+                        <Route path={"/post/:name"} component={Post}/>
                     </div>
                 </BrowserRouter>
             </div>
