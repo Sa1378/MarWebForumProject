@@ -14,8 +14,16 @@ import Container from "@material-ui/core/Container";
 import Comment from "./Comment";
 
 
-class Post extends Component {
+class PostPage extends Component {
 
+    state = {
+        comments: [
+            {id: 1, message: 'First Comment', avatar_src: 'src/static/img/wallpaper4.jpg', name: 'alireza'},
+            {id: 2, message: 'Second Comment', avatar_src: 'src/static/img/wallpaper4.jpg', name: 'alireza'},
+            {id: 3, message: 'Third Comment', avatar_src: 'src/static/img/wallpaper4.jpg', name: 'alireza'},
+            {id: 4, message: 'Fourth Comment', avatar_src: 'src/static/img/wallpaper4.jpg', name: 'alireza'},
+        ],
+    };
 
     render() {
         return (
@@ -24,7 +32,6 @@ class Post extends Component {
                     <CardHeader
                         avatar={
                             <Avatar aria-label="recipe">
-                                R
                             </Avatar>
                         }
                         action={
@@ -80,13 +87,14 @@ class Post extends Component {
                     </CardContent>
                 </Card>
 
-                <Comment/>
-                <Comment/>
-                <Comment/>
+                {this.state.comments.map(comment => <Comment
+                    key={comment.id}
+                    comment={comment}
+                />)}
 
             </Container>
         );
     }
 }
 
-export default Post;
+export default PostPage;
