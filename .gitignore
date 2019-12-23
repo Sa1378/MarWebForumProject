@@ -23,5 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+<<<<<<< HEAD
 package.json
 .gitignore
+=======
+package.json
+>>>>>>> first commit
