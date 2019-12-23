@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import "./static/css/index.css";
+import 'bootstrap/dist/css/bootstrap.css'
+
 
 ReactDOM.render((
-        <App/>
+    <App/>
 ), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
