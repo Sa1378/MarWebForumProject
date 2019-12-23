@@ -15,6 +15,12 @@ import Search from "./Search";
 import Post from "./post/Post";
 
 class App extends Component {
+
+    state = {
+        my_name: 'reza'
+    };
+
+
     render() {
         return (<div style={{whiteSpace: "pre-wrap"}}>
                 <Header/>
@@ -23,7 +29,7 @@ class App extends Component {
                         <Route exact path="/" component={MainPage}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
-                        <Route path="/profile/:username" component={Profile}/>
+                        <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>
                         <Route path="/editprofile" component={EditProfile}/>
                         <Route path="/newpost" component={NewPost}/>
                         <Route path="/channel/:channelName" component={Channel}/>
