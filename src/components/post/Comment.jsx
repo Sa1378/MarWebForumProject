@@ -17,17 +17,24 @@ import Container from "@material-ui/core/Container";
 
 class Comment extends Component {
 
+    state = {
+        message: 'alireza te bez beza',
+    };
+
+    componentDidMount() {
 
 
+    }
 
 
     render() {
         return (
-            <Container maxWidth={"md"} className="mt-3" >
+            <Container maxWidth={"md"} className="mt-3">
                 <Card>
                     <CardHeader
                         avatar={
-                            <Avatar aria-label="recipe">
+                            <Avatar aria-label="recipe" src={this.props.comment.avatar_src}
+                                    alt={this.props.comment.name}>
                                 R
                             </Avatar>
                         }
@@ -42,16 +49,10 @@ class Comment extends Component {
                     <CardContent>
                         <Typography paragraph>Method:</Typography>
                         <Typography paragraph>
-                            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                            minutes.
+                            {this.props.comment.id}
                         </Typography>
                         <Typography paragraph>
-                            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                            heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                            browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-                            and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                            pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-                            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+                            {this.props.comment.message}
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
