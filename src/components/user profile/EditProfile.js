@@ -1,10 +1,9 @@
 import React from "react";
 
-function EditProfile(){
+function EditProfile() {
     return (
-        <div>
-            This is Edit Profile Page!
-        </div>
+        <React.Fragment>
+        </React.Fragment>
     );
 }
 
