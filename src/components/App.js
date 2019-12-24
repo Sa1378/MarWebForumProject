@@ -28,7 +28,7 @@ class App extends Component {
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
                         <Route path="/profile/:username" my_name ={this.state.my_name} component={Profile}/>
-                        <Route path="/editprofile" component={EditProfile}/>
+                        <Route path="/editprofile/:username" component={EditProfile}/>
                         <Route path="/newpost" component={NewPost}/>
                         <Route path="/channel/:channelName" component={Channel}/>
                         <Route path="/createchannel" component={CreateChannel}/>

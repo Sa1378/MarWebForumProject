@@ -1,10 +1,15 @@
-import React from "react";
+import React, {Component} from "react";
 
-function EditProfile() {
-    return (
-        <React.Fragment>
-        </React.Fragment>
-    );
+class EditProfile extends Component {
+    render() {
+        return (
+            <React.Fragment>
+
+            </React.Fragment>
+        );
+    }
+
+
 }
 
 export default EditProfile;
