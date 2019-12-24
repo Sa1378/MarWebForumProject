@@ -19,18 +19,18 @@ class PostCard extends Component {
 
     render() {
         return (
-            <Card>
+            <Card className="mt-3">
                 <CardActionArea>
                     <CardMedia
-                        component={}
-                        alt={}
-                        height={}
-                        image={}
-                        title={}
+                        // component={}
+                        // alt={}
+                        // height={}
+                        // image={}
+                        // title={}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Lizard
+                            {this.props.title}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
