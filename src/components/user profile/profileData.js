@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "@material-ui/core/Button";
+import TransitionsModal from "../Modal";
 
 
 class Data extends Component {
     render() {
+        function f() {
+            console.log("salaaaaaaaaaaaaaaaaaaa")
+        }
+
         return (
             <React.Fragment>
                 <div className="d-flex flex-column">
@@ -13,16 +19,16 @@ class Data extends Component {
 
                     <div className='d-flex justify-content-between px-5 pb-3'>
                         <div className="d-flex flex-column">
-                            <b>Posts</b>
+                            <Button>Posts</Button>
                             <b className="d-flex justify-content-center">{this.props.numberOfPosts}</b>
                         </div>
                         <div className="d-flex flex-column">
-                            <b>Followers</b>
+                            <TransitionsModal content="account" buttonName="follower" variant=""/>
                             <b className="d-flex justify-content-center">{this.props.numberOfFollower}</b>
 
                         </div>
                         <div className="d-flex flex-column">
-                            <b>Following</b>
+                            <TransitionsModal content="account" buttonName="following" variant=""/>
                             <b className="d-flex justify-content-center">{this.props.numberOfFollowing}</b>
 
                         </div>
@@ -34,6 +40,7 @@ class Data extends Component {
 
 
 }
+
 export default Data
 
 

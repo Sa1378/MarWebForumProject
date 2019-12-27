@@ -12,7 +12,7 @@ import Channel from "./Channel";
 import CreateChannel from "./CreateChannel";
 import Notifications from "./Notifications";
 import Search from "./Search";
-import Post from "./post/Post";
+import Post from "./post/PostPage";
 
 class App extends Component {
     state = {

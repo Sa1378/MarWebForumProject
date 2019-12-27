@@ -8,7 +8,7 @@ class Follow extends Component {
         return (
             <React.Fragment>
                 <div className='d-flex justify-content-center pb-4'>
-                    {this.format}
+                    {this.format()}
                 </div>
             </React.Fragment>
         );
@@ -19,12 +19,15 @@ class Follow extends Component {
             return;
         } else {
             if (this.props.followed === false) {
-                return <Button variant="contained" color="primary">Follow</Button>
-            } else return <Button variant="contained" color="secondary">Unfollow</Button>
+                return <Button className="d-flex flex-column-reverse" variant="contained"
+                               color="primary">Follow</Button>
+            } else return <Button className="d-flex flex-column-reverse" variant="contained"
+                                  color="secondary">Unfollow</Button>
         }
     }
 
 }
+
 export default Follow
 
 
