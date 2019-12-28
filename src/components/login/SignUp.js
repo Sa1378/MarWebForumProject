@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 
-class EditProfile extends Component {
+
+class SignUp extends Component {
     render() {
         return (
             <React.Fragment>
@@ -8,8 +9,4 @@ class EditProfile extends Component {
             </React.Fragment>
         );
     }
-
-
 }
-
-export default EditProfile;

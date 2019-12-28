@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import SingIn from "./login/SingIn";
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <Typography
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -56,16 +57,47 @@ export default function SimpleTabs() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab label="Posts" {...a11yProps(0)} />
-                    <Tab label="Channels" {...a11yProps(1)} />
+                    <Tab label={props.name1} {...a11yProps(0)} />
+                    <Tab label={props.name2} {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                POSTS
+                {loginOrProfileFirstTab(props)}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                CHANNELS
+                {loginOrProfileSecondTab(props)}
             </TabPanel>
         </div>
     );
+
+    function loginOrProfileFirstTab(props) {
+        if (props.page === 'profile')
+            return post();
+        else return singIn()
+    }
+
+    function loginOrProfileSecondTab(props) {
+        if (props.page === 'profile')
+            return channel();
+        else return signUp()
+    }
+
+
+    function post() {
+        return 'Post'
+    }
+
+    function channel() {
+        return 'Channel'
+    }
+
+    function singIn() {
+        return <SingIn/>
+    }
+
+    function signUp() {
+        return 'sign up'
+    }
+
+
 }
