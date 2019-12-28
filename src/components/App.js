@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import "../static/css/App.css";
 import Header from "./Header";
-import MainPage from "./main-page/MainPage.js"
-import Login from "./Login";
+import MainPage from "./MainPage";
+import Login from "./login/Login";
 import Register from "./Register"
-import Profile from "./user-profile/Profile";
-import EditProfile from "./user-profile/EditProfile";
+import Profile from "./user profile/Profile";
+import EditProfile from "./user profile/EditProfile";
 import NewPost from "./NewPost";
 import CreateChannel from "./CreateChannel";
 import Notifications from "./Notifications";
