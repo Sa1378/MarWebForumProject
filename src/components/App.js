@@ -13,6 +13,7 @@ import Notifications from "./Notifications";
 import Search from "./Search";
 import PostPage from "./post/PostPage";
 import Channel from "./channel/Channel";
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
     state = {

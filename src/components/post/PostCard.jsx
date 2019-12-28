@@ -19,7 +19,7 @@ class PostCard extends Component {
 
     render() {
         return (
-            <Card className="mt-3">
+            <Card className="mt-3 w-100">
                 <CardActionArea>
                     <CardMedia
                         // component={}
@@ -33,8 +33,7 @@ class PostCard extends Component {
                             {this.props.title}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
+                            {this.props.postSummary}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
