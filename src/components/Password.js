@@ -53,7 +53,7 @@ export default function InputAdornments(props) {
     };
 
     return (
-            <FormControl className='mx-5' variant="outlined">
+            <FormControl className='mx-5 mt-3' variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">{props.label}</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password"
