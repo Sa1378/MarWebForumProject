@@ -6,7 +6,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ImageAvatars from "./Avatar";
 import SimpleTabs from "./postOrChannel";
 import Data from "./profileData";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import Follow from "./follow";
 
 
