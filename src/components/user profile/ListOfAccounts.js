@@ -34,7 +34,7 @@ const ListOfAccounts = () => {
                     <GridList cellHeight={180} className={classes.gridList}>
                         <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
                         </GridListTile>
-                            <p>list of accounts</p>
+                        <p>list of accounts</p>
                     </GridList>
                 </Typography>
             </Container>

@@ -3,7 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import ImageAvatars from "./Avatar";
-import SimpleTabs from "./postOrChannel";
+import SimpleTabs from "../TwoTab";
 import Data from "./profileData";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Follow from "./follow";
@@ -45,7 +45,7 @@ class Profile extends Component {
                               numberOfFollowing={this.state.numberOfFollowing}/>
                         <Follow followed={this.state.followed} my_name={this.state.my_name}
                                 username={this.state.username}/>
-                        <SimpleTabs/>
+                        <SimpleTabs name1="Posts" name2="Channels" page="profile"/>
                     </Typography>
                 </Container>
             </React.Fragment>

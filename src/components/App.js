@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import "../static/css/App.css";
 import Header from "./Header";
 import MainPage from "./MainPage";
-import Login from "./Login";
+import Login from "./login/Login";
 import Register from "./Register"
 import Profile from "./user profile/Profile";
 import EditProfile from "./user profile/EditProfile";

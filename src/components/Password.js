@@ -13,23 +13,24 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-    withoutLabel: {
-        marginTop: theme.spacing(3),
-    },
-    textField: {
-        width: 200,
-    },
-}));
+
 
 export default function InputAdornments(props) {
+    const useStyles = makeStyles(theme => ({
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        margin: {
+            margin: theme.spacing(1),
+        },
+        withoutLabel: {
+            marginTop: theme.spacing(3),
+        },
+        textField: {
+            width: 200,
+        },
+    }));
     const classes = useStyles();
     const [values, setValues] = React.useState({
         amount: '',
@@ -52,8 +53,7 @@ export default function InputAdornments(props) {
     };
 
     return (
-        <div className={classes.root + " mx-5"}>
-            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+            <FormControl className='mx-5' variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">{props.label}</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password"
@@ -75,7 +75,6 @@ export default function InputAdornments(props) {
                     labelWidth={withoutLabel()}
                 />
             </FormControl>
-        </div>
     );
 
     function withoutLabel() {

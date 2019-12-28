@@ -35,8 +35,8 @@ class EditProfile extends Component {
                                 <InputAdornments label="Repeat Password"/>
                             </div>
                             <div className="d-flex justify-content-center flex-column-reverse mt-5 mx-5">
-                            <Button className="edit_password" variant="contained" color="primary">Edit
-                                Password</Button>
+                                <Button className="edit_password" variant="contained" color="primary">Edit
+                                    Password</Button>
                             </div>
                         </form>
                     </Typography>
