@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import ImageAvatars from "./Avatar";
 import SimpleTabs from "../TwoTab";
 import Data from "./profileData";
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Follow from "./follow";
 import TransitionsModal from "../Modal";
 
