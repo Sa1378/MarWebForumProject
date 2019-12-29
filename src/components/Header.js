@@ -1,5 +1,4 @@
 import React from "react";
-import "../static/css/Header.css";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -78,6 +77,10 @@ const useStyles = makeStyles(theme => ({
   link: {
       textDecoration:"none",
       color:"white",
+      "&:hover":{
+        color:"white",
+        textDecoration:"none",
+      }
   },
   toolbar: {
       width:"100%",
@@ -92,6 +95,11 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up('sm')]: {        
           maxHeight:"64px",
       },
+  },
+  icon: {
+    "&:focus":{
+      outline:"none",
+    }
   }
 }));
 
@@ -130,7 +138,7 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.icon}>
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -138,7 +146,7 @@ export default function Header() {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton aria-label="show 11 new notifications" color="inherit" className={classes.icon}>
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -146,7 +154,7 @@ export default function Header() {
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
+        <IconButton className={classes.icon}
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
@@ -181,18 +189,18 @@ export default function Header() {
           </div>
           <div className={classes.grow}/>
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            <IconButton aria-label="show 4 new mails" color="inherit" className={classes.icon}>
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon}>
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
            
-            <IconButton
+            <IconButton className={classes.icon}
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
