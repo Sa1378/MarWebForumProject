@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {Container} from "@material-ui/core";
 import PostList from "../post/PostList";
-
+import ChannelInfo from "./ChannelInfo";
+import {StickyContainer, Sticky} from 'react-sticky';
 
 class Channel extends Component {
 
@@ -18,8 +19,16 @@ class Channel extends Component {
             {id: 4, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
             {id: 5, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
             {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
+            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
 
-        ]
+        ],
+        offset: 0,
     };
 
     postListStyle = {
@@ -30,8 +39,16 @@ class Channel extends Component {
 
     render() {
         return (
-            <Container className="d-flex justify-content-center" fixed>
-                <PostList postListStyle={this.postListStyle} postCards={this.state.postCards}/>
+            <Container className="d-flex justify-content-center">
+                <Container>
+                    <ChannelInfo/>
+                </Container>
+                <Container className="">
+                    <PostList postListStyle={this.postListStyle} postCards={this.state.postCards}/>
+                </Container>
+                <Container>
+                    <ChannelInfo/>
+                </Container>
             </Container>
         )
     }
