@@ -13,30 +13,36 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
 
 
 class PostCard extends Component {
 
+
+
+
     render() {
         return (
             <Card className="mt-3 w-100">
-                <CardActionArea>
-                    <CardMedia
-                        // component={}
-                        // alt={}
-                        // height={}
-                        // image={}
-                        // title={}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {this.props.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {this.props.postSummary}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
+                <Link to={'/post/' + this.props.key} style={this.style} className="nav-link">
+                    <CardActionArea>
+                        <CardMedia
+                            // component={}
+                            // alt={}
+                            // height={}
+                            // image={}
+                            // title={}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {this.props.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {this.props.postSummary}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Link>
                 <CardActions>
                     <Button size="small" color="primary">
                         Share
