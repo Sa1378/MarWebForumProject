@@ -3,6 +3,7 @@ import {Container} from "@material-ui/core";
 import PostList from "../post/PostList";
 import ChannelInfo from "./ChannelInfo";
 import {StickyContainer, Sticky} from 'react-sticky';
+import ChannelsList from "./ChannelsList";
 
 class Channel extends Component {
 
@@ -28,6 +29,13 @@ class Channel extends Component {
             {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3},
 
         ],
+        channels: [
+            {id: 1, title: 'alireza', creator: 'MarWeb studio'},
+            {id: 2, title: 'alireza', creator: 'MarWeb studio'},
+            {id: 3, title: 'alireza', creator: 'MarWeb studio'},
+            {id: 4, title: 'alireza', creator: 'MarWeb studio'},
+            {id: 5, title: 'alireza', creator: 'MarWeb studio'},
+        ],
         offset: 0,
     };
 
@@ -47,7 +55,7 @@ class Channel extends Component {
                     <PostList postListStyle={this.postListStyle} postCards={this.state.postCards}/>
                 </Container>
                 <Container>
-                    <ChannelInfo/>
+                    <ChannelsList channels={this.state.channels}/>
                 </Container>
             </Container>
         )
