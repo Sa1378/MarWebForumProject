@@ -10,7 +10,7 @@ class PostList extends Component {
         return (
             <GridList style={this.props.postListStyle}>
                 {this.props.postCards.map(postCard => (
-                    <PostCard key={postCard.id}
+                    <PostCard postCard={postCard} key={postCard.id}
                               title={postCard.title}
                               postSummary={postCard.postSummary}/>
                 ))}

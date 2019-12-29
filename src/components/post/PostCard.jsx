@@ -19,12 +19,10 @@ import {Link} from "react-router-dom";
 class PostCard extends Component {
 
 
-
-
     render() {
         return (
             <Card className="mt-3 w-100">
-                <Link to={'/post/' + this.props.key} style={this.style} className="nav-link">
+                <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia
                             // component={}
