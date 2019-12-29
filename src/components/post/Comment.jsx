@@ -13,6 +13,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
 
 
 class Comment extends Component {
@@ -55,6 +56,7 @@ class Comment extends Component {
                             {this.props.comment.message}
                         </Typography>
                     </CardContent>
+                    <Divider variant="middle"/>
                     <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
                             <FavoriteIcon/>

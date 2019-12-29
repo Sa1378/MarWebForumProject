@@ -9,11 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Container from "@material-ui/core/Container";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
 
 
 class PostCard extends Component {
@@ -41,6 +40,7 @@ class PostCard extends Component {
                         </CardContent>
                     </CardActionArea>
                 </Link>
+                <Divider variant="middle" />
                 <CardActions>
                     <Button size="small" color="primary">
                         Share

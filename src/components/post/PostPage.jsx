@@ -12,6 +12,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import Comment from "./Comment";
+import Divider from "@material-ui/core/Divider";
 
 
 class PostPage extends Component {
@@ -65,6 +66,7 @@ class PostPage extends Component {
                                 <ShareIcon/>
                             </IconButton>
                         </CardActions>
+                        <Divider variant="middle" />
                         <CardContent>
                             <Typography paragraph>Method:</Typography>
                             <Typography paragraph>
@@ -90,6 +92,7 @@ class PostPage extends Component {
                                 Set aside off of the heat to let rest for 10 minutes, and then serve.
                             </Typography>
                         </CardContent>
+
                     </Card>
 
                     {this.state.comments.map(comment => <Comment
