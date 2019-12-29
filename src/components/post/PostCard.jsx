@@ -9,35 +9,38 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Container from "@material-ui/core/Container";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
 
 
 class PostCard extends Component {
 
+
     render() {
         return (
-            <Card>
-                <CardActionArea>
-                    <CardMedia
-                        component={}
-                        alt={}
-                        height={}
-                        image={}
-                        title={}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
+            <Card className="mt-3 w-100">
+                <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
+                    <CardActionArea>
+                        <CardMedia
+                            // component={}
+                            // alt={}
+                            // height={}
+                            // image={}
+                            // title={}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {this.props.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {this.props.postSummary}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Link>
+                <Divider variant="middle" />
                 <CardActions>
                     <Button size="small" color="primary">
                         Share
