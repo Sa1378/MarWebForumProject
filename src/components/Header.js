@@ -1,5 +1,5 @@
-import React from "react";
-import { fade, makeStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { fade, withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,8 +13,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { render } from "@testing-library/react";
 
-const useStyles = makeStyles(theme => ({
+const styles =theme=>({
   grow: {
     flexGrow: 2,
   },
@@ -22,10 +23,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
   },
   search: {
     position: 'relative',
@@ -35,12 +33,8 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
-    },
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -58,21 +52,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
   },
   link: {
       textDecoration:"none",
@@ -91,81 +70,47 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
       
-      maxHeight:"56px",
-      [theme.breakpoints.up('sm')]: {        
-          maxHeight:"64px",
-      },
+      maxHeight:"64px",
   },
   icon: {
     "&:focus":{
       outline:"none",
     }
+  },
+  iconContainer:{
+    display:"flex",
   }
-}));
+});
 
-export default function Header() {
-  const classes = useStyles();
-  const [,setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+class Header extends Component {
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = event => {
-    setAnchorEl(event.currentTarget);
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleProfileClick=this.handleProfileClick.bind(this);
+}
+componentDidMount(){
+  var searchTextField=document.getElementById("searchTextField");
+  searchTextField.addEventListener("keypress",event=>{
+      var key=event.keyCode;
+      console.log(key)
+      if(key===13)
+      {
+          window.location.href="/search/"+searchTextField.value;
+      //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
+          searchTextField.value="";
+      }
+  });
+}
+
+  handleProfileClick(){
     window.location.href="/profile";
-  };
+  }
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-
-  const handleMobileMenuOpen = event => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.icon}>
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit" className={classes.icon}>
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton className={classes.icon}
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  
+  render(){
+    const {classes} = this.props;
 
   return (
     <div className={classes.grow}>
@@ -184,16 +129,12 @@ export default function Header() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              id="searchTextField"
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
           <div className={classes.grow}/>
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit" className={classes.icon}>
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+          <div className={classes.iconContainer}>
             <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon}>
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
@@ -203,32 +144,22 @@ export default function Header() {
             <IconButton className={classes.icon}
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={this.handleProfileClick}
               color="inherit"
             >
                 
                   <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
     </div>
   );
+            }
 }
+
+export default withStyles(styles)(Header);
 
 
 

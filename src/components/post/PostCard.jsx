@@ -15,7 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom'
 
 
-const styles={
+const styles=theme=>({
     card: {
       display:"flex",
       flexDirection:"column",
@@ -64,7 +64,7 @@ const styles={
             color:"gray",
         }
     }
-  };
+  });
   
 
 class PostCard extends Component{
