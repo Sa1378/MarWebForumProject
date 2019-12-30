@@ -6,14 +6,16 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import { render } from "@testing-library/react";
+import Box from '@material-ui/core/Box';
+import Popover from '@material-ui/core/Popover';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import PeopleIcon from '@material-ui/icons/People';
+
+
 
 const styles =theme=>({
   grow: {
@@ -79,30 +81,47 @@ const styles =theme=>({
   },
   iconContainer:{
     display:"flex",
+  },
+  notifIcon:{
+    marginRight:"2px",
+    display:"inline",
+  },
+  notifMessage:{
+    display:"inlien",
+  },
+  followIcon:{
+    color:"Dodgerblue",
+  },
+  commentIcon:{
+    color:"yellowgreen",
+  },
+  notifBox:{
+    "&:hover":{
+      backgroundColor:"rgb(240,240,240)",
+      cursor:"pointer",
+    }
   }
 });
 
 class Header extends Component {
-
-
   constructor(props) {
     super(props);
     this.state = {};
     this.handleProfileClick=this.handleProfileClick.bind(this);
-}
-componentDidMount(){
-  var searchTextField=document.getElementById("searchTextField");
-  searchTextField.addEventListener("keypress",event=>{
-      var key=event.keyCode;
-      console.log(key)
-      if(key===13)
-      {
-          window.location.href="/search/"+searchTextField.value;
-      //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
-          searchTextField.value="";
-      }
-  });
-}
+  }
+  componentDidMount(){
+    var searchTextField=document.getElementById("searchTextField");
+    searchTextField.addEventListener("keypress",event=>{
+        var key=event.keyCode;
+        console.log(key)
+        if(key===13)
+        {
+            window.location.href="/search/"+searchTextField.value;
+        //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
+            searchTextField.value="";
+        }
+    });
+  }
 
   handleProfileClick(){
     window.location.href="/profile";
@@ -135,11 +154,38 @@ componentDidMount(){
           </div>
           <div className={classes.grow}/>
           <div className={classes.iconContainer}>
-            <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon}>
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+          <PopupState variant="popover" popupId="demo-popup-popover">
+              {popupState => (
+                <div>
+                  <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon} {...bindTrigger(popupState)}>
+                    <Badge badgeContent={3} color="secondary">
+                     <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  <Popover
+                    {...bindPopover(popupState)}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                    >
+                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Mahdis";}}>
+                      <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Mahdis followed you
+                    </Box>
+                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/post/1";}}>
+                      <ChatBubbleIcon className={classes.notifIcon+" "+classes.commentIcon}/> Mohammad commented on your post
+                    </Box>
+                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Akbar";}}>
+                      <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Akbar followed you
+                    </Box>
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
            
             <IconButton className={classes.icon}
               edge="end"
