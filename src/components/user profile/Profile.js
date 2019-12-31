@@ -19,11 +19,108 @@ class Profile extends Component {
         numberOfFollower: 354,
         numberOfFollowing: 323,
         followed: false,
-        follower:[
-            {name :'rez' , }
-        ]
-
+        follower: [
+            {name: 'rez',}
+        ], channels: [
+            {id: 1, title: '1', creator: 'MarWeb studio'},
+            {id: 2, title: '2', creator: 'MarWeb studio'},
+            {id: 3, title: '3', creator: 'MarWeb studio'},
+            {id: 4, title: '4', creator: 'MarWeb studio'},
+            {id: 5, title: '4', creator: 'MarWeb studio'},
+        ],postCards: [
+            {
+                id: 1,
+                author: 'alireza',
+                title: 'Hello World',
+                postSummary: 'this message is bullshit\nasfjasfjasf ',
+                liked: true,
+            },
+            {
+                id: 2,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
+                liked: false,
+            },
+            {
+                id: 3,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 4,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 5,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 6,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 7,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 8,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 9,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 10,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 11,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 12,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 13,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            }]
     };
+
 
     componentDidMount() {
         this.setState(() => this.props.match.params);
@@ -45,7 +142,8 @@ class Profile extends Component {
                               numberOfFollowing={this.state.numberOfFollowing}/>
                         <Follow followed={this.state.followed} my_name={this.state.my_name}
                                 username={this.state.username}/>
-                        <SimpleTabs name1="Posts" name2="Channels" page="profile"/>
+                        <SimpleTabs name1="Posts" name2="Channels" page="profile" posts={this.state.postCards}
+                                    channels={this.state.channels}/>
                     </Typography>
                 </Container>
             </React.Fragment>
