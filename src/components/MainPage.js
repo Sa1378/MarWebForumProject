@@ -124,7 +124,7 @@ class MainPage extends Component{
         </CardActions>
         </Card>
         )}
-    };
+    }
     return (
       <div className={classes.cardContainer+" "+classes.preWrap}>
           <Post classes={classes} author="Mehrdad" date="September 14, 2019" previewText="Why painful the sixteen how minuter looking nor.
