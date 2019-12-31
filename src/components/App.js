@@ -5,8 +5,8 @@ import Header from "./header/Header";
 import MainPage from "./main-page/MainPage";
 import Login from "./login/Login";
 import Register from "./Register"
-import Profile from "./user-profile/Profile";
-import EditProfile from "./user-profile/EditProfile";
+import Profile from "./user profile/Profile";
+import EditProfile from "./user profile/EditProfile";
 import NewPost from "./NewPost";
 import CreateChannel from "./CreateChannel";
 import Notifications from "./Notifications";

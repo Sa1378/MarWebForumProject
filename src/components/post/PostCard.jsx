@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,150 +7,92 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import CardActionArea from "@material-ui/core/CardActionArea";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
+import {red} from "@material-ui/core/colors";
+import LikeIcon from "./LikeIcon";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Link } from 'react-router-dom'
 
-
-const styles=theme=>({
+const styles = {
+    cardContainer: {
+        display: "flex",
+        flexWrap: "wrap",
+    },
     card: {
-      display:"flex",
-      flexDirection:"column",
-      width: 310,
-      height: 290,
-      margin:"0px 30px 50px 30px",
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: 345,
+        margin: "0px 50px 50px 50px",
     },
     grow: {
-        flexGrow:2,
+        flexGrow: 2,
     },
     media: {
-      display:"none", //TODO
-      height: 0,
-      paddingTop: '56.25%', // 16:9
+        display: "none",
+        height: 0,
+        paddingTop: '56.25%', // 16:9
     },
     avatar: {
-      backgroundColor: red[500],
+        backgroundColor: red[500],
     },
     liked: {
-        color:"red",
+        color: "red",
     },
     notliked: {
-        color:"black",
+        color: "black",
     },
-    cardContent: {
-        overflow:"hidden",
-    },
-    icon: {
-        "&:focus":{
-            outline:"none",
-        }
-    },
-    link: {
-        textDecoration:"none",
-        color:"black",
-        "&:hover":{
-            textDecoration:"none",
-            color:"black",
-        }
-    },
-    title: {
-    },
-    author: {
-        color:"gray",
-        "&:hover":{
-            color:"gray",
-        }
+    preWrap: {
+        whiteSpace: "pre-wrap",
     }
-  });
-  
+};
 
-class PostCard extends Component{
-        
-    constructor(props) {
-        super(props);
-        this.state = {liked: false};
-        this.likePost = this.likePost.bind(this);
-    }
-    likePost(){
-        console.log(this.state);
-        this.setState({liked:!this.state.liked});
-        console.log(this.state);
-    }
-
-    render(){
-    
-    class LikeIcon extends Component {
-        render(){
-            const {classes,liked}=this.props;
-            if(liked===true)
-            {
-                return (
-                    <FavoriteIcon className={classes.liked}/>
-                );
-            }
-            else{
-                return (
-                    <FavoriteIcon className={classes.notliked}/>
-                );
-            }
-        }
-    }
-
-
-    const {classes,id,title,author,previewText}=this.props;
-    return (
-    <Card className={classes.card+" "+classes.preWrap}>
-    <CardHeader
-      avatar={
-        <Avatar aria-label="recipe" className={classes.avatar}>
-           M
-        </Avatar>
-      }
-      action={
-        <IconButton aria-label="settings" className={classes.icon}>
-           <MoreVertIcon />
-         </IconButton>
-      }
-      title={<Link className={classes.link+" "+classes.title} to={"/post/"+id}>{title}</Link>}
-      titleTypographyProps={{fontSize:"20px" }}
-      subheader={<Link className={classes.link+" "+classes.author} to={"/profile/"+author}>{author}</Link>}
-    />
-    <CardMedia
-      className={classes.media}
-      image="/static/images/cards/paella.jpg"
-      title="Paella dish"
-    />
-    <CardContent className={classes.cardContent}>
-      <Typography variant="body2" color="textSecondary" component="p">
-          {previewText}
-      </Typography>
-    </CardContent>
-    <div className={classes.grow}/>
-    <CardActions disableSpacing>    
-      <IconButton aria-label="like" onClick={this.likePost} className={classes.icon}>
-          <LikeIcon classes={classes} liked={this.state.liked}/>
-      </IconButton>
-      <IconButton aria-label="share" className={classes.icon}>
-        <ShareIcon />
-      </IconButton>
-    </CardActions>
-    </Card>
-    )}
-}
-
-export default withStyles(styles)(PostCard);
-
-/*
 
 class PostCard extends Component {
+
+    linkStyle = {
+        textDecoration: "none",
+        color: "black",
+        "&:hover": {
+            textDecoration: "none",
+            color: "black",
+        }
+    };
+
+    authorStyle = {
+        color: "gray",
+        textDecoration: "none",
+        "&:hover": {
+            textDecoration: "none",
+            color: "black",
+        }
+    };
 
 
     render() {
         return (
             <Card className="mt-3 w-100">
-                <Link to={'/post/' + this.props.id} style={this.style} className="nav-link">
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="recipe">
+                            M
+                        </Avatar>
+                    }
+                    action={
+                        <IconButton aria-label="settings">
+                            <MoreVertIcon/>
+                        </IconButton>
+                    }
+                    title={<Link style={this.linkStyle} className="nav-link"
+                                 to={"/post/" + this.props.postCard.id}>{this.props.postCard.title}</Link>}
+                    titleTypographyProps={{fontSize: "20px"}}
+                    subheader={<Link style={this.authorStyle} className="nav-link"
+                                     to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
+                />
+                <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia
                             // component={}
@@ -170,7 +111,7 @@ class PostCard extends Component {
                         </CardContent>
                     </CardActionArea>
                 </Link>
-                <Divider variant="middle" />
+                <Divider variant="middle"/>
                 <CardActions>
                     <Button size="small" color="primary">
                         Share
@@ -178,8 +119,9 @@ class PostCard extends Component {
                     <Button size="small" color="primary">
                         Learn More
                     </Button>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon/>
+                    <IconButton onClick={() => this.props.onLike(this.props.postCard.id)} aria-label="add to favorites">
+                        <LikeIcon
+                            liked={this.props.postCard.liked}/>
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon/>
@@ -192,4 +134,3 @@ class PostCard extends Component {
 }
 
 export default PostCard;
-*/

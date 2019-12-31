@@ -25,7 +25,7 @@ const styles =theme=>({
     marginRight: theme.spacing(2),
   },
   title: {
-      display: 'block',
+    display: 'block',
   },
   search: {
     position: 'relative',
@@ -35,8 +35,8 @@ const styles =theme=>({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
-      marginLeft: theme.spacing(3),
-      width: 'auto',
+    marginLeft: theme.spacing(3),
+    width: 'auto',
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -56,23 +56,23 @@ const styles =theme=>({
     width: '100%',
   },
   link: {
-      textDecoration:"none",
+    textDecoration:"none",
+    color:"white",
+    "&:hover":{
       color:"white",
-      "&:hover":{
-        color:"white",
-        textDecoration:"none",
-      }
+      textDecoration:"none",
+    }
   },
   toolbar: {
-      width:"100%",
-      boxSizing:"border-box",
-      paddingLeft:"10px",
-      paddingRight:"10px",
-      margin:"0px",
+    width:"100%",
+    boxSizing:"border-box",
+    paddingLeft:"10px",
+    paddingRight:"10px",
+    margin:"0px",
   },
   appBar: {
-      
-      maxHeight:"64px",
+
+    maxHeight:"64px",
   },
   icon: {
     "&:focus":{
@@ -112,14 +112,14 @@ class Header extends Component {
   componentDidMount(){
     var searchTextField=document.getElementById("searchTextField");
     searchTextField.addEventListener("keypress",event=>{
-        var key=event.keyCode;
-        console.log(key)
-        if(key===13)
-        {
-            window.location.href="/search/"+searchTextField.value;
+      var key=event.keyCode;
+      console.log(key)
+      if(key===13)
+      {
+        window.location.href="/search/"+searchTextField.value;
         //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
-            searchTextField.value="";
-        }
+        searchTextField.value="";
+      }
     });
   }
 
@@ -127,82 +127,82 @@ class Header extends Component {
     window.location.href="/profile";
   }
 
-  
+
   render(){
     const {classes} = this.props;
 
-  return (
-    <div className={classes.grow}>
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography className={classes.title} variant="h6" noWrap href="/">
-            <a href="/" className={classes.link}>MarWeb</a>
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              id="searchTextField"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.grow}/>
-          <div className={classes.iconContainer}>
-          <PopupState variant="popover" popupId="demo-popup-popover">
-              {popupState => (
-                <div>
-                  <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon} {...bindTrigger(popupState)}>
-                    <Badge badgeContent={3} color="secondary">
-                     <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
-                  <Popover
-                    {...bindPopover(popupState)}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                    >
-                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Mahdis";}}>
-                      <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Mahdis followed you
-                    </Box>
-                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/post/1";}}>
-                      <ChatBubbleIcon className={classes.notifIcon+" "+classes.commentIcon}/> Mohammad commented on your post
-                    </Box>
-                    <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Akbar";}}>
-                      <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Akbar followed you
-                    </Box>
-                  </Popover>
+    return (
+        <div className={classes.grow}>
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar className={classes.toolbar}>
+              <Typography className={classes.title} variant="h6" noWrap href="/">
+                <a href="/" className={classes.link}>MarWeb</a>
+              </Typography>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
                 </div>
-              )}
-            </PopupState>
-           
-            <IconButton className={classes.icon}
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              onClick={this.handleProfileClick}
-              color="inherit"
-            >
-                
+                <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    id="searchTextField"
+                    inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+              <div className={classes.grow}/>
+              <div className={classes.iconContainer}>
+                <PopupState variant="popover" popupId="demo-popup-popover">
+                  {popupState => (
+                      <div>
+                        <IconButton aria-label="show 17 new notifications" color="inherit" className={classes.icon} {...bindTrigger(popupState)}>
+                          <Badge badgeContent={3} color="secondary">
+                            <NotificationsIcon />
+                          </Badge>
+                        </IconButton>
+                        <Popover
+                            {...bindPopover(popupState)}
+                            anchorOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                            }}
+                        >
+                          <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Mahdis";}}>
+                            <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Mahdis followed you
+                          </Box>
+                          <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/post/1";}}>
+                            <ChatBubbleIcon className={classes.notifIcon+" "+classes.commentIcon}/> Mohammad commented on your post
+                          </Box>
+                          <Box p={2} className={classes.notifBox} onClick={() => {window.location.href="/profile/Akbar";}}>
+                            <PeopleIcon className={classes.notifIcon+" "+classes.followIcon}/> Akbar followed you
+                          </Box>
+                        </Popover>
+                      </div>
+                  )}
+                </PopupState>
+
+                <IconButton className={classes.icon}
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            onClick={this.handleProfileClick}
+                            color="inherit"
+                >
+
                   <AccountCircle />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-            }
+                </IconButton>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </div>
+    );
+  }
 }
 
 export default withStyles(styles)(Header);
