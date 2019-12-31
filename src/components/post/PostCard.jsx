@@ -15,6 +15,7 @@ import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import {red} from "@material-ui/core/colors";
 import LikeIcon from "./LikeIcon";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const styles = {
     cardContainer: {
@@ -52,10 +53,45 @@ const styles = {
 
 class PostCard extends Component {
 
+    linkStyle = {
+        textDecoration: "none",
+        color: "black",
+        "&:hover": {
+            textDecoration: "none",
+            color: "black",
+        }
+    };
+
+    authorStyle = {
+        color: "gray",
+        textDecoration: "none",
+        "&:hover": {
+            textDecoration: "none",
+            color: "black",
+        }
+    };
+
 
     render() {
         return (
             <Card className="mt-3 w-100">
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="recipe">
+                            M
+                        </Avatar>
+                    }
+                    action={
+                        <IconButton aria-label="settings">
+                            <MoreVertIcon/>
+                        </IconButton>
+                    }
+                    title={<Link style={this.linkStyle} className="nav-link"
+                                 to={"/post/" + this.props.postCard.id}>{this.props.postCard.title}</Link>}
+                    titleTypographyProps={{fontSize: "20px"}}
+                    subheader={<Link style={this.authorStyle} className="nav-link"
+                                     to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
+                />
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia

@@ -15,24 +15,108 @@ class Channel extends Component {
 
     state = {
         postCards: [
-            {id: 1, title: 'Hello World', postSummary: 'this message is bullshit\nasfjasfjasf ', cols: 3},
+            {
+                id: 1,
+                author: 'alireza',
+                title: 'Hello World',
+                postSummary: 'this message is bullshit\nasfjasfjasf ',
+                cols: 3
+            },
             {
                 id: 2,
+                author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
                 cols: 3
             },
-            {id: 3, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 4, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: false},
-            {id: 5, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 6, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: false},
-            {id: 7, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 8, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: false},
-            {id: 9, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: false},
-            {id: 10, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 11, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 12, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: true},
-            {id: 13, title: 'Bye World', postSummary: 'this message is not bullshit ', cols: 3, liked: false},
+            {
+                id: 3,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 4,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: false
+            },
+            {
+                id: 5,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 6,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: false
+            },
+            {
+                id: 7,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 8,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: false
+            },
+            {
+                id: 9,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: false
+            },
+            {
+                id: 10,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 11,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 12,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: true
+            },
+            {
+                id: 13,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                cols: 3,
+                liked: false
+            },
 
         ],
         channels: [
