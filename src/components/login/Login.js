@@ -11,7 +11,7 @@ function Login(){
         <React.Fragment>
             <CssBaseline/>
             <Container maxWidth="sm">
-                <Typography component="div" style={{backgroundColor: 'white', height: '68vh',}}
+                <Typography component="div" style={{backgroundColor: 'white', height: '58vh',}}
                             className="border rounded mt-5">
                     <SimpleTabs name1="Sign in" name2="Sing up" page="login"/>
                 </Typography>
