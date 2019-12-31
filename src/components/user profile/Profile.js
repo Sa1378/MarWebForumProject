@@ -14,7 +14,7 @@ class Profile extends Component {
     state = {
         my_name: 'reza',
         username: null,
-        avatar_src: null,
+        avatar_src: 'images/download.jpeg',
         numberOfPosts: 20,
         numberOfFollower: 354,
         numberOfFollowing: 323,
@@ -27,7 +27,7 @@ class Profile extends Component {
             {id: 3, title: '3', creator: 'MarWeb studio'},
             {id: 4, title: '4', creator: 'MarWeb studio'},
             {id: 5, title: '4', creator: 'MarWeb studio'},
-        ],postCards: [
+        ], postCards: [
             {
                 id: 1,
                 author: 'alireza',
@@ -65,55 +65,6 @@ class Profile extends Component {
             },
             {
                 id: 6,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false
-            },
-            {
-                id: 7,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true
-            },
-            {
-                id: 8,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false
-            },
-            {
-                id: 9,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false
-            },
-            {
-                id: 10,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true
-            },
-            {
-                id: 11,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true
-            },
-            {
-                id: 12,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true
-            },
-            {
-                id: 13,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
