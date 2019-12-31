@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Container} from "@material-ui/core";
 import PostList from "../post/PostList";
 import ChannelInfo from "./ChannelInfo";
+import {StickyContainer, Sticky} from 'react-sticky';
 import ChannelsList from "./ChannelsList";
 
 class Channel extends Component {
