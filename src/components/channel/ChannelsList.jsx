@@ -25,7 +25,6 @@ class ChannelsList extends Component {
         return (
             <List style={this.listStyle}>
                 <Divider variant="inset" component="li"/>
-
                 {
                     this.props.channels.map(item => (
                         <React.Fragment>

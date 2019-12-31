@@ -13,6 +13,41 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
+import {red} from "@material-ui/core/colors";
+import LikeIcon from "./LikeIcon";
+
+const styles = {
+    cardContainer: {
+        display: "flex",
+        flexWrap: "wrap",
+    },
+    card: {
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: 345,
+        margin: "0px 50px 50px 50px",
+    },
+    grow: {
+        flexGrow: 2,
+    },
+    media: {
+        display: "none",
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
+    liked: {
+        color: "red",
+    },
+    notliked: {
+        color: "black",
+    },
+    preWrap: {
+        whiteSpace: "pre-wrap",
+    }
+};
 
 
 class PostCard extends Component {
@@ -40,7 +75,7 @@ class PostCard extends Component {
                         </CardContent>
                     </CardActionArea>
                 </Link>
-                <Divider variant="middle" />
+                <Divider variant="middle"/>
                 <CardActions>
                     <Button size="small" color="primary">
                         Share
@@ -48,8 +83,9 @@ class PostCard extends Component {
                     <Button size="small" color="primary">
                         Learn More
                     </Button>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon/>
+                    <IconButton onClick={() => this.props.onLike(this.props.postCard.id)} aria-label="add to favorites">
+                        <LikeIcon
+                            liked={this.props.postCard.liked}/>
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon/>
