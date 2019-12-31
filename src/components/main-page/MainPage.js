@@ -1,10 +1,14 @@
 import React, {Component} from "react";
-import PostsView from "./PostsView";
 import SortBy from "./SortBy";
 import PostList from "../post/PostList";
 import {Container} from "@material-ui/core";
 
 class MainPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleLikePost = this.handleLikePost.bind(this);
+    }
 
 
     state = {
