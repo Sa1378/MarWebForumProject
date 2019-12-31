@@ -2,6 +2,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import img from '../../static/images/avatar/download.jpeg'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,7 +24,7 @@ const ImageAvatars = props => {
         if (props.avatar_src === null)
             return <Avatar className={classes.large}/>
         else {
-            return <Avatar src={props.avatar_src} className={classes.large}/>
+            return <Avatar src={img} className={classes.large}/>
         }
     }
 
