@@ -2,8 +2,6 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Data from "../user-profile/profileData";
-import Follow from "../user-profile/follow";
 import SimpleTabs from "../TwoTab";
 
 function Login(){

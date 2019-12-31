@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Container} from "@material-ui/core";
 import PostList from "../post/PostList";
 import ChannelInfo from "./ChannelInfo";
-import {StickyContainer, Sticky} from 'react-sticky';
 import ChannelsList from "./ChannelsList";
 
 class Channel extends Component {
@@ -20,21 +19,20 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Hello World',
                 postSummary: 'this message is bullshit\nasfjasfjasf ',
-                cols: 3
+                liked: true,
             },
             {
                 id: 2,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
-                cols: 3
+                liked: false,
             },
             {
                 id: 3,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -42,7 +40,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: false
             },
             {
@@ -50,7 +47,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -58,7 +54,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: false
             },
             {
@@ -66,7 +61,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -74,7 +68,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: false
             },
             {
@@ -82,7 +75,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: false
             },
             {
@@ -90,7 +82,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -98,7 +89,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -106,7 +96,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: true
             },
             {
@@ -114,7 +103,6 @@ class Channel extends Component {
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                cols: 3,
                 liked: false
             },
 
@@ -135,7 +123,6 @@ class Channel extends Component {
     };
 
     handleLikePost(postId) {
-        console.log(this.state, "<=============");
         const postCards = [];
         this.state.postCards.forEach(function (postCard) {
             if (postId === postCard.id) {

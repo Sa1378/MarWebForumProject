@@ -1,27 +1,112 @@
 import React, {Component} from "react";
 import PostsView from "./PostsView";
 import SortBy from "./SortBy";
+import PostList from "../post/PostList";
+import {Container} from "@material-ui/core";
 
 class MainPage extends Component {
 
 
+    state = {
+        postCards: [
+            {
+                id: 1,
+                author: 'alireza',
+                title: 'Hello World',
+                postSummary: 'this message is bullshit\nasfjasfjasf ',
+                liked: true,
+            },
+            {
+                id: 2,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
+                liked: false,
+            },
+            {
+                id: 3,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 4,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 5,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 6,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 7,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+            {
+                id: 8,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 9,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: false
+            },
+            {
+                id: 10,
+                author: 'alireza',
+                title: 'Bye World',
+                postSummary: 'this message is not bullshit ',
+                liked: true
+            },
+
+        ],
+    };
+
+    postListStyle = {
+        width: '100vh',
+        justifyContent: 'center',
+    };
+
+    handleLikePost(postId) {
+        const postCards = [];
+        this.state.postCards.forEach(function (postCard) {
+            if (postId === postCard.id) {
+                postCard.liked = !postCard.liked;
+            }
+            postCards.push(postCard);
+        });
+        this.setState({postCards: postCards});
+    }
+
+
     render() {
-        const posts = [];
-        for (let i = 0; i < 10; i++) {
-            posts.push({
-                id: i, title: "Some Important Sheet", author: "Mehrdad", text: "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high\
-         heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly\
-         browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken\
-         and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and\
-         pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add\
-         saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil."
-            })
-        }
         return (
-            <div>
+            <Container>
                 <SortBy/>
-                <PostsView posts={posts}/>
-            </div>
+                <PostList onLike={this.handleLikePost} postListStyle={this.postListStyle}
+                          postCards={this.state.postCards}/>
+            </Container>
         );
     }
 }
