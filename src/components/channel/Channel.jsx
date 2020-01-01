@@ -120,11 +120,12 @@ class Channel extends Component {
         ],
         offset: 0,
         accounts: [
-            {id: 1, username: 'alireza'},
-            {id: 2, username: 'alireza'},
-            {id: 3, username: 'alireza'},
-            {id: 4, username: 'alireza'},
-            {id: 5, username: 'alireza'},
+            'alireza',
+            'reza',
+            'mehrdad',
+            'fereydoon',
+            'kambiz',
+            'yaghoob',
         ]
     };
 

@@ -18,7 +18,7 @@ import Button from "@material-ui/core/Button";
 import {Icon} from "@material-ui/core";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {Link} from 'react-router-dom'
-import TransitionsModal from "../Modal";
+import TransitionsModal from "../TransitionsModal";
 
 
 const styles = theme => ({
@@ -161,8 +161,8 @@ class Header extends Component {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {popupState => (
                                     <div>
-                                      <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
-                                      <IconButton aria-label="show 17 new notifications" color="inherit"
+                                        <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
+                                        <IconButton aria-label="show 17 new notifications" color="inherit"
                                                     className={classes.icon} {...bindTrigger(popupState)}>
                                             <Badge badgeContent={3} color="secondary">
                                                 <NotificationsIcon/>
