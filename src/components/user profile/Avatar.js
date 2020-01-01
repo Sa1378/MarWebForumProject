@@ -13,13 +13,23 @@ class ImageAvatar extends Component {
         width: '150px',
         height: '150px',
     };
+    small = {
+        width: '50px',
+        height: '50px',
+    };
 
     formatAvatar() {
         if (this.props.avatar_src === null)
-            return <Avatar style={this.large}/>;
+            return <Avatar style={this.smallOrLarge()}/>;
         else {
-            return <Avatar src={img} style={this.large}/>
+            return <Avatar src={img} style={this.smallOrLarge()}/>
         }
+    }
+    smallOrLarge(){
+        console.log(this.props);
+        if (this.props.isList === 'true'){
+            return this.small;
+        }else return this.large;
     }
 
     render() {

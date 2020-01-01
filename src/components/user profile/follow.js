@@ -6,11 +6,9 @@ import Button from "@material-ui/core/Button";
 class Follow extends Component {
     render() {
         return (
-            <React.Fragment>
-                <div className='d-flex justify-content-center pb-4'>
-                    {this.format()}
-                </div>
-            </React.Fragment>
+            <div className='d-flex justify-content-center pb-4'>
+                {this.format()}
+            </div>
         );
     }
 
