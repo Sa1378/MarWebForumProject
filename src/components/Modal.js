@@ -60,9 +60,9 @@ export default function TransitionsModal(props) {
         if (props.buttonName === 'setting') {
             return <EditProfile/>
         } else if (props.buttonName === 'follower') {
-            return <ListOfAccounts eroring='er' follower={props.follower}/>
+            return <ListOfAccounts/>
         } else if (props.buttonName === 'following') {
-            return <ListOfAccounts eroring={'ing'} following={props.following}/>
+            return <ListOfAccounts/>
         }
     }
 }
