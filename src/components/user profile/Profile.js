@@ -19,15 +19,15 @@ class Profile extends Component {
         numberOfFollower: 354,
         numberOfFollowing: 323,
         followed: false,
-        follower: [
-            {name: 'rez',}
-        ], channels: [
+
+        channels: [
             {id: 1, title: '1', creator: 'MarWeb studio'},
             {id: 2, title: '2', creator: 'MarWeb studio'},
             {id: 3, title: '3', creator: 'MarWeb studio'},
             {id: 4, title: '4', creator: 'MarWeb studio'},
             {id: 5, title: '4', creator: 'MarWeb studio'},
-        ], postCards: [
+        ],
+        postCards: [
             {
                 id: 1,
                 author: 'alireza',
@@ -69,7 +69,49 @@ class Profile extends Component {
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
                 liked: false
-            }]
+            }],
+        follower: [
+            {
+                username: 'follower1',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower2',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower3',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower4',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower5',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower6',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }
+        ], following: [
+            {
+                username: 'following1',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'following2',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'following3',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'following4',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'following5',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'following6',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }
+        ]
+
     };
 
 
@@ -87,10 +129,13 @@ class Profile extends Component {
                         <div className="d-flex justify-content-end p-2">
                             {this.formatSetting()}
                         </div>
-                        {this.formatAvatar()}
+                        <div className='mx-5'>
+                            {this.formatAvatar()}
+                        </div>
                         <Data name={this.state.username} numberOfPosts={this.state.numberOfPosts}
                               numberOfFollower={this.state.numberOfFollower}
-                              numberOfFollowing={this.state.numberOfFollowing}/>
+                              numberOfFollowing={this.state.numberOfFollowing} follower={this.state.follower}
+                              following={this.state.following}/>
                         <Follow followed={this.state.followed} my_name={this.state.my_name}
                                 username={this.state.username}/>
                         <SimpleTabs name1="Posts" name2="Channels" page="profile" posts={this.state.postCards}
@@ -102,7 +147,7 @@ class Profile extends Component {
     };
 
     formatAvatar() {
-        return <ImageAvatars avatarSrc={this.state.avatar_src}/>
+        return <ImageAvatars avatarSrc={this.state.avatar_src} isList='false'/>
     }
 
     formatSetting() {
