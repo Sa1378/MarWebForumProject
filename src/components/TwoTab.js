@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import SingIn from "./login/SingIn";
 import SignUp from "./login/SignUp";
+import PostList from "./post/PostList";
+import ChannelsList from "./channel/ChannelsList";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -73,23 +75,23 @@ export default function SimpleTabs(props) {
 
     function loginOrProfileFirstTab(props) {
         if (props.page === 'profile')
-            return post();
+            return post(props);
         else return singIn()
     }
 
     function loginOrProfileSecondTab(props) {
         if (props.page === 'profile')
-            return channel();
+            return channel(props);
         else return signUp()
     }
 
 
-    function post() {
-        return 'Post'
+    function post(props) {
+        return <PostList postCards={props.posts}/>
     }
 
-    function channel() {
-        return 'Channel'
+    function channel(props) {
+        return <ChannelsList channels={props.channels}/>
     }
 
     function singIn() {
