@@ -81,7 +81,7 @@ class Profile extends Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <Container maxWidth="sm">
+                <Container maxWidth="lg">
                     <Typography component="div" style={{backgroundColor: 'white', height: '88vh',}}
                                 className="border rounded">
                         <div className="d-flex justify-content-end p-2">
