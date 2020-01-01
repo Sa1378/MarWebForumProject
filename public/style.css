@@ -1,9 +1,11 @@
-.edit_password{
+.edit_password {
     margin-top: 300px;
 }
-.password_size{
+
+.password_size {
     width: 100%;
 }
-.email_size{
+
+.email_size {
     width: 81%;
 }

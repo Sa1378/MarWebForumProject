@@ -47,6 +47,11 @@ const styles = {
     },
     preWrap: {
         whiteSpace: "pre-wrap",
+    },
+    link:{
+        "&:focus":{
+            outline:"none",
+        }
     }
 };
 
