@@ -3,6 +3,10 @@ import {Container} from "@material-ui/core";
 import PostList from "../post/PostList";
 import ChannelInfo from "./ChannelInfo";
 import ChannelsList from "./ChannelsList";
+import IconButton from "@material-ui/core/IconButton";
+import LikeIcon from "../post/LikeIcon";
+import CardActions from "@material-ui/core/CardActions";
+import CreateChannelButton from "./CreateChannelButton";
 
 class Channel extends Component {
 
@@ -146,6 +150,9 @@ class Channel extends Component {
                 </Container>
                 <Container>
                     <ChannelsList channels={this.state.channels}/>
+                </Container>
+                <Container >
+                    <CreateChannelButton/>
                 </Container>
             </Container>
         )

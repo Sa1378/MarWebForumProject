@@ -6,6 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import Button from "@material-ui/core/Button";
 import EditProfile from "./user profile/EditProfile";
 import ListOfAccounts from "./user profile/ListOfAccounts";
+import CreateChannel from "./channel/CreateChannel";
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,6 +64,9 @@ export default function TransitionsModal(props) {
             return <ListOfAccounts/>
         } else if (props.buttonName === 'following') {
             return <ListOfAccounts/>
+        } else if (props.buttonName === 'create channel') {
+            console.log("Hellooooooooooooooooooooooooooooooo");
+            return <CreateChannel/>
         }
     }
 }

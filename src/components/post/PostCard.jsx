@@ -48,9 +48,9 @@ const styles = {
     preWrap: {
         whiteSpace: "pre-wrap",
     },
-    link:{
-        "&:focus":{
-            outline:"none",
+    link: {
+        "&:focus": {
+            outline: "none",
         }
     }
 };
@@ -64,7 +64,11 @@ class PostCard extends Component {
         "&:hover": {
             textDecoration: "none",
             color: "black",
+        },
+        "&:focus": {
+            outline: "none",
         }
+
     };
 
     authorStyle = {
@@ -73,6 +77,9 @@ class PostCard extends Component {
         "&:hover": {
             textDecoration: "none",
             color: "black",
+        },
+        "&:focus":{
+            outline:"none",
         }
     };
 
