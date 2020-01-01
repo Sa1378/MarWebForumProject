@@ -9,7 +9,8 @@ class CreateChannelButton extends Component {
 
     render() {
         return (
-            <TransitionsModal content="channel" buttonName="create channel" variant="contained"/>
+            <TransitionsModal accounts={this.props.accounts} content="channel" buttonName="create channel"
+                              variant="contained"/>
         );
     }
 

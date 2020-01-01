@@ -119,6 +119,13 @@ class Channel extends Component {
             {id: 5, title: 'alireza', creator: 'MarWeb studio'},
         ],
         offset: 0,
+        accounts: [
+            {id: 1, username: 'alireza'},
+            {id: 2, username: 'alireza'},
+            {id: 3, username: 'alireza'},
+            {id: 4, username: 'alireza'},
+            {id: 5, username: 'alireza'},
+        ]
     };
 
     postListStyle = {
@@ -151,8 +158,8 @@ class Channel extends Component {
                 <Container>
                     <ChannelsList channels={this.state.channels}/>
                 </Container>
-                <Container >
-                    <CreateChannelButton/>
+                <Container>
+                    <CreateChannelButton accounts={this.state.accounts}/>
                 </Container>
             </Container>
         )

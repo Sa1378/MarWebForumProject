@@ -66,7 +66,7 @@ export default function TransitionsModal(props) {
             return <ListOfAccounts/>
         } else if (props.buttonName === 'create channel') {
             console.log("Hellooooooooooooooooooooooooooooooo");
-            return <CreateChannel/>
+            return <CreateChannel accounts={props.accounts}/>
         }
     }
 }
