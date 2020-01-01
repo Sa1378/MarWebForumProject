@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import EditProfile from "./user profile/EditProfile";
 import ListOfAccounts from "./user profile/ListOfAccounts";
 import CreateChannel from "./channel/CreateChannel";
+import NewPost from "./post/NewPost";
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,6 +68,8 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'create channel') {
             console.log("Hellooooooooooooooooooooooooooooooo");
             return <CreateChannel accounts={props.accounts}/>
+        } else if (props.buttonName === 'new post') {
+            return <NewPost/>
         }
     }
 }

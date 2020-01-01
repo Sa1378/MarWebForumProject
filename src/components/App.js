@@ -7,7 +7,8 @@ import Login from "./login/Login";
 import Register from "./Register"
 import Profile from "./user profile/Profile";
 import EditProfile from "./user profile/EditProfile";
-import NewPost from "./NewPost";
+
+import NewPost from "./post/NewPost";
 import Notifications from "./Notifications";
 import Search from "./Search";
 import PostPage from "./post/PostPage";
