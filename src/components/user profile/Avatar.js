@@ -1,41 +1,48 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import img from '../../static/images/avatar/download.jpeg'
 
-const useStyles = makeStyles(theme => ({
-    root: {
+
+class ImageAvatar extends Component {
+
+    root = {
         display: 'flex',
-        '& > *': {
-            margin: theme.spacing(1),
-        },
-    },
-    large: {
-        width: theme.spacing(15),
-        height: theme.spacing(15),
-    },
-}));
+    };
+    large = {
+        width: '150px',
+        height: '150px',
+    };
+    small = {
+        width: '50px',
+        height: '50px',
+    };
 
-const ImageAvatars = props => {
-    const classes = useStyles();
-
-    function formatAvatar() {
-        if (props.avatar_src === null)
-            return <Avatar className={classes.large}/>
+    formatAvatar() {
+        if (this.props.avatar_src === null)
+            return <Avatar style={this.smallOrLarge()}/>;
         else {
-            return <Avatar src={img} className={classes.large}/>
+            return <Avatar src={img} style={this.smallOrLarge()}/>
         }
     }
+    smallOrLarge(){
+        console.log(this.props);
+        if (this.props.isList === 'true'){
+            return this.small;
+        }else return this.large;
+    }
 
-    return (
-        <div className={classes.root + " d-flex justify-content-center"}>
-            {formatAvatar()}
-        </div>
-    );
+    render() {
 
+        return (
+            <div className={" d-flex justify-content-center"} style={this.root}>
+                {this.formatAvatar()}
+            </div>
+        );
+    }
 
-};
-export default ImageAvatars
+}
+
+export default ImageAvatar
 
 
