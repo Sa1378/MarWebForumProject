@@ -21,6 +21,7 @@ import {Link} from 'react-router-dom'
 import TransitionsModal from "../TransitionsModal";
 
 
+
 const styles = theme => ({
     grow: {
         flexGrow: 2,
@@ -162,9 +163,10 @@ class Header extends Component {
                                 {popupState => (
                                     <div>
                                         <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
-                                        <IconButton aria-label="show 17 new notifications" color="inherit"
+
+                                      <IconButton aria-label="show new notifications" color="inherit"
                                                     className={classes.icon} {...bindTrigger(popupState)}>
-                                            <Badge badgeContent={3} color="secondary">
+                                            <Badge badgeContent={3} color="secondary" id="notifBadge">
                                                 <NotificationsIcon/>
                                             </Badge>
                                         </IconButton>

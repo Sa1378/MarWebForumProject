@@ -10,7 +10,7 @@ import EditProfile from "./user profile/EditProfile";
 
 import NewPost from "./post/NewPost";
 import Notifications from "./Notifications";
-import Search from "./Search";
+import Search from "./search/Search";
 import PostPage from "./post/PostPage";
 import Channel from "./channel/Channel";
 import 'bootstrap/dist/css/bootstrap.css';

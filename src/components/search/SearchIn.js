@@ -5,7 +5,10 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import {withStyles} from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 
 const styles = {
@@ -32,32 +35,32 @@ class SortBy extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {shownPosts: "followed"};
+        this.state = {searchIn: "posts"};
     }
 
     render() {
         const {classes} = this.props;
-        const handleChange = (event, newShownPosts) => {
-            console.log(newShownPosts);
-            if (newShownPosts)
-                this.setState({shownPosts: newShownPosts});
+        const handleChange = (event, newSearchIn) => {
+            console.log(newSearchIn);
+            if (newSearchIn)
+            {
+                document.getElementById("searchIn").innerHTML="in "+newSearchIn;
+                this.setState({searchIn: newSearchIn});
+            }
         };
 
         return (
-            <ToggleButtonGroup size="small" value={this.state.shownPosts} exclusive onChange={handleChange}
+            <ToggleButtonGroup size="small" value={this.state.searchIn} exclusive onChange={handleChange}
                                className={classes.container}>
-                <ToggleButton key={1} value="followed" className={classes.item}>
-                    <PeopleIcon className={classes.icon}/>Followed
+                <ToggleButton key={1} value="posts" className={classes.item}>
+                    <EmailIcon className={classes.icon}/>Posts
                 </ToggleButton>,
-                <ToggleButton key={2} value="newest" className={classes.item}>
-                    <NewReleasesIcon className={classes.icon}/>Newest
+                <ToggleButton key={2} value="users" className={classes.item}>
+                    <PersonIcon className={classes.icon}/>Users
                 </ToggleButton>,
-                <ToggleButton key={3} value="hottest" className={classes.item}>
-                    <WhatshotIcon className={classes.icon}/>Hottest
+                <ToggleButton key={3} value="channels" className={classes.item}>
+                    <SupervisedUserCircleIcon className={classes.icon}/>Channels
                 </ToggleButton>,
-                <ToggleButton key={4} value="participated" className={classes.item}>
-                    <ChatBubbleIcon className={classes.icon}/>Participated
-                </ToggleButton>
             </ToggleButtonGroup>
         );
     }

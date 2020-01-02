@@ -1,15 +1,6 @@
 import React, {Component} from "react";
-import SortBy from "./SortBy";
-import PostList from "../post/PostList";
 import {Container} from "@material-ui/core";
-import {withStyles} from '@material-ui/core/styles'
-import Sidebar from './Sidebar'; 
-
-const styles={
-    container:{
-        display:"flex",
-    }
-}
+import SearchIn from './SearchIn'
 
 class MainPage extends Component {
 
@@ -93,7 +84,12 @@ class MainPage extends Component {
             },
 
         ],
+        searchQuery:null,
     };
+
+    componentDidMount () {
+        this.setState(()=>this.props.match.params); // age dasti this.state ro meghdar bdim nmishe
+    }
 
     postListStyle = {
         width: '100vh',
@@ -113,18 +109,15 @@ class MainPage extends Component {
 
 
     render() {
-        const {classes}=this.props;
         return (
             <Container>
-                <SortBy/>
-                <div className={classes.container}>
-                <PostList onLike={this.handleLikePost} postListStyle={this.postListStyle}
-                          postCards={this.state.postCards}/>
-                <Sidebar/>
+                <SearchIn />
+                <div id="searchResult">
+                    You've Searched {this.state.searchQuery} <span id="searchIn">in posts</span>!
                 </div>
             </Container>
         );
     }
 }
 
-export default withStyles(styles)(MainPage);
+export default MainPage;
