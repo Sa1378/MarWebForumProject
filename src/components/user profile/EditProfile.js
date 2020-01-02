@@ -26,9 +26,19 @@ class EditProfile extends Component {
                                            variant="outlined"/>
                                 <TextField className="mx-5" type="email" id="outlined-basic" label="E-mail"
                                            variant="outlined"/>
+                                <Button className='mx-1'
+                                    variant="contained"
+                                    component="label"
+                                >
+                                    Avatar Image
+                                    <input
+                                        type="file"
+                                        style={{display: "none"}}
+                                    />
+                                </Button>
                                 <Button className="mt-3 ml-5" variant="contained" color="primary">Edit</Button>
                             </div>
-                            <h4 className="d-flex justify-content-center">Forget Password</h4>
+                            <h4 className="d-flex justify-content-center">Edit Password</h4>
                             <div className="d-flex justify-content-around">
                                 <InputAdornments label="Last Password"/>
                                 <InputAdornments label="Password"/>
