@@ -55,7 +55,8 @@ class PostCard extends Component {
                             <MoreVertIcon/>
                         </IconButton>
                     }
-                    title={<Link className={classes.link + " nav-link"}
+                    title={<Link className={classes.link + " nav-link" + " font-weight-bold font-italic"}
+                                 style={{color: 'black'}}
                                  to={"/post/" + this.props.postCard.id}>{this.props.postCard.title}</Link>}
                     titleTypographyProps={{fontSize: "20px"}}
                     subheader={<Link className={classes.link + " nav-link"}
@@ -97,7 +98,7 @@ class PostCard extends Component {
         let a = (Math.floor(Math.random() * 2)) / 2 + 1;
         if (a === 1) {
             return <img src={img} width={'100%'}/>
-        } else return <img src={img2}  width={'100%'}/>
+        } else return <img src={img2} width={'100%'}/>
     }
 
 }

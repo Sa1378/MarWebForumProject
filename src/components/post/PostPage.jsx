@@ -36,6 +36,11 @@ const styles = theme => (
 
 class PostPage extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleLikeComment = this.handleLikeComment.bind(this);
+    }
+
     state = {
         comments: [
             {
@@ -43,31 +48,47 @@ class PostPage extends Component {
                 message: 'First Comment',
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'alireza',
-                loggedInUser: 'alireza'
+                loggedInUser: 'alireza',
+                liked: true
             },
             {
                 id: 2,
                 message: 'Second Comment',
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'reza',
-                loggedInUser: 'alireza'
+                loggedInUser: 'alireza',
+                liked: false
             },
             {
                 id: 3,
                 message: 'Third Comment',
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'mehrdad',
-                loggedInUser: 'alireza'
+                loggedInUser: 'alireza',
+                liked: false
             },
             {
                 id: 4,
                 message: 'Fourth df;askdf;askdb\nComment',
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'alireza',
-                loggedInUser: 'alireza'
+                loggedInUser: 'alireza',
+                liked: true
             },
         ],
     };
+
+
+    handleLikeComment(commentId) {
+        const comments = [];
+        this.state.comments.forEach(function (comment) {
+            if (commentId === comment.id) {
+                comment.liked = !comment.liked;
+            }
+            comments.push(comment);
+        });
+        this.setState({comments: comments});
+    }
 
     render() {
         const {classes} = this.props;
@@ -130,7 +151,7 @@ class PostPage extends Component {
                         </CardContent>
                         <Divider variant="middle"/>
                         <CardActions disableSpacing>
-                            <IconButton className={classes.link} aria-label="add to favorites">
+                            <IconButton className={classes.link} aria-label="like">
                                 <FavoriteIcon/>
                             </IconButton>
                             <IconButton className={classes.link} aria-label="share">
@@ -142,6 +163,7 @@ class PostPage extends Component {
                     {this.state.comments.map(comment => <Comment
                         key={comment.id}
                         comment={comment}
+                        onLike={this.handleLikeComment}
                     />)}
 
                     <NewComment/>
@@ -155,7 +177,7 @@ class PostPage extends Component {
         let a = (Math.floor(Math.random() * 2)) / 2 + 1;
         if (a === 1) {
             return <img src={img} width={'100%'}/>
-        } else return <img src={img2}  width={'100%'}/>
+        } else return <img src={img2} width={'100%'}/>
     }
 
 }
