@@ -46,7 +46,17 @@ class NewPost extends Component {
 
                             </div>
                             <div className="form-group d-flex justify-content-center">
-                                <input type="file" className="form-control-file" id="image"/>
+                                <Button className='mx-1'
+                                        variant="contained"
+                                        component="label"
+                                >
+                                    Post Image
+                                    <input
+                                        type="file"
+                                        id={'image'}
+                                        style={{display: "none"}}
+                                    />
+                                </Button>
                             </div>
                             <div className='d-flex justify-content-center'>
                                 <InputLabel id="label">Post Place</InputLabel>
