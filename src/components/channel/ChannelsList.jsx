@@ -18,7 +18,7 @@ class ChannelsList extends Component {
 
     render() {
         return (
-            <List style={this.listStyle}>
+            <List className="position-sticky" style={this.listStyle}>
                 <Divider variant="inset" component="li"/>
                 {
                     this.props.channels.map(item => (
