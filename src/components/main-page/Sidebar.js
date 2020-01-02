@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
 import {Link} from 'react-router-dom';
-import TransitionsModal from "../Modal";
+import TransitionsModal from "../TransitionsModal";
 
 const styles={
     container:{
@@ -54,7 +54,6 @@ const styles={
         marginTop:"5px",
     },
     sticky:{
-        position: "-webkit-sticky", /* Safari */
         position: "sticky",
         top: "70px",
     }
