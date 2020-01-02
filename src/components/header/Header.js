@@ -105,6 +105,12 @@ const styles = theme => ({
             backgroundColor: "rgb(240,240,240)",
             cursor: "pointer",
         }
+    },
+    newPostButton:{
+        display:"inline",
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+          },
     }
 });
 
@@ -162,8 +168,9 @@ class Header extends Component {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {popupState => (
                                     <div>
-                                        <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
-
+                                        <div className={classes.newPostButton}>
+                                            <TransitionsModal content="newpost" buttonName="new post" variant="contained" />
+                                        </div>
                                       <IconButton aria-label="show new notifications" color="inherit"
                                                     className={classes.icon} {...bindTrigger(popupState)}>
                                             <Badge badgeContent={3} color="secondary" id="notifBadge">
