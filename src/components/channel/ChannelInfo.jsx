@@ -62,7 +62,8 @@ class ChannelInfo extends Component {
                         </Avatar>
                     }
                     action={
-                        <ChannelInfoSettingButton followers={this.state.follower} linkClass={classes.link}/>
+                        <ChannelInfoSettingButton canEdit={this.props.loggedInUser === this.props.channelFounder}
+                                                  followers={this.state.follower} linkClass={classes.link}/>
                     }
                     title="Channel Info"
                     subheader="Alireza Channel"

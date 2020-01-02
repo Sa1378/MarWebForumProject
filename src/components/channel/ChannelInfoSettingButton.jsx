@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {makeStyles} from "@material-ui/core/styles";
 import TransitionsModal from "../TransitionsModal";
-
+import InfoIcon from '@material-ui/icons/Info';
 
 
 export default function ChannelInfoSettingButton(props) {
@@ -21,10 +21,23 @@ export default function ChannelInfoSettingButton(props) {
         setAnchorEl(null);
     };
 
+    const infoOrSetting = () => {
+        console.log(props.canEdit);
+        if (!props.canEdit) {
+            return (
+                <InfoIcon color={"primary"}/>
+            )
+        } else {
+            return (
+                <SettingsIcon color={"primary"}/>
+            )
+        }
+    }
+
     return (
         <div>
             <IconButton className={props.linkClass} aria-controls="settings" aria-haspopup="true" onClick={handleClick}>
-                <SettingsIcon color={"primary"}/>
+                {infoOrSetting()}
             </IconButton>
             <Menu
                 id="setting-menu"
@@ -33,7 +46,7 @@ export default function ChannelInfoSettingButton(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                <MenuItem disabled={!props.canEdit} onClick={handleClose}>Edit</MenuItem>
                 <TransitionsModal accounts={props.followers} onClose={handleClose} buttonName="subscribers"/>
                 {/*<MenuItem onClick={handleClose}>Subscribers</MenuItem>*/}
                 <MenuItem onClick={handleClose}>Authors</MenuItem>
