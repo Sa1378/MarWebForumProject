@@ -8,6 +8,10 @@ import EditProfile from "./user profile/EditProfile";
 import ListOfAccounts from "./user profile/ListOfAccounts";
 import CreateChannel from "./channel/CreateChannel";
 import NewPost from "./post/NewPost";
+import IconButton from "@material-ui/core/IconButton";
+import ReplyIcon from '@material-ui/icons/Reply';
+import CardActions from "@material-ui/core/CardActions";
+import NewComment from "./post/NewComment";
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +26,17 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    link: {
+        color: "gray",
+        textDecoration: "none",
+        "&:hover": {
+            textDecoration: "none",
+            color: "black",
+        },
+        "&:focus": {
+            outline: "none",
+        }
+    }
 }));
 
 export default function TransitionsModal(props) {
@@ -38,7 +53,7 @@ export default function TransitionsModal(props) {
 
     return (
         <React.Fragment>
-            <Button onClick={handleOpen} variant={props.variant} color="primary">{props.buttonName}</Button>
+            {handleButton()}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -58,6 +73,22 @@ export default function TransitionsModal(props) {
         </React.Fragment>
     );
 
+    function handleButton() {
+        if (props.buttonName === 'reply') {
+            console.log("heeeloooooooooo ommad icon button");
+            return (
+                <IconButton onClick={handleOpen} className={classes.link} aria-label="Reply">
+                    <ReplyIcon/>
+                </IconButton>
+            )
+        } else {
+            return (
+                <Button className={classes.link} onClick={handleOpen} variant={props.variant}
+                        color="primary">{props.buttonName}</Button>
+            )
+        }
+    }
+
     function contentOfModal() {
         if (props.buttonName === 'setting') {
             return <EditProfile/>
@@ -70,6 +101,8 @@ export default function TransitionsModal(props) {
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {
             return <NewPost/>
+        } else if (props.buttonName === 'reply'){
+            return <NewComment/>
         }
     }
 }

@@ -14,6 +14,9 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
 import ReplyIcon from '@material-ui/icons/Reply';
+import LikeIcon from "./LikeIcon";
+import TransitionsModal from "../TransitionsModal";
+
 
 const styles = theme => (
     {
@@ -68,20 +71,17 @@ class Comment extends Component {
                     />
                     <CardContent>
                         <Typography paragraph>
-                            {this.props.comment.id}
-                        </Typography>
-                        <Typography paragraph>
                             {this.props.comment.message}
                         </Typography>
                     </CardContent>
                     <Divider variant="middle"/>
                     <CardActions disableSpacing>
-                        <IconButton className={classes.link} aria-label="Like">
-                            <FavoriteIcon/>
+                        <IconButton onClick={() => this.props.onLike(this.props.comment.id)} className={classes.link}
+                                    aria-label="Like">
+                            <LikeIcon liked={this.props.comment.liked}/>
                         </IconButton>
-                        <IconButton className={classes.link} aria-label="Like">
-                            <ReplyIcon/>
-                        </IconButton>
+                        <TransitionsModal content="post" buttonName="reply"/>
+
                     </CardActions>
                 </Card>
             </Container>
