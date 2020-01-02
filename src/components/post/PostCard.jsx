@@ -17,6 +17,8 @@ import {red} from "@material-ui/core/colors";
 import LikeIcon from "./LikeIcon";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {withStyles} from "@material-ui/core";
+import img from '../../static/images/cards/wallpaper4.jpg'
+import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
 
 const styles = theme => (
     {
@@ -59,6 +61,7 @@ class PostCard extends Component {
                     subheader={<Link className={classes.link + " nav-link"}
                                      to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
                 />
+                {this.randomImage()}
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia
@@ -88,6 +91,13 @@ class PostCard extends Component {
                 </CardActions>
             </Card>
         );
+    }
+
+    randomImage() {
+        let a = (Math.floor(Math.random() * 2)) / 2 + 1;
+        if (a === 1) {
+            return <img src={img} width={'100%'}/>
+        } else return <img src={img2}  width={'100%'}/>
     }
 
 }

@@ -30,7 +30,7 @@ class EditProfile extends Component {
                                     variant="contained"
                                     component="label"
                                 >
-                                    Avatar Image
+                                    Avatar Imagepull
                                     <input
                                         type="file"
                                         style={{display: "none"}}
