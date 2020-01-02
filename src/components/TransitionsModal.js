@@ -102,9 +102,9 @@ export default function TransitionsModal(props) {
         if (props.buttonName === 'setting') {
             return <EditProfile/>
         } else if (props.buttonName === 'follower') {
-            return <ListOfAccounts eroring='er' follower={props.follower}/>
+            return <ListOfAccounts listOfAccount={props.follower}/>
         } else if (props.buttonName === 'following') {
-            return <ListOfAccounts eroring='ing' following={props.following}/>
+            return <ListOfAccounts listOfAccount={props.following}/>
         } else if (props.buttonName === 'create channel') {
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {

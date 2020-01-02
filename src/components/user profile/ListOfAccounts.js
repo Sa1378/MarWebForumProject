@@ -15,12 +15,10 @@ class ListOfAccounts extends Component {
         color: 'rgba(255, 255, 255, 0.54)',
     };
 
-    followerOrFollowing = () => {
-        console.log(this.props);
-        if (this.props.eroring === 'er') {
+    listOfAccount = () => {
             return (
                 <div className='d-flex flex-column'>
-                    {this.props.follower.map(item => (
+                    {this.props.listOfAccount.map(item => (
                         <React.Fragment>
                             <AccountCard user={item} isList='true'/>
                             <Divider variant="inset" component="li"/>
@@ -28,18 +26,6 @@ class ListOfAccounts extends Component {
                     ))}
                 </div>
             )
-        } else {
-            return (
-                <div className='d-flex flex-column'>
-                    {this.props.following.map(item => (
-                        <React.Fragment>
-                            <AccountCard user={item} isList='true'/>
-                            <Divider variant="inset" component="li"/>
-                        </React.Fragment>
-                    ))}
-                </div>
-            )
-        }
     };
 
     render() {
@@ -51,7 +37,7 @@ class ListOfAccounts extends Component {
                         <GridList cellHeight={180} style={this.gridList}>
                             <div className='d-flex ml-3'>
                                 <div className="d-flex align-content-end m-5">
-                                    {this.followerOrFollowing()}
+                                    {this.listOfAccount()}
                                 </div>
                             </div>
                         </GridList>
