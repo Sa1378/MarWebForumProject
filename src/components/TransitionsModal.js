@@ -112,7 +112,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'reply') {
             return <NewComment/>
         } else if (props.buttonName === 'subscribers') {
-            return <ListOfAccounts/>
+            return <ListOfAccounts listOfAccount={props.accounts}/>
         }
     }
 }
