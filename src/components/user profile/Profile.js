@@ -21,11 +21,11 @@ class Profile extends Component {
         followed: false,
 
         channels: [
-            {id: 1, title: '1', creator: 'MarWeb studio'},
-            {id: 2, title: '2', creator: 'MarWeb studio'},
-            {id: 3, title: '3', creator: 'MarWeb studio'},
-            {id: 4, title: '4', creator: 'MarWeb studio'},
-            {id: 5, title: '4', creator: 'MarWeb studio'},
+            {id: 1, title: '1', creator: 'MarWeb_studio'},
+            {id: 2, title: '2', creator: 'MarWeb_studio'},
+            {id: 3, title: '3', creator: 'MarWeb_studio'},
+            {id: 4, title: '4', creator: 'MarWeb_studio'},
+            {id: 5, title: '5', creator: 'MarWeb_studio'},
         ],
         postCards: [
             {

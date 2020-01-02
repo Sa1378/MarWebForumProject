@@ -11,6 +11,8 @@ import NewPost from "./post/NewPost";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
 import NewComment from "./post/NewComment";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(theme => ({
@@ -89,18 +91,25 @@ export default function TransitionsModal(props) {
                     <ReplyIcon/>
                 </IconButton>
             )
+        } else if (props.buttonName === 'subscribers') {
+            console.log("Dakhele Ifeeeeeeeeeeeeeeeeeee");
+            return (
+                <MenuItem onClick={function () {
+                    handleOpen();
+                    props.onClose();
+                }}>Subscribers</MenuItem>
+            )
         } else if (props.buttonName === 'follower' || props.buttonName === 'following') {
             return (
                 <Button className={classes.link2} onClick={handleOpen} variant=''
                         color="primary">{props.buttonName}</Button>
             )
-        }else if (props.buttonName === 'setting'){
+        } else if (props.buttonName === 'setting') {
             return (
                 <Button className={classes.link2} onClick={handleOpen} variant=''
                         color="primary"><SettingsIcon color='primary'/></Button>
             )
-        }
-        else {
+        } else {
             return (
                 <Button className={classes.link1} onClick={handleOpen} variant='contained'
                         color="secondary">{props.buttonName}</Button>
@@ -116,12 +125,13 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'following') {
             return <ListOfAccounts listOfAccount={props.following}/>
         } else if (props.buttonName === 'create channel') {
-            console.log("Hellooooooooooooooooooooooooooooooo");
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {
             return <NewPost/>
         } else if (props.buttonName === 'reply') {
             return <NewComment/>
+        } else if (props.buttonName === 'subscribers') {
+            return <ListOfAccounts listOfAccount={props.accounts}/>
         }
     }
 }

@@ -14,6 +14,7 @@ import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
 import LikeIcon from "./LikeIcon";
 import TransitionsModal from "../TransitionsModal";
+import {Link} from "react-router-dom";
 import img3 from '../../static/images/avatar/download.jpeg'
 import img4 from '../../static/images/avatar/photo_2020-01-02_22-01-43.jpg'
 import img5 from '../../static/images/avatar/photo_2020-01-02_22-01-52.jpg'
@@ -74,7 +75,9 @@ class Comment extends Component {
                         action={
                             this.isMyComment(this.props.comment.loggedInUser, this.props.comment.name)
                         }
-                        title="Shrimp and Chorizo Paella"
+                        title={<Link className={classes.link + " nav-link" + " font-weight-bold font-italic"}
+                                     style={{color: 'black'}}
+                                     to={"/profile/" + this.props.comment.name}>{this.props.comment.name}</Link>}
                         subheader="September 14, 2016"
                     />
                     <CardContent>

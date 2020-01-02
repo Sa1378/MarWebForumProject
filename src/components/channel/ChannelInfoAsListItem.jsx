@@ -4,12 +4,21 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
+import {Link} from "react-router-dom";
 
 
 class ChannelInfoAsListItem extends Component {
 
     inlineStyle = {
         display: 'inline',
+    };
+    linkStyle = {
+        textDecoration: "none",
+        color: "black",
+        "&:hover": {
+            color: "white",
+            textDecoration: "none",
+        }
     };
 
     render() {
@@ -28,7 +37,9 @@ class ChannelInfoAsListItem extends Component {
                                 style={this.inlineStyle}
                                 color="textPrimary"
                             >
-                                {this.props.channel.creator}
+                                <Link style={this.linkStyle} to={'/profile/' + this.props.channel.creator}>
+                                    {this.props.channel.creator}
+                                </Link>
                             </Typography>
                         </React.Fragment>
                     }
