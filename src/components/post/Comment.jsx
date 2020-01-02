@@ -16,6 +16,7 @@ import {withStyles} from "@material-ui/core";
 import ReplyIcon from '@material-ui/icons/Reply';
 import LikeIcon from "./LikeIcon";
 import TransitionsModal from "../TransitionsModal";
+import {Link} from "react-router-dom";
 
 
 const styles = theme => (
@@ -66,7 +67,9 @@ class Comment extends Component {
                         action={
                             this.isMyComment(this.props.comment.loggedInUser, this.props.comment.name)
                         }
-                        title="Shrimp and Chorizo Paella"
+                        title={<Link className={classes.link + " nav-link" + " font-weight-bold font-italic"}
+                                     style={{color: 'black'}}
+                                     to={"/profile/" + this.props.comment.name}>{this.props.comment.name}</Link>}
                         subheader="September 14, 2016"
                     />
                     <CardContent>
