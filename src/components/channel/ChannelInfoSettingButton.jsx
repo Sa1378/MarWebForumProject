@@ -5,10 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import SettingsIcon from '@material-ui/icons/Settings';
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {makeStyles} from "@material-ui/core/styles";
 
 
-export default function SimpleMenu() {
+export default function ChannelInfoSettingButton(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -20,7 +22,7 @@ export default function SimpleMenu() {
 
     return (
         <div>
-            <IconButton aria-controls="settings" aria-haspopup="true" onClick={handleClick}>
+            <IconButton className={props.linkClass} aria-controls="settings" aria-haspopup="true" onClick={handleClick}>
                 <SettingsIcon color={"primary"}/>
             </IconButton>
             <Menu

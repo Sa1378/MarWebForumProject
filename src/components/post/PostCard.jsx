@@ -59,8 +59,8 @@ const styles = {
 class PostCard extends Component {
 
     linkStyle = {
+        color: "gray",
         textDecoration: "none",
-        color: "black",
         "&:hover": {
             textDecoration: "none",
             color: "black",
@@ -69,18 +69,6 @@ class PostCard extends Component {
             outline: "none",
         }
 
-    };
-
-    authorStyle = {
-        color: "gray",
-        textDecoration: "none",
-        "&:hover": {
-            textDecoration: "none",
-            color: "black",
-        },
-        "&:focus":{
-            outline:"none",
-        }
     };
 
 
@@ -101,7 +89,7 @@ class PostCard extends Component {
                     title={<Link style={this.linkStyle} className="nav-link"
                                  to={"/post/" + this.props.postCard.id}>{this.props.postCard.title}</Link>}
                     titleTypographyProps={{fontSize: "20px"}}
-                    subheader={<Link style={this.authorStyle} className="nav-link"
+                    subheader={<Link style={this.linkStyle} className="nav-link"
                                      to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
                 />
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
@@ -114,9 +102,6 @@ class PostCard extends Component {
                             // title={}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {this.props.title}
-                            </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 {this.props.postSummary}
                             </Typography>
@@ -125,12 +110,6 @@ class PostCard extends Component {
                 </Link>
                 <Divider variant="middle"/>
                 <CardActions>
-                    <Button size="small" color="primary">
-                        Share
-                    </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-                    </Button>
                     <IconButton onClick={() => this.props.onLike(this.props.postCard.id)} aria-label="add to favorites">
                         <LikeIcon
                             liked={this.props.postCard.liked}/>
