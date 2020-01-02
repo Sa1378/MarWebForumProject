@@ -36,9 +36,11 @@ class NewComment extends Component {
                                    variant="filled"
                                    multiline
                         />
-                        <Button className="m-2" type='submit' color='primary' variant='contained'>
-                            Insert
-                        </Button>
+                        <div className="d-flex justify-content-center w-100">
+                            <Button className="m-2 w-100" type='submit' color='primary' variant='contained'>
+                                Insert
+                            </Button>
+                        </div>
                     </form>
                 </Paper>
             </Container>
