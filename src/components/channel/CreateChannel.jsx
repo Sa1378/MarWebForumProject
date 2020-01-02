@@ -8,7 +8,6 @@ import {PhotoCamera} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 
 
-
 class CreateChannel extends Component {
 
 

@@ -14,6 +14,7 @@ import Container from "@material-ui/core/Container";
 import Comment from "./Comment";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
+import NewComment from "./NewComment";
 
 const styles = theme => (
     {
@@ -139,6 +140,8 @@ class PostPage extends Component {
                         key={comment.id}
                         comment={comment}
                     />)}
+
+                    <NewComment/>
 
                 </Container>
             </React.Fragment>

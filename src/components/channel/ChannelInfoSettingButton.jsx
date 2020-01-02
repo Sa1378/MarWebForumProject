@@ -26,7 +26,7 @@ export default function ChannelInfoSettingButton(props) {
                 <SettingsIcon color={"primary"}/>
             </IconButton>
             <Menu
-                id="simple-menu"
+                id="setting-menu"
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
