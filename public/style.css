@@ -15,3 +15,8 @@
     width: 200px;
     height: 200px;
 }
+
+.a_account:hover{
+    transition: 1s;
+    transform: scale(1.5);
+}

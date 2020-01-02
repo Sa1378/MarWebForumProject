@@ -5,7 +5,15 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import img from '../../static/images/avatar/download.jpeg'
-
+import img3 from '../../static/images/avatar/download.jpeg'
+import img4 from '../../static/images/avatar/photo_2020-01-02_22-01-43.jpg'
+import img5 from '../../static/images/avatar/photo_2020-01-02_22-01-52.jpg'
+import img6 from '../../static/images/avatar/photo_2020-01-02_22-01-58.jpg'
+import img7 from '../../static/images/avatar/photo_2020-01-02_22-02-02.jpg'
+import img8 from '../../static/images/avatar/photo_2020-01-02_22-02-06.jpg'
+import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
+import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
+import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 class AccountCard extends Component {
 
     inlineStyle = {
@@ -15,9 +23,9 @@ class AccountCard extends Component {
     render() {
         return (
             <div className='d-flex justify-content-around'>
-                <ListItem style={{width: '40vh'}}>
+                <ListItem style={{width: '150%'}}>
                     <ListItemAvatar>
-                        <Avatar alt="User" src={img}/>
+                        <Avatar alt="User" src={this.randomAvatarImage()}/>
                     </ListItemAvatar>
                     <ListItemText
                         primary={this.props.user.username}
@@ -29,7 +37,6 @@ class AccountCard extends Component {
                                     style={this.inlineStyle}
                                     color="textPrimary"
                                 >
-                                    {/*{this.props.}*/}
                                 </Typography>
                             </React.Fragment>
                         }
@@ -37,6 +44,30 @@ class AccountCard extends Component {
                 </ListItem>
             </div>
         );
+    }
+
+    randomAvatarImage() {
+        let number = (Math.floor(Math.random() * 9)) + 3;
+        console.log("==> " + number);
+        if (number === 3) {
+            return img3
+        } else if (number === 4) {
+            return img4
+        } else if (number === 5) {
+            return img5
+        } else if (number === 6) {
+            return img6
+        } else if (number === 7) {
+            return img7
+        } else if (number === 8) {
+            return img8
+        } else if (number === 9) {
+            return img9
+        } else if (number === 10) {
+            return img10
+        } else if (number === 11) {
+            return img11
+        } else return img
     }
 
 }
