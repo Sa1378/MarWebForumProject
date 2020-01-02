@@ -107,7 +107,7 @@ class Profile extends Component {
                 username: 'following5',
                 avatar_src: 'src/static/images/avatar/download.jpeg'
             }, {
-                username: 'following6',
+                username: 'following6sdsjgn;isgbaflgnafd;g',
                 avatar_src: 'src/static/images/avatar/download.jpeg'
             }
         ]

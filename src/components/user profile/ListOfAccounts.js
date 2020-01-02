@@ -8,8 +8,8 @@ import Divider from "@material-ui/core/Divider";
 
 class ListOfAccounts extends Component {
     gridList = {
-        width: 536,
-        height: 660,
+        width: 300,
+        height: 460,
     };
     icon = {
         color: 'rgba(255, 255, 255, 0.54)',
@@ -17,11 +17,11 @@ class ListOfAccounts extends Component {
 
     listOfAccount = () => {
             return (
-                <div className='d-flex flex-column'>
+                <div className='d-flex flex-column m-0 p-0'>
                     {this.props.listOfAccount.map(item => (
                         <React.Fragment>
                             <AccountCard user={item} isList='true'/>
-                            <Divider variant="inset" component="li"/>
+                            <Divider className='a_account' variant="inset" component="li"/>
                         </React.Fragment>
                     ))}
                 </div>
@@ -32,17 +32,15 @@ class ListOfAccounts extends Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <Container maxWidth="sm">
-                    <Typography component="div" style={{backgroundColor: 'white', height: '70vh'}}>
-                        <GridList cellHeight={180} style={this.gridList}>
+                <div style={{backgroundColor : 'white' ,borderRadius : '10px'}}>
+                        <GridList style={this.gridList}>
                             <div className='d-flex ml-3'>
-                                <div className="d-flex align-content-end m-5">
+                                <div className="d-flex align-content-end m-5 a_account" style={{width : '100%'}}>
                                     {this.listOfAccount()}
                                 </div>
                             </div>
                         </GridList>
-                    </Typography>
-                </Container>
+                </div>
             </React.Fragment>
         );
     }
