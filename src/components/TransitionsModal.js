@@ -13,7 +13,7 @@ import ReplyIcon from '@material-ui/icons/Reply';
 import NewComment from "./post/NewComment";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-    link: {
+    link1: {
         color: "white",
         textDecoration: "none",
         "&:hover": {
@@ -36,6 +36,16 @@ const useStyles = makeStyles(theme => ({
         },
         "&:focus": {
             outline: "none",
+        }, link2: {
+            color: "black",
+            textDecoration: "none",
+            "&:hover": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "&:focus": {
+                outline: "none",
+            }
         }
     }
 }));
@@ -89,11 +99,20 @@ export default function TransitionsModal(props) {
                     props.onClose();
                 }}>Subscribers</MenuItem>
             )
-
+        } else if (props.buttonName === 'follower' || props.buttonName === 'following') {
+            return (
+                <Button className={classes.link2} onClick={handleOpen} variant=''
+                        color="primary">{props.buttonName}</Button>
+            )
+        } else if (props.buttonName === 'setting') {
+            return (
+                <Button className={classes.link2} onClick={handleOpen} variant=''
+                        color="primary"><SettingsIcon color='primary'/></Button>
+            )
         } else {
             return (
-                <Button className={classes.link} onClick={handleOpen} variant={props.variant}
-                        color="primary">{props.buttonName}</Button>
+                <Button className={classes.link1} onClick={handleOpen} variant='contained'
+                        color="secondary">{props.buttonName}</Button>
             )
         }
     }
