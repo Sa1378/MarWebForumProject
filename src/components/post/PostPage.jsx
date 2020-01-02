@@ -99,15 +99,6 @@ class PostPage extends Component {
                                 guests. Add 1 cup of frozen peas along with the mussels, if you like.
                             </Typography>
                         </CardContent>
-                        <CardActions disableSpacing>
-                            <IconButton className={classes.link} aria-label="add to favorites">
-                                <FavoriteIcon/>
-                            </IconButton>
-                            <IconButton className={classes.link} aria-label="share">
-                                <ShareIcon/>
-                            </IconButton>
-                        </CardActions>
-                        <Divider variant="middle"/>
                         <CardContent>
                             <Typography paragraph>Method:</Typography>
                             <Typography paragraph>
@@ -133,7 +124,15 @@ class PostPage extends Component {
                                 Set aside off of the heat to let rest for 10 minutes, and then serve.
                             </Typography>
                         </CardContent>
-
+                        <Divider variant="middle"/>
+                        <CardActions disableSpacing>
+                            <IconButton className={classes.link} aria-label="add to favorites">
+                                <FavoriteIcon/>
+                            </IconButton>
+                            <IconButton className={classes.link} aria-label="share">
+                                <ShareIcon/>
+                            </IconButton>
+                        </CardActions>
                     </Card>
 
                     {this.state.comments.map(comment => <Comment
