@@ -14,6 +14,12 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, {bindTrigger, bindPopover} from 'material-ui-popup-state';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
+import Button from "@material-ui/core/Button";
+import {Icon} from "@material-ui/core";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {Link} from 'react-router-dom'
+import TransitionsModal from "../TransitionsModal";
+
 
 
 const styles = theme => ({
@@ -156,9 +162,11 @@ class Header extends Component {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {popupState => (
                                     <div>
+                                        <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
+
                                       <IconButton aria-label="show new notifications" color="inherit"
                                                     className={classes.icon} {...bindTrigger(popupState)}>
-                                            <Badge badgeContent={3} color="secondary"n id="notifBadge">
+                                            <Badge badgeContent={3} color="secondary" id="notifBadge">
                                                 <NotificationsIcon/>
                                             </Badge>
                                         </IconButton>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "@material-ui/core/Button";
-import TransitionsModal from "../Modal";
+import TransitionsModal from "../TransitionsModal";
 
 
 class Data extends Component {

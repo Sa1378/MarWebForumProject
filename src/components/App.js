@@ -7,13 +7,14 @@ import Login from "./login/Login";
 import Register from "./Register"
 import Profile from "./user profile/Profile";
 import EditProfile from "./user profile/EditProfile";
+
 import NewPost from "./post/NewPost";
-import CreateChannel from "./CreateChannel";
 import Notifications from "./Notifications";
 import Search from "./search/Search";
 import PostPage from "./post/PostPage";
 import Channel from "./channel/Channel";
 import 'bootstrap/dist/css/bootstrap.css';
+import CreateChannel from "./channel/CreateChannel";
 
 class App extends Component {
     state = {
@@ -32,7 +33,7 @@ class App extends Component {
                         <Route path="/editprofile/:username" component={EditProfile}/>
                         <Route path="/newpost" component={NewPost}/>
                         <Route path="/channel/:channelName" component={Channel}/>
-                        <Route path="/createchannel" component={CreateChannel}/>
+                        <Route path="/channel/create" component={CreateChannel}/>
                         <Route path="/notifications" component={Notifications}/>
                         <Route path="/search/:searchQuery" component={Search}/>
                         <Route path={"/post/:name"} component={PostPage}/>

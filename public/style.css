@@ -1,14 +1,16 @@
-.edit_password{
+.edit_password {
     margin-top: 300px;
 }
-.password_size{
+
+.password_size {
     width: 100%;
 }
-.email_size{
+
+.email_size {
     width: 81%;
 }
 
-.avatar_size{
+.avatar_size {
     width: 200px;
     height: 200px;
 }

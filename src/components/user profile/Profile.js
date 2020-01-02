@@ -7,7 +7,7 @@ import SimpleTabs from "../TwoTab";
 import Data from "./profileData";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Follow from "./follow";
-import TransitionsModal from "../Modal";
+import TransitionsModal from "../TransitionsModal";
 
 
 class Profile extends Component {

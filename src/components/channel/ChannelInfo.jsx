@@ -15,15 +15,28 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ChannelInfoSettingButton from "./ChannelInfoSettingButton";
+import {withStyles} from "@material-ui/core";
 
-
-
-
+const styles = theme => (
+    {
+        link: {
+            "&:focus": {
+                outline: "none",
+            }
+        }
+    }
+);
 
 
 class ChannelInfo extends Component {
 
+    constructor(props) {
+        super(props);
+
+    }
+
     render() {
+        const {classes} = this.props;
         return (
             <Card className="position-sticky w-100" style={{top: 90}}>
                 <CardHeader
@@ -33,7 +46,7 @@ class ChannelInfo extends Component {
                         </Avatar>
                     }
                     action={
-                        <ChannelInfoSettingButton />
+                        <ChannelInfoSettingButton linkClass={classes.link}/>
                     }
                     title="Channel Info"
                     subheader="Alireza Channel"
@@ -49,10 +62,10 @@ class ChannelInfo extends Component {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label={this.followOrUnFollowLabel(false)}>
+                    <IconButton className={classes.link} aria-label={this.followOrUnFollowLabel(false)}>
                         {this.followOrUnFollowIcon(false)}
                     </IconButton>
-                    <IconButton aria-label="share">
+                    <IconButton className={classes.link} aria-label="share">
                         <ShareIcon color={"primary"}/>
                     </IconButton>
                 </CardActions>
@@ -67,9 +80,9 @@ class ChannelInfo extends Component {
         return "UnFollow";
     }
 
-    followOrUnFollowIcon(followed){
-        if (followed){
-            return  <RemoveCircleIcon color={"primary"}/>
+    followOrUnFollowIcon(followed) {
+        if (followed) {
+            return <RemoveCircleIcon color={"primary"}/>
         }
         return <AddCircleIcon color={"primary"}/>
     }
@@ -78,4 +91,4 @@ class ChannelInfo extends Component {
 }
 
 
-export default ChannelInfo;
+export default withStyles(styles)(ChannelInfo);
