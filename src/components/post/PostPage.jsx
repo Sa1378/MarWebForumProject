@@ -15,6 +15,8 @@ import Comment from "./Comment";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
 import NewComment from "./NewComment";
+import img from '../../static/images/cards/wallpaper4.jpg'
+import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
 
 const styles = theme => (
     {
@@ -94,6 +96,7 @@ class PostPage extends Component {
                             image="../../static/images/cards/wallpaper4.jpg"
                             title="Paella dish"
                         />
+                        {this.randomImage()}
                         <CardContent>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 This impressive paella is a perfect party dish and a fun meal to cook together with your
@@ -147,6 +150,14 @@ class PostPage extends Component {
             </React.Fragment>
         );
     }
+
+    randomImage() {
+        let a = (Math.floor(Math.random() * 2)) / 2 + 1;
+        if (a === 1) {
+            return <img src={img} width={'100%'}/>
+        } else return <img src={img2}  width={'100%'}/>
+    }
+
 }
 
 export default withStyles(styles)(PostPage);
