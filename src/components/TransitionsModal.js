@@ -11,7 +11,7 @@ import NewPost from "./post/NewPost";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
 import NewComment from "./post/NewComment";
-
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-    link: {
+    link1: {
         color: "white",
         textDecoration: "none",
         "&:hover": {
@@ -34,6 +34,16 @@ const useStyles = makeStyles(theme => ({
         },
         "&:focus": {
             outline: "none",
+        }, link2: {
+            color: "black",
+            textDecoration: "none",
+            "&:hover": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "&:focus": {
+                outline: "none",
+            }
         }
     }
 }));
@@ -74,16 +84,26 @@ export default function TransitionsModal(props) {
 
     function handleButton() {
         if (props.buttonName === 'reply') {
-            console.log("heeeloooooooooo ommad icon button");
             return (
                 <IconButton onClick={handleOpen} className={classes.link} aria-label="Reply">
                     <ReplyIcon/>
                 </IconButton>
             )
-        } else {
+        } else if (props.buttonName === 'follower' || props.buttonName === 'following') {
             return (
-                <Button className={classes.link} onClick={handleOpen} variant={props.variant}
+                <Button className={classes.link2} onClick={handleOpen} variant=''
                         color="primary">{props.buttonName}</Button>
+            )
+        }else if (props.buttonName === 'setting'){
+            return (
+                <Button className={classes.link2} onClick={handleOpen} variant=''
+                        color="primary"><SettingsIcon color='primary'/></Button>
+            )
+        }
+        else {
+            return (
+                <Button className={classes.link1} onClick={handleOpen} variant='contained'
+                        color="secondary">{props.buttonName}</Button>
             )
         }
     }
