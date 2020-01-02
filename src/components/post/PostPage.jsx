@@ -181,8 +181,8 @@ class PostPage extends Component {
     randomImage() {
         let a = (Math.floor(Math.random() * 2)) / 2 + 1;
         if (a === 1) {
-            return <img src={img} width={'100%'}/>
-        } else return <img src={img2} width={'100%'}/>
+            return <img src={img} width={'100%'} alt="Can't be shown."/>
+        } else return <img src={img2} width={'100%'} alt="Can't be shown."/>
     }
 
 }

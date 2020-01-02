@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import {red} from "@material-ui/core/colors";
 
 
 class LikeIcon extends Component {
