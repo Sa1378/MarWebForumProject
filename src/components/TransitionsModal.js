@@ -12,6 +12,8 @@ import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
 import CardActions from "@material-ui/core/CardActions";
 import NewComment from "./post/NewComment";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 
 const useStyles = makeStyles(theme => ({
@@ -75,12 +77,20 @@ export default function TransitionsModal(props) {
 
     function handleButton() {
         if (props.buttonName === 'reply') {
-            console.log("heeeloooooooooo ommad icon button");
             return (
                 <IconButton onClick={handleOpen} className={classes.link} aria-label="Reply">
                     <ReplyIcon/>
                 </IconButton>
             )
+        } else if (props.buttonName === 'subscribers') {
+            console.log("Dakhele Ifeeeeeeeeeeeeeeeeeee");
+            return (
+                <MenuItem onClick={function () {
+                    handleOpen();
+                    props.onClose();
+                }}>Subscribers</MenuItem>
+            )
+
         } else {
             return (
                 <Button className={classes.link} onClick={handleOpen} variant={props.variant}
@@ -97,12 +107,13 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'following') {
             return <ListOfAccounts eroring='ing' following={props.following}/>
         } else if (props.buttonName === 'create channel') {
-            console.log("Hellooooooooooooooooooooooooooooooo");
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {
             return <NewPost/>
-        } else if (props.buttonName === 'reply'){
+        } else if (props.buttonName === 'reply') {
             return <NewComment/>
+        } else if (props.buttonName === 'subscribers') {
+            return <ListOfAccounts/>
         }
     }
 }

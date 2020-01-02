@@ -33,8 +33,6 @@ class ChannelsList extends Component {
                         </React.Fragment>
                     ))
                 }
-
-
             </List>
 
         );
