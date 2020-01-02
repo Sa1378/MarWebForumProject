@@ -13,24 +13,65 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import Comment from "./Comment";
 import Divider from "@material-ui/core/Divider";
+import {withStyles} from "@material-ui/core";
 
+const styles = theme => (
+    {
+        link: {
+            color: "gray",
+            textDecoration: "none",
+            "&:hover": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "&:focus": {
+                outline: "none",
+            }
+        }
+    }
+);
 
 class PostPage extends Component {
 
     state = {
         comments: [
-            {id: 1, message: 'First Comment', avatar_src: 'src/static/images/wallpaper4.jpg', name: 'alireza'},
-            {id: 2, message: 'Second Comment', avatar_src: 'src/static/images/wallpaper4.jpg', name: 'alireza'},
-            {id: 3, message: 'Third Comment', avatar_src: 'src/static/images/wallpaper4.jpg', name: 'alireza'},
-            {id: 4, message: 'Fourth Comment', avatar_src: 'src/static/images/wallpaper4.jpg', name: 'alireza'},
+            {
+                id: 1,
+                message: 'First Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'alireza',
+                loggedInUser: 'alireza'
+            },
+            {
+                id: 2,
+                message: 'Second Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'reza',
+                loggedInUser: 'alireza'
+            },
+            {
+                id: 3,
+                message: 'Third Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'mehrdad',
+                loggedInUser: 'alireza'
+            },
+            {
+                id: 4,
+                message: 'Fourth df;askdf;askdb\nComment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'alireza',
+                loggedInUser: 'alireza'
+            },
         ],
     };
 
     render() {
+        const {classes} = this.props;
         return (
             <React.Fragment>
                 <Container>
-                     {/*TODO add a side bar*/}
+                    {/*TODO add a side bar*/}
                 </Container>
 
                 <Container maxWidth={"lg"}>
@@ -41,7 +82,7 @@ class PostPage extends Component {
                                 </Avatar>
                             }
                             action={
-                                <IconButton aria-label="settings">
+                                <IconButton className={classes.link} aria-label="settings">
                                     <MoreVertIcon/>
                                 </IconButton>
                             }
@@ -59,14 +100,14 @@ class PostPage extends Component {
                             </Typography>
                         </CardContent>
                         <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites">
+                            <IconButton className={classes.link} aria-label="add to favorites">
                                 <FavoriteIcon/>
                             </IconButton>
-                            <IconButton aria-label="share">
+                            <IconButton className={classes.link} aria-label="share">
                                 <ShareIcon/>
                             </IconButton>
                         </CardActions>
-                        <Divider variant="middle" />
+                        <Divider variant="middle"/>
                         <CardContent>
                             <Typography paragraph>Method:</Typography>
                             <Typography paragraph>
@@ -106,4 +147,4 @@ class PostPage extends Component {
     }
 }
 
-export default PostPage;
+export default withStyles(styles)(PostPage);

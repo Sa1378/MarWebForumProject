@@ -16,63 +16,30 @@ import Divider from "@material-ui/core/Divider";
 import {red} from "@material-ui/core/colors";
 import LikeIcon from "./LikeIcon";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {withStyles} from "@material-ui/core";
 
-const styles = {
-    cardContainer: {
-        display: "flex",
-        flexWrap: "wrap",
-    },
-    card: {
-        display: "flex",
-        flexDirection: "column",
-        maxWidth: 345,
-        margin: "0px 50px 50px 50px",
-    },
-    grow: {
-        flexGrow: 2,
-    },
-    media: {
-        display: "none",
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    },
-    avatar: {
-        backgroundColor: red[500],
-    },
-    liked: {
-        color: "red",
-    },
-    notliked: {
-        color: "black",
-    },
-    preWrap: {
-        whiteSpace: "pre-wrap",
-    },
-    link: {
-        "&:focus": {
-            outline: "none",
+const styles = theme => (
+    {
+        link: {
+            color: "gray",
+            textDecoration: "none",
+            "&:hover": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "&:focus": {
+                outline: "none",
+            }
         }
     }
-};
+);
 
 
 class PostCard extends Component {
 
-    linkStyle = {
-        color: "gray",
-        textDecoration: "none",
-        "&:hover": {
-            textDecoration: "none",
-            color: "black",
-        },
-        "&:focus": {
-            outline: "none",
-        }
-
-    };
-
 
     render() {
+        const {classes} = this.props;
         return (
             <Card className="mt-3 w-100">
                 <CardHeader
@@ -82,14 +49,14 @@ class PostCard extends Component {
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="settings">
+                        <IconButton className={classes.link} aria-label="settings">
                             <MoreVertIcon/>
                         </IconButton>
                     }
-                    title={<Link style={this.linkStyle} className="nav-link"
+                    title={<Link className={classes.link + " nav-link"}
                                  to={"/post/" + this.props.postCard.id}>{this.props.postCard.title}</Link>}
                     titleTypographyProps={{fontSize: "20px"}}
-                    subheader={<Link style={this.linkStyle} className="nav-link"
+                    subheader={<Link className={classes.link + " nav-link"}
                                      to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
                 />
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
@@ -110,11 +77,12 @@ class PostCard extends Component {
                 </Link>
                 <Divider variant="middle"/>
                 <CardActions>
-                    <IconButton onClick={() => this.props.onLike(this.props.postCard.id)} aria-label="add to favorites">
+                    <IconButton className={classes.link} onClick={() => this.props.onLike(this.props.postCard.id)}
+                                aria-label="add to favorites">
                         <LikeIcon
                             liked={this.props.postCard.liked}/>
                     </IconButton>
-                    <IconButton aria-label="share">
+                    <IconButton className={classes.link} aria-label="share">
                         <ShareIcon/>
                     </IconButton>
                 </CardActions>
@@ -124,4 +92,4 @@ class PostCard extends Component {
 
 }
 
-export default PostCard;
+export default withStyles(styles)(PostCard);

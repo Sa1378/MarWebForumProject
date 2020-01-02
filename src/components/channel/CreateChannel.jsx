@@ -5,6 +5,8 @@ import MultipleSelect from "../post/MultiSelect";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import {PhotoCamera} from "@material-ui/icons";
+import Avatar from "@material-ui/core/Avatar";
+
 
 
 class CreateChannel extends Component {
@@ -14,25 +16,26 @@ class CreateChannel extends Component {
         return (
             <div style={{backgroundColor: 'white'}}>
                 <form noValidate autoComplete="off">
+                    <div>
+                        <Avatar className="" style={{left: '0'}} alt="Alireza" src=""/>
+                    </div>
                     <div className="d-flex justify-content-center p-3">
                         <TextField className="m-2"
                                    id="outlined-textarea"
                                    label="Channel Title"
                                    placeholder="Title"
-                            // multiline
                                    variant="outlined"
                         />
                         <TextField className="m-2"
                                    id="outlined-textarea"
-                                   label="Channel Title"
-                                   placeholder="Title"
-                            // multiline
+                                   label="Channel Subject"
+                                   placeholder="Subject"
                                    variant="outlined"
                         />
-                        <input accept="image/*"  style={{display: 'none'}} id="icon-button-file" type="file" />
+                        <input accept="image/*" style={{display: 'none'}} id="icon-button-file" type="file"/>
                         <label htmlFor="icon-button-file">
                             <IconButton size='large' color="primary" aria-label="upload picture" component="span">
-                                <PhotoCamera />
+                                <PhotoCamera/>
                             </IconButton>
                         </label>
                     </div>
