@@ -1,8 +1,4 @@
 import React, {Component} from "react";
-import PeopleIcon from '@material-ui/icons/People';
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import {withStyles} from '@material-ui/core/styles';

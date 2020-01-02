@@ -14,10 +14,6 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, {bindTrigger, bindPopover} from 'material-ui-popup-state';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
-import Button from "@material-ui/core/Button";
-import {Icon} from "@material-ui/core";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import {Link} from 'react-router-dom'
 import TransitionsModal from "../TransitionsModal";
 
 
@@ -135,7 +131,7 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        window.location.href = "/profile";
+        window.location.href = "/profile/merhdads";
     }
 
 

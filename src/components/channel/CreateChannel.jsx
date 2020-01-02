@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
 import MultipleSelect from "../post/MultiSelect";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";

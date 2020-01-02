@@ -10,7 +10,6 @@ import CreateChannel from "./channel/CreateChannel";
 import NewPost from "./post/NewPost";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
-import CardActions from "@material-ui/core/CardActions";
 import NewComment from "./post/NewComment";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -29,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2, 4, 3),
     },
     link: {
-        color: "gray",
+        color: "white",
         textDecoration: "none",
         "&:hover": {
             textDecoration: "none",
