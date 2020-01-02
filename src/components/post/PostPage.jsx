@@ -17,6 +17,7 @@ import {withStyles} from "@material-ui/core";
 import NewComment from "./NewComment";
 import img from '../../static/images/cards/wallpaper4.jpg'
 import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
+import Sidebar from "../main-page/Sidebar";
 
 const styles = theme => (
     {
@@ -93,83 +94,87 @@ class PostPage extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <React.Fragment>
-                <Container>
-                    {/*TODO add a side bar*/}
-                </Container>
-
-                <Container maxWidth={"lg"}>
-                    <Card>
-                        <CardHeader
-                            avatar={
-                                <Avatar aria-label="recipe">
-                                </Avatar>
-                            }
-                            action={
-                                <IconButton className={classes.link} aria-label="settings">
-                                    <MoreVertIcon/>
+            <Container>
+                <div className="d-flex justify-content-center">
+                    <Container maxWidth={"lg"}>
+                        <Card>
+                            <CardHeader
+                                avatar={
+                                    <Avatar aria-label="recipe">
+                                    </Avatar>
+                                }
+                                action={
+                                    <IconButton className={classes.link} aria-label="settings">
+                                        <MoreVertIcon/>
+                                    </IconButton>
+                                }
+                                title="Shrimp and Chorizo Paella"
+                                subheader="September 14, 2016"
+                            />
+                            <CardMedia
+                                image="../../static/images/cards/wallpaper4.jpg"
+                                title="Paella dish"
+                            />
+                            {this.randomImage()}
+                            <CardContent>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    This impressive paella is a perfect party dish and a fun meal to cook together with
+                                    your
+                                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                                </Typography>
+                            </CardContent>
+                            <CardContent>
+                                <Typography paragraph>Method:</Typography>
+                                <Typography paragraph>
+                                    Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
+                                    minutes.
+                                </Typography>
+                                <Typography paragraph>
+                                    Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
+                                    heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
+                                    browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
+                                    chicken
+                                    and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
+                                    pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
+                                    saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+                                </Typography>
+                                <Typography paragraph>
+                                    Add rice and stir very gently to distribute. Top with artichokes and peppers, and
+                                    cook
+                                    without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce
+                                    heat to
+                                    medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
+                                    cook
+                                    again without stirring, until mussels have opened and rice is just tender, 5 to 7
+                                    minutes more. (Discard any mussels that don’t open.)
+                                </Typography>
+                                <Typography>
+                                    Set aside off of the heat to let rest for 10 minutes, and then serve.
+                                </Typography>
+                            </CardContent>
+                            <Divider variant="middle"/>
+                            <CardActions disableSpacing>
+                                <IconButton className={classes.link} aria-label="like">
+                                    <FavoriteIcon/>
                                 </IconButton>
-                            }
-                            title="Shrimp and Chorizo Paella"
-                            subheader="September 14, 2016"
-                        />
-                        <CardMedia
-                            image="../../static/images/cards/wallpaper4.jpg"
-                            title="Paella dish"
-                        />
-                        {this.randomImage()}
-                        <CardContent>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                            </Typography>
-                        </CardContent>
-                        <CardContent>
-                            <Typography paragraph>Method:</Typography>
-                            <Typography paragraph>
-                                Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                                minutes.
-                            </Typography>
-                            <Typography paragraph>
-                                Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                                heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                                browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-                                and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                                pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-                                saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                            </Typography>
-                            <Typography paragraph>
-                                Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-                                without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-                                medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-                                again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                                minutes more. (Discard any mussels that don’t open.)
-                            </Typography>
-                            <Typography>
-                                Set aside off of the heat to let rest for 10 minutes, and then serve.
-                            </Typography>
-                        </CardContent>
-                        <Divider variant="middle"/>
-                        <CardActions disableSpacing>
-                            <IconButton className={classes.link} aria-label="like">
-                                <FavoriteIcon/>
-                            </IconButton>
-                            <IconButton className={classes.link} aria-label="share">
-                                <ShareIcon/>
-                            </IconButton>
-                        </CardActions>
-                    </Card>
+                                <IconButton className={classes.link} aria-label="share">
+                                    <ShareIcon/>
+                                </IconButton>
+                            </CardActions>
+                        </Card>
 
-                    {this.state.comments.map(comment => <Comment
-                        key={comment.id}
-                        comment={comment}
-                        onLike={this.handleLikeComment}
-                    />)}
+                        {this.state.comments.map(comment => <Comment
+                            key={comment.id}
+                            comment={comment}
+                            onLike={this.handleLikeComment}
+                        />)}
 
-                    <NewComment/>
+                        <NewComment/>
+                    </Container>
+                    <Sidebar/>
+                </div>
 
-                </Container>
-            </React.Fragment>
+            </Container>
         );
     }
 
