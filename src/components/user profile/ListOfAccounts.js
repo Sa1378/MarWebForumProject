@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import ImageAvatar from "./Avatar";
 import AccountCard from "./AccountCard";
 import Divider from "@material-ui/core/Divider";
 

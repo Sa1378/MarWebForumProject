@@ -8,12 +8,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
-import ReplyIcon from '@material-ui/icons/Reply';
 import LikeIcon from "./LikeIcon";
 import TransitionsModal from "../TransitionsModal";
 import img3 from '../../static/images/avatar/download.jpeg'

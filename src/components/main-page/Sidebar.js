@@ -7,7 +7,7 @@ import TransitionsModal from "../TransitionsModal";
 
 const styles={
     container:{
-        margin:"15px 0px 0px 20px",
+        margin:"15px 0px 0px 60px",
         display:"flex",
         flexFlow:"column",
         width:"20%",
@@ -98,11 +98,11 @@ class Sidebar extends Component{
                 </Paper>
                 <Paper className={classes.item}>
                     Marweb
-                    <a href="#" className={classes.medium+" "+classes.firstMedium}>About</a>
-                    <a href="#" className={classes.medium}>Careers</a>
-                    <a href="#" className={classes.medium}>Help</a>
+                    <a href="/" className={classes.medium+" "+classes.firstMedium}>About</a>
+                    <a href="/" className={classes.medium}>Careers</a>
+                    <a href="/" className={classes.medium}>Help</a>
                     <div className={classes.small+" "+classes.firstSmall}>
-                        <a href="#">Terms</a>|<a href="#">Content Policy</a>|<a href="#">Privacy Policy</a>|<a href="#">Mod Policy</a>
+                        <a href="/">Terms</a>|<a href="/">Content Policy</a>|<a href="/">Privacy Policy</a>|<a href="/">Mod Policy</a>
                     </div>
                     <div className={classes.small}>Marweb Inc © 2020. All rights reserved</div>
                 </Paper>

@@ -1,11 +1,8 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import SettingsIcon from '@material-ui/icons/Settings';
 import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {makeStyles} from "@material-ui/core/styles";
 
 
 export default function ChannelInfoSettingButton(props) {
