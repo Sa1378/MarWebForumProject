@@ -12,7 +12,7 @@ class CreateChannel extends Component {
 
     render() {
         return (
-            <div style={{backgroundColor: 'white'}}>
+            <div style={{backgroundColor: 'white'}} className="p-5">
                 <form noValidate autoComplete="off">
                     <div>
                         <Avatar className="" style={{left: '0'}} alt="Alireza" src=""/>

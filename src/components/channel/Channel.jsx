@@ -109,11 +109,11 @@ class Channel extends Component {
 
         ],
         channels: [
-            {id: 1, title: 'alireza', creator: 'MarWeb studio'},
-            {id: 2, title: 'alireza', creator: 'MarWeb studio'},
-            {id: 3, title: 'alireza', creator: 'MarWeb studio'},
-            {id: 4, title: 'alireza', creator: 'MarWeb studio'},
-            {id: 5, title: 'alireza', creator: 'MarWeb studio'},
+            {id: 1, creator: 'alireza', title: 'MarWeb studio'},
+            {id: 2, creator: 'alireza', title: 'MarWeb studio'},
+            {id: 3, creator: 'alireza', title: 'MarWeb studio'},
+            {id: 4, creator: 'alireza', title: 'MarWeb studio'},
+            {id: 5, creator: 'alireza', title: 'MarWeb studio'},
         ],
         offset: 0,
         accounts: [
@@ -123,6 +123,12 @@ class Channel extends Component {
             'fereydoon',
             'kambiz',
             'yaghoob',
+        ],
+        loggedInUser: [
+            'reza',
+        ],
+        channelFounder: [
+            'alireza'
         ]
     };
 
@@ -147,7 +153,7 @@ class Channel extends Component {
         return (
             <Container className="d-flex justify-content-center">
                 <Container>
-                    <ChannelInfo/>
+                    <ChannelInfo loggedInUser={this.state.loggedInUser} channelFounder={this.state.channelFounder}/>
                 </Container>
                 <Container className="">
                     <PostList onLike={this.handleLikePost} postListStyle={this.postListStyle}

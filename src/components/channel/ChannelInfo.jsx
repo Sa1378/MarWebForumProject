@@ -26,6 +26,30 @@ const styles = theme => (
 
 class ChannelInfo extends Component {
 
+    state = {
+        follower: [
+            {
+                username: 'follower1',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower2',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower3',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower4',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower5',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }, {
+                username: 'follower6',
+                avatar_src: 'src/static/images/avatar/download.jpeg'
+            }
+        ],
+    };
+
 
     render() {
         const {classes} = this.props;
@@ -38,7 +62,8 @@ class ChannelInfo extends Component {
                         </Avatar>
                     }
                     action={
-                        <ChannelInfoSettingButton linkClass={classes.link}/>
+                        <ChannelInfoSettingButton canEdit={this.props.loggedInUser === this.props.channelFounder}
+                                                  followers={this.state.follower} linkClass={classes.link}/>
                     }
                     title="Channel Info"
                     subheader="Alireza Channel"
