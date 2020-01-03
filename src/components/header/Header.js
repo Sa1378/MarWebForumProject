@@ -15,7 +15,6 @@ import PopupState, {bindTrigger, bindPopover} from 'material-ui-popup-state';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
 import TransitionsModal from "../TransitionsModal";
-import App from '../App';
 
 
 
@@ -132,7 +131,8 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        window.location.href = "/profile/"+App.state.username;
+        console.log(localStorage.getItem("username"));
+        window.location.href = "/profile/"+localStorage.getItem("username");
     }
 
 
@@ -241,10 +241,7 @@ const styles = {
         marginTop:"0px",
     }
 };
-
-
 class Header extends Component{
-
     componentDidMount(){
         var searchTextField=document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress",event=>{
@@ -256,7 +253,6 @@ class Header extends Component{
             }
         });
     }
-
     render(){
         const {classes}=this.props;
         return (
@@ -270,6 +266,5 @@ class Header extends Component{
         );
     };
 }
-
 export default withStyles(styles)(Header); // chon byd az function haie martabe balatr estefade konim vase override krdne material
 */
