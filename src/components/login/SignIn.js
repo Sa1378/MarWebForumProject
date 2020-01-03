@@ -23,10 +23,12 @@ class SignIn extends Component {
         return (
             <form className="d-flex flex-column justify-content-around my-5">
 
-                <TextField className="m-5 email_size" type="email" id="usernameInput" label="E-mail"
+                <TextField className="m-5 email_size" type="text" id="usernameInput" label="username"
                            variant="outlined" required />
                 <InputAdornments label="Password" required/>
                 <Button className="my-5" variant="contained" color="primary" onClick={this.loginClick}>Sign In</Button>
+                <TextField className="" type="email" id="usernameInput" label="E-mail"
+                           variant="outlined" required />
                 <Tooltip title='first fill email input'>
                     <Button className="my-2" variant="" color="primary" >Forget Password</Button>
                 </Tooltip>
