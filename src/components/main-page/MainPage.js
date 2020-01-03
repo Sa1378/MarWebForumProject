@@ -28,7 +28,7 @@ class MainPage extends Component {
                 title: 'Hello World',
                 postSummary: 'this message is bullshit\nasfjasfjasf ',
                 liked: true,
-                disliked: false
+                disliked: false,
             },
             {
                 id: 2,

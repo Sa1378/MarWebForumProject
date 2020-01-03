@@ -26,6 +26,9 @@ import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import img from "../../static/images/cards/wallpaper4.jpg";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import EditDeleteComment from "./EditDeleteComment";
+import Badge from "@material-ui/core/Badge/Badge";
+import ScoreIcon from '@material-ui/icons/Score';
+
 
 
 const styles = theme => (
@@ -93,7 +96,9 @@ class Comment extends Component {
                                             onDisLike={this.props.onDisLike}
                                             postCard={this.props.comment}/>
                         <TransitionsModal content="post" buttonName="reply"/>
-
+                        <Badge badgeContent={120} color={'primary'} >
+                            <ScoreIcon/>
+                        </Badge>
                     </CardActions>
                 </Card>
             </Container>
