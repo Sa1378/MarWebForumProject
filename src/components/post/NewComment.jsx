@@ -35,6 +35,7 @@ class NewComment extends Component {
                                    placeholder="Comment"
                                    variant="filled"
                                    multiline
+                                   defaultValue={this.checkComment()}
                         />
                         <div className="d-flex justify-content-center w-100">
                             <Button className="m-2 w-100" type='submit' color='primary' variant='contained'>
@@ -45,6 +46,13 @@ class NewComment extends Component {
                 </Paper>
             </Container>
         );
+    }
+
+    checkComment(){
+        if (this.props.comment){
+            return this.props.comment;
+        }
+        return ''
     }
 
 

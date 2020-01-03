@@ -25,6 +25,7 @@ import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import img from "../../static/images/cards/wallpaper4.jpg";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
+import EditDeleteComment from "./EditDeleteComment";
 
 
 const styles = theme => (
@@ -103,9 +104,8 @@ class Comment extends Component {
         const {classes} = this.props;
         if (loggedInUser === name) {
             return (
-                <IconButton className={classes.link} aria-label="settings">
-                    <MoreVertIcon/>
-                </IconButton>)
+                <EditDeleteComment comment={this.state.message}/>
+            )
         } else {
             return null;
         }
