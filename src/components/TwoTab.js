@@ -10,6 +10,7 @@ import SingIn from "./login/SingIn";
 import SignUp from "./login/SignUp";
 import PostList from "./post/PostList";
 import ChannelsList from "./channel/ChannelsList";
+import {Container} from "@material-ui/core";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -87,7 +88,10 @@ export default function SimpleTabs(props) {
 
 
     function post(props) {
-        return <PostList postCards={props.posts}/>
+        return <PostList onDisLike={props.handleDisLikePost}
+                         onLike={props.handleLikePost}
+                         postListStyle={props.postListStyle}
+                         postCards={props.postCards}/>
     }
 
     function channel(props) {
