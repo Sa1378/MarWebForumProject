@@ -12,7 +12,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
-import LikeIcon from "./LikeIcon";
 import TransitionsModal from "../TransitionsModal";
 import {Link} from "react-router-dom";
 import img3 from '../../static/images/avatar/download.jpeg'

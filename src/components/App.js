@@ -17,13 +17,12 @@ import CreateChannel from "./channel/CreateChannel";
 
 class App extends Component {
     state = {
-        my_name: 'reza'
+        username: null
     };
 
     render() {
-        console.log(localStorage.getItem("username"));
         return (<div style={{whiteSpace: "pre-wrap"}}>
-                {(localStorage.getItem("username")===null) ? (<Login/>):(
+                {(this.state.username===null) ? (<Login/>):(
                 <div>
                 <Header/>
                 <BrowserRouter>
@@ -40,7 +39,7 @@ class App extends Component {
                         <Route path="/search/:searchQuery" component={Search}/>
                         <Route path={"/post/:name"} component={PostPage}/>
                         <Route path="/logout">
-                            {localStorage.removeItem("username")}
+                            {this.setState({username:null})}
                             <Redirect to="/login"/>
                         </Route>
                     </div>

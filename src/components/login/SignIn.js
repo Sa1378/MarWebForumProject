@@ -17,9 +17,11 @@ class SignIn extends Component {
     loginClick()
     {
         username=document.getElementById("usernameInput").value;
-        localStorage.setItem("username",username)
+        localStorage.setItem("username",username);
         console.log("Username: "+username);
         window.location.href="/";
+        
+        console.log("Username: "+username);
     }
 
     render() {

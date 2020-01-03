@@ -15,6 +15,7 @@ import PopupState, {bindTrigger, bindPopover} from 'material-ui-popup-state';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
 import TransitionsModal from "../TransitionsModal";
+import App from '../App';
 
 
 
@@ -131,8 +132,7 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        console.log(localStorage.getItem("username"));
-        window.location.href = "/profile/"+localStorage.getItem("username");
+        window.location.href = "/profile/"+App.state.username;
     }
 
 
