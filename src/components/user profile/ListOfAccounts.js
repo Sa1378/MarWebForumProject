@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import GridList from '@material-ui/core/GridList';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
 import AccountCard from "./AccountCard";
 import Divider from "@material-ui/core/Divider";
 

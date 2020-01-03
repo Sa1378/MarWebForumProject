@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import IconButton from "@material-ui/core/IconButton";
-import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 

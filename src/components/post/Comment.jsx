@@ -76,7 +76,7 @@ class Comment extends Component {
                         action={
                             this.isMyComment(this.props.comment.loggedInUser, this.props.comment.name)
                         }
-                        title={<Link className={classes.link + " nav-link" + " font-weight-bold font-italic"}
+                        title={<Link className={classes.link + " nav-link font-weight-bold font-italic"}
                                      style={{color: 'black'}}
                                      to={"/profile/" + this.props.comment.name}>{this.props.comment.name}</Link>}
                         subheader="September 14, 2016"

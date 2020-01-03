@@ -167,7 +167,7 @@ class MainPage extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <Container>
+            <Container >
                 <SortBy/>
                 <div className={classes.container}>
                     <PostList onDisLike={this.handleDisLikePost}
