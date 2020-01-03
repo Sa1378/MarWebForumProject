@@ -27,6 +27,7 @@ import img8 from '../../static/images/avatar/photo_2020-01-02_22-02-06.jpg'
 import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
 import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
+import EditDeletePost from "./EditDeletePost";
 
 const styles = theme => (
     {
@@ -53,6 +54,7 @@ class PostPage extends Component {
     }
 
     state = {
+        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit'},
         comments: [
             {
                 id: 1,
@@ -140,9 +142,8 @@ class PostPage extends Component {
                                     </Avatar>
                                 }
                                 action={
-                                    <IconButton className={classes.link} aria-label="settings">
-                                        <MoreVertIcon/>
-                                    </IconButton>
+
+                                    <EditDeletePost post={this.state.post} />
                                 }
                                 title="Shrimp and Chorizo Paella"
                                 subheader="September 14, 2016"

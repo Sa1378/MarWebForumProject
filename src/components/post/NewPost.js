@@ -36,11 +36,11 @@ class NewPost extends Component {
                                 className="border rounded">
                         <form className="jumbotron d-flex flex-column justify-content-center">
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField id="filled-basic" label="Title" variant="filled"/>
+                                <TextField id="filled-basic" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
                             </div>
                             <div className="form-group d-flex justify-content-center my-3">
                                 <TextField style={{width: '100%'}} id="filled-basic" label="Content" variant="filled"
-                                           multiline={true}/>
+                                           multiline={true} defaultValue={this.checkForContent()}/>
 
                             </div>
                             <div className="form-group d-flex justify-content-center">
@@ -70,7 +70,7 @@ class NewPost extends Component {
                             </div>
                             <div className='d-flex justify-content-center'>
                                 <Button type="submit" className="btn btn-primary" color="primary"
-                                        variant="contained">Create</Button>
+                                        variant="contained">{this.buttonName()}</Button>
                             </div>
 
                         </form>
@@ -79,6 +79,24 @@ class NewPost extends Component {
             </div>
         );
     };
+
+    checkForTitle(){
+        if (this.props.post)
+            return this.props.post.title;
+        return ''
+    }
+
+    checkForContent(){
+        if (this.props.post)
+            return this.props.post.content;
+        return ''
+    }
+
+    buttonName(){
+        if (this.props.post)
+            return 'Edit';
+        return 'Create'
+    }
 
 }
 
