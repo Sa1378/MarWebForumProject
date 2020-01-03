@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route,Redirect} from "react-router-dom";
 import "../static/css/App.css";
 import Header from "./header/Header";
 import MainPage from "./main-page/MainPage";
@@ -7,7 +7,6 @@ import Login from "./login/Login";
 import Register from "./Register"
 import Profile from "./user profile/Profile";
 import EditProfile from "./user profile/EditProfile";
-
 import NewPost from "./post/NewPost";
 import Notifications from "./Notifications";
 import Search from "./search/Search";
@@ -22,11 +21,14 @@ class App extends Component {
     };
 
     render() {
+        console.log(localStorage.getItem("username"));
         return (<div style={{whiteSpace: "pre-wrap"}}>
                 <Header/>
                 <BrowserRouter>
                     <div className="mainContainer">
-                        <Route exact path="/" component={MainPage}/>
+                        <Route exact path="/">
+                            {(localStorage.getItem("username")===null) ?<Redirect to="/login"/>: <MainPage />}    
+                        </Route>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
                         <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>

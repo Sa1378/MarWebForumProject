@@ -7,8 +7,9 @@ import Sidebar from './Sidebar';
 
 const styles={
     container:{
+        position:"relative",
         display:"flex",
-    }
+    },
 }
 
 class MainPage extends Component {
@@ -115,7 +116,7 @@ class MainPage extends Component {
     render() {
         const {classes}=this.props;
         return (
-            <Container>
+            <Container >
                 <SortBy/>
                 <div className={classes.container}>
                 <PostList onLike={this.handleLikePost} postListStyle={this.postListStyle}
