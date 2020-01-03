@@ -13,6 +13,10 @@ import ReplyIcon from '@material-ui/icons/Reply';
 import NewComment from "./post/NewComment";
 import MenuItem from "@material-ui/core/MenuItem";
 import SettingsIcon from '@material-ui/icons/Settings';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DeletePostAlert from "./post/DeletePostAlert";
+
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -27,7 +31,6 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2, 4, 3),
     },
     link1: {
-        color: "white",
         textDecoration: "none",
         "&:hover": {
             textDecoration: "none",
@@ -35,16 +38,17 @@ const useStyles = makeStyles(theme => ({
         },
         "&:focus": {
             outline: "none",
-        }, link2: {
-            color: "black",
+        },
+    },
+    link2: {
+        color: "black",
+        textDecoration: "none",
+        "&:hover": {
             textDecoration: "none",
-            "&:hover": {
-                textDecoration: "none",
-                color: "black",
-            },
-            "&:focus": {
-                outline: "none",
-            }
+            color: "black",
+        },
+        "&:focus": {
+            outline: "none",
         }
     }
 }));
@@ -86,12 +90,11 @@ export default function TransitionsModal(props) {
     function handleButton() {
         if (props.buttonName === 'reply') {
             return (
-                <IconButton onClick={handleOpen} className={classes.link} aria-label="Reply">
+                <IconButton onClick={handleOpen} className={classes.link1} aria-label="Reply">
                     <ReplyIcon/>
                 </IconButton>
             )
         } else if (props.buttonName === 'subscribers') {
-            console.log("Dakhele Ifeeeeeeeeeeeeeeeeeee");
             return (
                 <MenuItem onClick={function () {
                     handleOpen();
@@ -107,6 +110,18 @@ export default function TransitionsModal(props) {
             return (
                 <Button className={classes.link2} onClick={handleOpen} variant=''
                         color="primary"><SettingsIcon color='primary'/></Button>
+            )
+        } else if (props.buttonName === 'editPost') {
+            return (
+                <IconButton className={classes.link1} onClick={handleOpen} variant=''>
+                    <EditIcon/>
+                </IconButton>
+            )
+        } else if (props.buttonName === 'deletePost') {
+            return (
+                <IconButton className={classes.link1} onClick={handleOpen} variant=''>
+                    <DeleteIcon/>
+                </IconButton>
             )
         } else {
             return (
@@ -131,6 +146,10 @@ export default function TransitionsModal(props) {
             return <NewComment/>
         } else if (props.buttonName === 'subscribers') {
             return <ListOfAccounts listOfAccount={props.accounts}/>
+        } else if (props.buttonName === 'editPost') {
+            return <NewPost post={props.post}/>
+        } else if (props.buttonName === 'deletePost'){
+            return <DeletePostAlert/>
         }
     }
 }
