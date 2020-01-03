@@ -164,6 +164,8 @@ class Profile extends Component {
 
     componentDidMount() {
         this.setState(() => this.props.match.params);
+        console.log("----------")
+        console.log(localStorage.getItem('username'))
     }
 
     render() {

@@ -113,7 +113,6 @@ class Comment extends Component {
 
     randomAvatarImage() {
         let number = (Math.floor(Math.random() * 9)) + 3;
-        console.log("==> " + number);
         if (number === 3) {
             return img3
         } else if (number === 4) {
