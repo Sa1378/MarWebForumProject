@@ -28,6 +28,9 @@ import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import EditDeletePost from "./EditDeletePost";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
+import Badge from "@material-ui/core/Badge/Badge";
+import ScoreIcon from '@material-ui/icons/Score';
+
 
 const styles = theme => (
     {
@@ -219,6 +222,9 @@ class PostPage extends Component {
                                     className={classes.link} aria-label="share">
                                     <ShareIcon/>
                                 </IconButton>
+                                <Badge badgeContent={120} color={'primary'} >
+                                    <ScoreIcon/>
+                                </Badge>
                             </CardActions>
                         </Card>
 
