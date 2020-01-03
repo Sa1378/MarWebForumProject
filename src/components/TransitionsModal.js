@@ -11,7 +11,8 @@ import NewPost from "./post/NewPost";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
 import NewComment from "./post/NewComment";
-
+import MenuItem from "@material-ui/core/MenuItem";
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-    link: {
+    link1: {
         color: "white",
         textDecoration: "none",
         "&:hover": {
@@ -34,6 +35,16 @@ const useStyles = makeStyles(theme => ({
         },
         "&:focus": {
             outline: "none",
+        }, link2: {
+            color: "black",
+            textDecoration: "none",
+            "&:hover": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "&:focus": {
+                outline: "none",
+            }
         }
     }
 }));
@@ -74,16 +85,33 @@ export default function TransitionsModal(props) {
 
     function handleButton() {
         if (props.buttonName === 'reply') {
-            console.log("heeeloooooooooo ommad icon button");
             return (
                 <IconButton onClick={handleOpen} className={classes.link} aria-label="Reply">
                     <ReplyIcon/>
                 </IconButton>
             )
+        } else if (props.buttonName === 'subscribers') {
+            console.log("Dakhele Ifeeeeeeeeeeeeeeeeeee");
+            return (
+                <MenuItem onClick={function () {
+                    handleOpen();
+                    props.onClose();
+                }}>Subscribers</MenuItem>
+            )
+        } else if (props.buttonName === 'follower' || props.buttonName === 'following') {
+            return (
+                <Button className={classes.link2} onClick={handleOpen} variant=''
+                        color="primary">{props.buttonName}</Button>
+            )
+        } else if (props.buttonName === 'setting') {
+            return (
+                <Button className={classes.link2} onClick={handleOpen} variant=''
+                        color="primary"><SettingsIcon color='primary'/></Button>
+            )
         } else {
             return (
-                <Button className={classes.link} onClick={handleOpen} variant={props.variant}
-                        color="primary">{props.buttonName}</Button>
+                <Button className={classes.link1} onClick={handleOpen} variant='contained'
+                        color="secondary">{props.buttonName}</Button>
             )
         }
     }
@@ -92,16 +120,17 @@ export default function TransitionsModal(props) {
         if (props.buttonName === 'setting') {
             return <EditProfile/>
         } else if (props.buttonName === 'follower') {
-            return <ListOfAccounts eroring='er' follower={props.follower}/>
+            return <ListOfAccounts listOfAccount={props.follower}/>
         } else if (props.buttonName === 'following') {
-            return <ListOfAccounts eroring='ing' following={props.following}/>
+            return <ListOfAccounts listOfAccount={props.following}/>
         } else if (props.buttonName === 'create channel') {
-            console.log("Hellooooooooooooooooooooooooooooooo");
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {
             return <NewPost/>
-        } else if (props.buttonName === 'reply'){
+        } else if (props.buttonName === 'reply') {
             return <NewComment/>
+        } else if (props.buttonName === 'subscribers') {
+            return <ListOfAccounts listOfAccount={props.accounts}/>
         }
     }
 }

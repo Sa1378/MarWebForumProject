@@ -11,6 +11,13 @@ import TransitionsModal from "../TransitionsModal";
 
 
 class Profile extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleLikePost = this.handleLikePost.bind(this);
+        this.handleDisLikePost = this.handleDisLikePost.bind(this);
+    }
+
     state = {
         my_name: 'reza',
         username: null,
@@ -21,11 +28,11 @@ class Profile extends Component {
         followed: false,
 
         channels: [
-            {id: 1, title: '1', creator: 'MarWeb studio'},
-            {id: 2, title: '2', creator: 'MarWeb studio'},
-            {id: 3, title: '3', creator: 'MarWeb studio'},
-            {id: 4, title: '4', creator: 'MarWeb studio'},
-            {id: 5, title: '4', creator: 'MarWeb studio'},
+            {id: 1, title: '1', creator: 'MarWeb_studio'},
+            {id: 2, title: '2', creator: 'MarWeb_studio'},
+            {id: 3, title: '3', creator: 'MarWeb_studio'},
+            {id: 4, title: '4', creator: 'MarWeb_studio'},
+            {id: 5, title: '5', creator: 'MarWeb_studio'},
         ],
         postCards: [
             {
@@ -34,6 +41,7 @@ class Profile extends Component {
                 title: 'Hello World',
                 postSummary: 'this message is bullshit\nasfjasfjasf ',
                 liked: true,
+                disliked: false
             },
             {
                 id: 2,
@@ -41,35 +49,41 @@ class Profile extends Component {
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
                 liked: false,
+                disliked: true
             },
             {
                 id: 3,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                liked: true
+                liked: true,
+                disliked: false
             },
             {
                 id: 4,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                liked: false
+                liked: false,
+                disliked: true
             },
             {
                 id: 5,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                liked: true
+                liked: true,
+                disliked: false
             },
             {
                 id: 6,
                 author: 'alireza',
                 title: 'Bye World',
                 postSummary: 'this message is not bullshit ',
-                liked: false
-            }],
+                liked: false,
+                disliked: false
+            }
+        ],
         follower: [
             {
                 username: 'follower1',
@@ -107,12 +121,45 @@ class Profile extends Component {
                 username: 'following5',
                 avatar_src: 'src/static/images/avatar/download.jpeg'
             }, {
-                username: 'following6',
+                username: 'following6sdsjgn;isgbaflgnafd;g',
                 avatar_src: 'src/static/images/avatar/download.jpeg'
             }
         ]
 
     };
+
+    postListStyle = {
+        width: '100vh',
+        justifyContent: 'center',
+    };
+
+    handleLikePost(postId) {
+        const postCards = [];
+        this.state.postCards.forEach(function (postCard) {
+            if (postId === postCard.id) {
+                postCard.liked = !postCard.liked;
+                if (postCard.disliked) {
+                    postCard.disliked = !postCard.disliked;
+                }
+            }
+            postCards.push(postCard);
+        });
+        this.setState({postCards: postCards});
+    }
+
+    handleDisLikePost(postId) {
+        const postCards = [];
+        this.state.postCards.forEach(function (postCard) {
+            if (postId === postCard.id) {
+                postCard.disliked = !postCard.disliked;
+                if (postCard.liked) {
+                    postCard.liked = !postCard.liked;
+                }
+            }
+            postCards.push(postCard);
+        });
+        this.setState({postCards: postCards});
+    }
 
 
     componentDidMount() {
@@ -138,8 +185,10 @@ class Profile extends Component {
                               following={this.state.following}/>
                         <Follow followed={this.state.followed} my_name={this.state.my_name}
                                 username={this.state.username}/>
-                        <SimpleTabs name1="Posts" name2="Channels" page="profile" posts={this.state.postCards}
-                                    channels={this.state.channels}/>
+                        <SimpleTabs name1="Posts" name2="Channels" page="profile" postCards={this.state.postCards}
+                                    channels={this.state.channels} onDisLike={this.handleDisLikePost}
+                                    onLike={this.handleLikePost}
+                                    postListStyle={this.postListStyle}/>
                     </Typography>
                 </Container>
             </React.Fragment>

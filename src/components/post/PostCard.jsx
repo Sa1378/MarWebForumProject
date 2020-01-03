@@ -11,7 +11,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import CardActionArea from "@material-ui/core/CardActionArea";
 import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import LikeIcon from "./LikeIcon";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {withStyles} from "@material-ui/core";
 import img from '../../static/images/cards/wallpaper4.jpg'
@@ -25,6 +24,9 @@ import img8 from "../../static/images/avatar/photo_2020-01-02_22-02-06.jpg";
 import img9 from "../../static/images/avatar/photo_2020-01-02_22-02-11.jpg";
 import img10 from "../../static/images/avatar/photo_2020-01-02_22-02-15.jpg";
 import img11 from "../../static/images/avatar/photo_2020-01-02_22-02-19.jpg";
+import LikeDisLikeHandler from "./LikeDisLikeHandler";
+
+
 const styles = theme => (
     {
         link: {
@@ -86,11 +88,10 @@ class PostCard extends Component {
                 </Link>
                 <Divider variant="middle"/>
                 <CardActions>
-                    <IconButton className={classes.link} onClick={() => this.props.onLike(this.props.postCard.id)}
-                                aria-label="add to favorites">
-                        <LikeIcon
-                            liked={this.props.postCard.liked}/>
-                    </IconButton>
+                    <LikeDisLikeHandler classes={classes}
+                                        onLike={this.props.onLike}
+                                        onDisLike={this.props.onDisLike}
+                                        postCard={this.props.postCard}/>
                     <IconButton className={classes.link} aria-label="share">
                         <ShareIcon/>
                     </IconButton>

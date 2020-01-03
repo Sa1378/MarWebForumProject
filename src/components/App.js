@@ -39,6 +39,10 @@ class App extends Component {
                         <Route path="/notifications" component={Notifications}/>
                         <Route path="/search/:searchQuery" component={Search}/>
                         <Route path={"/post/:name"} component={PostPage}/>
+                        <Route path="/logout">
+                            {localStorage.removeItem("username")}
+                            <Redirect to="/login"/>
+                        </Route>
                     </div>
                 </BrowserRouter>
             </div>

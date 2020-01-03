@@ -87,7 +87,10 @@ export default function SimpleTabs(props) {
 
 
     function post(props) {
-        return <PostList postCards={props.posts}/>
+        return <PostList onDisLike={props.handleDisLikePost}
+                         onLike={props.handleLikePost}
+                         postListStyle={props.postListStyle}
+                         postCards={props.postCards}/>
     }
 
     function channel(props) {
