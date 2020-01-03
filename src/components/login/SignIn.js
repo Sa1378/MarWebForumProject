@@ -18,10 +18,7 @@ class SignIn extends Component {
     {
         username=document.getElementById("usernameInput").value;
         localStorage.setItem("username",username);
-        console.log("Username: "+username);
         window.location.href="/";
-        
-        console.log("Username: "+username);
     }
 
     render() {
