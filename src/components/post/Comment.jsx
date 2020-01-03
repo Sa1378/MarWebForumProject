@@ -25,6 +25,7 @@ import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
 import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import img from "../../static/images/cards/wallpaper4.jpg";
+import LikeDisLikeHandler from "./LikeDisLikeHandler";
 
 
 const styles = theme => (
@@ -87,10 +88,10 @@ class Comment extends Component {
                     </CardContent>
                     <Divider variant="middle"/>
                     <CardActions disableSpacing>
-                        <IconButton onClick={() => this.props.onLike(this.props.comment.id)} className={classes.link}
-                                    aria-label="Like">
-                            <LikeIcon liked={this.props.comment.liked}/>
-                        </IconButton>
+                        <LikeDisLikeHandler classes={classes}
+                                            onLike={this.props.onLike}
+                                            onDisLike={this.props.onDisLike}
+                                            postCard={this.props.comment}/>
                         <TransitionsModal content="post" buttonName="reply"/>
 
                     </CardActions>

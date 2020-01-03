@@ -49,6 +49,7 @@ class PostPage extends Component {
     constructor(props) {
         super(props);
         this.handleLikeComment = this.handleLikeComment.bind(this);
+        this.handleDisLikeComment = this.handleDisLikeComment.bind(this);
     }
 
     state = {
@@ -59,7 +60,8 @@ class PostPage extends Component {
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'alireza',
                 loggedInUser: 'alireza',
-                liked: true
+                liked: true,
+                disliked: false
             },
             {
                 id: 2,
@@ -67,7 +69,8 @@ class PostPage extends Component {
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'reza',
                 loggedInUser: 'alireza',
-                liked: false
+                liked: false,
+                disliked: true
             },
             {
                 id: 3,
@@ -75,7 +78,8 @@ class PostPage extends Component {
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'mehrdad',
                 loggedInUser: 'alireza',
-                liked: false
+                liked: false,
+                disliked: false
             },
             {
                 id: 4,
@@ -83,21 +87,44 @@ class PostPage extends Component {
                 avatar_src: 'src/static/images/wallpaper4.jpg',
                 name: 'alireza',
                 loggedInUser: 'alireza',
-                liked: true
+                liked: true,
+                disliked: false
             },
         ],
     };
 
 
+    postListStyle = {
+        width: '100vh',
+        justifyContent: 'center',
+    };
+
     handleLikeComment(commentId) {
-        const comments = [];
+        const postCards = [];
         this.state.comments.forEach(function (comment) {
             if (commentId === comment.id) {
                 comment.liked = !comment.liked;
+                if (comment.disliked) {
+                    comment.disliked = !comment.disliked;
+                }
             }
-            comments.push(comment);
+            postCards.push(comment);
         });
-        this.setState({comments: comments});
+        this.setState({postCards: postCards});
+    }
+
+    handleDisLikeComment(commentId) {
+        const postCards = [];
+        this.state.comments.forEach(function (comment) {
+            if (commentId === comment.id) {
+                comment.disliked = !comment.disliked;
+                if (comment.liked) {
+                    comment.liked = !comment.liked;
+                }
+            }
+            postCards.push(comment);
+        });
+        this.setState({postCards: postCards});
     }
 
     render() {
@@ -176,6 +203,7 @@ class PostPage extends Component {
                             key={comment.id}
                             comment={comment}
                             onLike={this.handleLikeComment}
+                            onDisLike={this.handleDisLikeComment}
                         />)}
 
                         <NewComment/>
