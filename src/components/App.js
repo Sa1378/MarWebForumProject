@@ -23,12 +23,12 @@ class App extends Component {
     render() {
         console.log(localStorage.getItem("username"));
         return (<div style={{whiteSpace: "pre-wrap"}}>
+                {(localStorage.getItem("username")===null) ? (<Login/>):(
+                <div>
                 <Header/>
                 <BrowserRouter>
                     <div className="mainContainer">
-                        <Route exact path="/">
-                            {(localStorage.getItem("username")===null) ?<Redirect to="/login"/>: <MainPage />}    
-                        </Route>
+                        <Route exact path="/" component={MainPage}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
                         <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>
@@ -45,6 +45,8 @@ class App extends Component {
                         </Route>
                     </div>
                 </BrowserRouter>
+                </div>)
+                }
             </div>
         );
     };

@@ -131,7 +131,8 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        window.location.href = "/profile/merhdads";
+        console.log(localStorage.getItem("username"));
+        window.location.href = "/profile/"+localStorage.getItem("username");
     }
 
 
