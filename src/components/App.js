@@ -21,9 +21,8 @@ class App extends Component {
     };
 
     render() {
-        console.log(localStorage.getItem("username"));
         return (<div style={{whiteSpace: "pre-wrap"}}>
-                {(localStorage.getItem("username")===null) ? (<Login/>):(
+                {(false) ? (<Login/>):(
                 <div>
                 <Header/>
                 <BrowserRouter>

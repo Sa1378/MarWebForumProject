@@ -131,8 +131,7 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        console.log(localStorage.getItem("username"));
-        window.location.href = "/profile/"+localStorage.getItem("username");
+        window.location.href = "/profile/reza";
     }
 
 
@@ -241,7 +240,10 @@ const styles = {
         marginTop:"0px",
     }
 };
+
+
 class Header extends Component{
+
     componentDidMount(){
         var searchTextField=document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress",event=>{
@@ -253,6 +255,7 @@ class Header extends Component{
             }
         });
     }
+
     render(){
         const {classes}=this.props;
         return (
@@ -266,5 +269,6 @@ class Header extends Component{
         );
     };
 }
+
 export default withStyles(styles)(Header); // chon byd az function haie martabe balatr estefade konim vase override krdne material
 */
