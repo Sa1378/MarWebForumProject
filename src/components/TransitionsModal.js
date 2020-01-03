@@ -111,13 +111,13 @@ export default function TransitionsModal(props) {
                 <Button className={classes.link2} onClick={handleOpen} variant=''
                         color="primary"><SettingsIcon color='primary'/></Button>
             )
-        } else if (props.buttonName === 'editPost') {
+        } else if (props.buttonName === 'editPost' || props.buttonName === 'editComment') {
             return (
                 <IconButton className={classes.link1} onClick={handleOpen} variant=''>
                     <EditIcon/>
                 </IconButton>
             )
-        } else if (props.buttonName === 'deletePost') {
+        } else if (props.buttonName === 'deletePost' || props.buttonName === 'deleteComment') {
             return (
                 <IconButton className={classes.link1} onClick={handleOpen} variant=''>
                     <DeleteIcon/>
@@ -148,7 +148,11 @@ export default function TransitionsModal(props) {
             return <ListOfAccounts listOfAccount={props.accounts}/>
         } else if (props.buttonName === 'editPost') {
             return <NewPost post={props.post}/>
-        } else if (props.buttonName === 'deletePost'){
+        } else if (props.buttonName === 'deletePost') {
+            return <DeletePostAlert/>
+        } else if (props.buttonName === 'editComment') {
+            return <NewComment comment={props.comment}/>
+        } else if (props.buttonName === 'deleteComment') {
             return <DeletePostAlert/>
         }
     }
