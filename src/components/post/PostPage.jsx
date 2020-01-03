@@ -27,6 +27,7 @@ import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
 import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import EditDeletePost from "./EditDeletePost";
+import LikeDisLikeHandler from "./LikeDisLikeHandler";
 
 const styles = theme => (
     {
@@ -50,10 +51,12 @@ class PostPage extends Component {
         super(props);
         this.handleLikeComment = this.handleLikeComment.bind(this);
         this.handleDisLikeComment = this.handleDisLikeComment.bind(this);
+        this.handleLikePost = this.handleLikePost.bind(this);
+        this.handleDisLikePost = this.handleDisLikePost.bind(this);
     }
 
     state = {
-        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit'},
+        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit', liked: true, disliked: false},
         comments: [
             {
                 id: 1,
@@ -128,6 +131,24 @@ class PostPage extends Component {
         this.setState({postCards: postCards});
     }
 
+    handleLikePost(postId) {
+        const post = this.state.post;
+        post.liked = !post.liked;
+        if (post.disliked) {
+            post.disliked = !post.disliked;
+        }
+        this.setState({post: post});
+    }
+
+    handleDisLikePost(postId) {
+        const post = this.state.post;
+        post.disliked = !post.disliked;
+        if (post.liked) {
+            post.liked = !post.liked;
+        }
+        this.setState({post: post});
+    }
+
     render() {
         const {classes} = this.props;
         return (
@@ -142,7 +163,7 @@ class PostPage extends Component {
                                 }
                                 action={
 
-                                    <EditDeletePost post={this.state.post} />
+                                    <EditDeletePost post={this.state.post}/>
                                 }
                                 title="Shrimp and Chorizo Paella"
                                 subheader="September 14, 2016"
@@ -190,10 +211,12 @@ class PostPage extends Component {
                             </CardContent>
                             <Divider variant="middle"/>
                             <CardActions disableSpacing>
-                                <IconButton className={classes.link} aria-label="like">
-                                    <FavoriteIcon/>
-                                </IconButton>
-                                <IconButton className={classes.link} aria-label="share">
+                                <LikeDisLikeHandler classes={classes}
+                                                    onLike={this.handleLikePost}
+                                                    onDisLike={this.handleDisLikePost}
+                                                    postCard={this.state.post}/>
+                                <IconButton
+                                    className={classes.link} aria-label="share">
                                     <ShareIcon/>
                                 </IconButton>
                             </CardActions>
