@@ -4,7 +4,6 @@ import InputAdornments from "../Password";
 import Button from "@material-ui/core/Button";
 import {Tooltip} from "@material-ui/core";
 
-export var username=null;
 
 class SignIn extends Component {
     
@@ -27,17 +26,19 @@ class SignIn extends Component {
         .then(function(response){ 
             console.log(response)
             if(response.status=="200"){
-                localStorage.setItem("refresh-token",response.refresh)
-                localStorage.setItem("access-token",response.access)
-                window.location.href="/"
-                return ;
+                console.log(response)
+                console.log("access-token: "+localStorage.getItem("access-token"));
+                //
+                return response.json();
             }
+            alert("Your Username or Password are incorrect!")
             return response.json();
         })
         .then(function(data){
             console.log(data)
-            alert("Your Username or Password are incorrect!")
-
+            localStorage.setItem("refresh-token",data.refresh)
+            localStorage.setItem("access-token",data.access)
+            window.location.href="/"
         });
     }
 

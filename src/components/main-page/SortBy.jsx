@@ -41,6 +41,7 @@ class SortBy extends Component {
             console.log(newShownPosts);
             if (newShownPosts)
                 this.setState({shownPosts: newShownPosts});
+            this.props.onChange(newShownPosts);
         };
 
         return (

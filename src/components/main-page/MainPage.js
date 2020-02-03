@@ -15,120 +15,126 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
+        this.state={postCards:[]};
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.handleShownPosts = this.handleShownPosts.bind(this);
     }
 
 
-    state = {
-        postCards: [
-            {
-                id: 1,
-                author: 'alireza',
-                title: 'Hello World',
-                postSummary: 'this message is bullshit\nasfjasfjasf ',
-                liked: true,
-                disliked: false,
-            },
-            {
-                id: 2,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 3,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 4,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 5,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 6,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: false
-            },
-            {
-                id: 7,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 8,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 9,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 10,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 11,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 12,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 13,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: false
-            },
+    // state = {
+    //     postCards: [
+    //         {
+    //             id: 1,
+    //             author: 'alireza',
+    //             title: 'Hello World',
+    //             postSummary: 'this message is bullshit\nasfjasfjasf ',
+    //             liked: true,
+    //             disliked: false,
+    //         },
+    //         {
+    //             id: 2,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
+    //             liked: false,
+    //             disliked: true
+    //         },
+    //         {
+    //             id: 3,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 4,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: false,
+    //             disliked: true
+    //         },
+    //         {
+    //             id: 5,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 6,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: false,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 7,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 8,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: false,
+    //             disliked: true
+    //         },
+    //         {
+    //             id: 9,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: false,
+    //             disliked: true
+    //         },
+    //         {
+    //             id: 10,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 11,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 12,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: true,
+    //             disliked: false
+    //         },
+    //         {
+    //             id: 13,
+    //             author: 'alireza',
+    //             title: 'Bye World',
+    //             postSummary: 'this message is not bullshit ',
+    //             liked: false,
+    //             disliked: false
+    //         },
 
-        ],
-    };
+    //     ],
+    // };
+
+    componentWillMount() {
+        this.handleShownPosts("followed");
+    }
 
     postListStyle = {
         width: '100vh',
@@ -163,12 +169,48 @@ class MainPage extends Component {
         this.setState({postCards: postCards});
     }
 
+    handleShownPosts(shownPosts){
+        let currentComponent=this;
+        console.log("MainPage: "+shownPosts)
+        var url="http://localhost:8000/post/posts/"
+        if(shownPosts=="followed"){
+            url+="followed-channels-post";
+        } else if(shownPosts=="newest"){
+            url+="new-posts";
+        } else if(shownPosts=="hottest"){
+            url+="hot-posts";
+        } else {
+            url+="participated-posts";
+        }
+        console.log("access-token: "+localStorage.getItem("access-token"))
+        fetch(url, { method: 'GET' ,
+                headers:{
+                        "Content-Type": "application/json", 
+                        "Access-Control-Origin": "*",
+                        'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+                }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log(data)
+            currentComponent.setState({postCards:data.posts})
+        })
+        .catch(function(err){
+            alert(err)
+        })
+    }
 
     render() {
         const {classes} = this.props;
+
         return (
             <Container >
-                <SortBy/>
+                <SortBy onChange={this.handleShownPosts}/>
                 <div className={classes.container}>
                     <PostList onDisLike={this.handleDisLikePost}
                               onLike={this.handleLikePost}

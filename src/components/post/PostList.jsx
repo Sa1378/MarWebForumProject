@@ -15,7 +15,7 @@ class PostList extends Component {
                               postCard={postCard}
                               key={postCard.id}
                               title={postCard.title}
-                              postSummary={postCard.postSummary}/>
+                              postSummary={postCard.summary}/>
                 ))}
             </GridList>
         )
