@@ -106,7 +106,7 @@ class MainPage extends Component {
                               onLike={this.handleLikePost}
                               postListStyle={this.postListStyle}
                               postCards={this.state.postCards}/>
-                    <Sidebar/>
+                    <Sidebar refreshToken={this.props.refreshToken}/>
                 </div>
             </Container>
         );

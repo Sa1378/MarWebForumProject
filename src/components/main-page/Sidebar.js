@@ -65,7 +65,7 @@ class Sidebar extends Component{
         const {classes}=this.props;
         return (
             <div className={classes.container}>
-                <TransitionsModal content="newpost" buttonName="new post" variant="contained"/>
+                <TransitionsModal content="newpost" buttonName="new post" variant="contained" refreshToken={this.props.refreshToken}/>
                 <Paper className={classes.item+" "+classes.firstItem}>
                     Top Users:
                     <div className={classes.rankItem}> <Badge badgeContent={1} color="primary" className={classes.rankBadge}/>

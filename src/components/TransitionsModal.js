@@ -141,7 +141,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'create channel') {
             return <CreateChannel accounts={props.accounts}/>
         } else if (props.buttonName === 'new post') {
-            return <NewPost/>
+            return <NewPost refreshToken={props.refreshToken}/>
         } else if (props.buttonName === 'reply') {
             return <NewComment/>
         } else if (props.buttonName === 'subscribers') {

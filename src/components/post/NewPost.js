@@ -10,36 +10,65 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 class NewPost extends Component {
-    state = {
-        value: '0',
-        channels: [
-            {
-                name: 'channel 1',
-            },
-            {
-                name: 'channel 2',
-            },
-        ],
-    };
 
-    changePlace = e => {
-        console.log("after set state");
-        this.setState({[e.target.name]: e.target.value})
+    constructor(props){
+        super(props);
+        this.props.refreshToken();
+        this.createPost=this.createPost.bind(this);
+    //    this.changePlace=this.changePlace.bind(this);
     }
 
+    state = {
+        value: "1",
+        channels: []
+    };
+
+    componentWillMount(){
+        let currentComponent=this;
+        fetch('http://localhost:8000/channel/channels',{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log(data.channels)
+            currentComponent.setState({channels:data.channels})
+        })
+        .catch(function(err){
+            //TODO
+            console.log(err);
+        })
+
+    }
+
+    
+
     render() {
+        const changePlace= (event)=>{
+            console.log(event);
+            this.setState({value:event.target.value})
+        }
         return (
             <div>
                 <CssBaseline/>
-                <Container minWidth="lg">
+                <Container>
                     <Typography component="div" style={{backgroundColor: 'white', width: '1000px'}}
                                 className="border rounded">
                         <form className="jumbotron d-flex flex-column justify-content-center">
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField id="filled-basic" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
+                                <TextField id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
                             </div>
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField style={{width: '100%'}} id="filled-basic" label="Content" variant="filled"
+                                <TextField style={{width: '100%'}} id="content" label="Content" variant="filled"
                                            multiline={true} defaultValue={this.checkForContent()}/>
 
                             </div>
@@ -51,7 +80,7 @@ class NewPost extends Component {
                                     Post Image
                                     <input
                                         type="file"
-                                        id={'image'}
+                                        id='image'
                                         style={{display: "none"}}
                                     />
                                 </Button>
@@ -60,17 +89,16 @@ class NewPost extends Component {
                                 <InputLabel id="label">Post Place</InputLabel>
                             </div>
                             <div className='d-flex justify-content-center mb-4'>
-                                <Select labelId="label" id="select" value={this.state.value}>
-                                    <MenuItem value="0">My Post</MenuItem>
+                                <Select labelId="label" id="select" value={this.state.value} onChange={changePlace}>
                                     {this.state.channels.map(item => (
-                                        <MenuItem name='value' value={item.name}
-                                                  onClick={this.changePlace}>{item.name}</MenuItem>
+                                        <MenuItem name='value' key={item.id} value={item.id}
+                                                  onClick={changePlace}>{item.title}</MenuItem>
                                     ))}
                                 </Select>
                             </div>
                             <div className='d-flex justify-content-center'>
-                                <Button type="submit" className="btn btn-primary" color="primary"
-                                        variant="contained">{this.buttonName()}</Button>
+                                <Button className="btn btn-primary" color="primary"
+                                        variant="contained" onClick={this.createPost}>{this.buttonName()}</Button>
                             </div>
 
                         </form>
@@ -96,6 +124,65 @@ class NewPost extends Component {
         if (this.props.post)
             return 'Edit';
         return 'Create'
+    }
+
+    createPost(){
+        var userId;
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/profile/'+localStorage.getItem("username"),{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log(data)
+            userId=data.user.id
+        })
+        .then(function(){
+            var data={title:document.getElementById("title").value,
+                    user:userId,
+                    channel:parseInt(currentComponent.state.value),
+                    body:document.getElementById("content").value}
+            console.log(data);
+            console.log(JSON.stringify(data))
+            fetch('http://localhost:8000/post/post-view',{
+                    method:"POST",
+                    headers:{
+                        "Content-Type": "multipart/form-data", 
+                        "Access-Control-Origin": "*",
+                        'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+                    body: JSON.stringify(data),
+            }})
+            .then(function(response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function(data) {
+                console.log(data);
+                window.location.href="/";
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        })
+        .catch(function(err){
+            //TODO
+            console.log(err);
+        })
+
+        
     }
 
 }

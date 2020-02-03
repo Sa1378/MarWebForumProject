@@ -38,6 +38,7 @@ class SignIn extends Component {
             console.log(data)
             localStorage.setItem("refresh-token",data.refresh)
             localStorage.setItem("access-token",data.access)
+            localStorage.setItem("username",document.getElementById("username").value)
             window.location.href="/"
         });
     }
