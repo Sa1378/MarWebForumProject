@@ -16,16 +16,39 @@ class SignIn extends Component {
 
     loginClick()
     {
-        window.location.href="/";
+        var data={'username':document.getElementById("username").value,
+                    'password':document.getElementById("password").value}
+        console.log(JSON.stringify(data))
+        fetch("http://localhost:8000/account/login", {
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Access-Control-Origin": "*"},
+                body:  JSON.stringify(data)
+        })
+        .then(function(response){ 
+            console.log(response)
+            if(response.status=="200"){
+                localStorage.setItem("refresh-token",response.refresh)
+                localStorage.setItem("access-token",response.access)
+                window.location.href="/"
+                return ;
+            }
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data)
+            alert("Your Username or Password are incorrect!")
+
+        });
     }
 
     render() {
         return (
             <form className="d-flex flex-column justify-content-around my-5">
 
-                <TextField className="m-5 email_size" type="text" id="usernameInput" label="username"
+                <TextField className="m-5 email_size" type="text" id="username" label="Username"
                            variant="outlined" required />
-                <InputAdornments label="Password" required/>
+                <TextField className="m-5 email_size" type="password" id="password" label="Password"
+                           variant="outlined" required />
                 <Button className="my-5" variant="contained" color="primary" onClick={this.loginClick}>Sign In</Button>
                 <TextField className="" type="email" id="usernameInput" label="E-mail"
                            variant="outlined" required />

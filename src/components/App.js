@@ -30,7 +30,6 @@ class App extends Component {
                     <div className="mainContainer">
                         <Route exact path="/" component={MainPage}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/signup" component={SignUp}/>
                         <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>
                         <Route path="/editprofile/:username" component={EditProfile}/>
                         <Route path="/newpost" component={NewPost}/>
