@@ -19,11 +19,10 @@ class MainPage extends Component {
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
         this.handleShownPosts = this.handleShownPosts.bind(this);
+        this.props.refreshToken();
     }
 
     componentWillMount() {
-        this.props.refreshToken();
-        setTimeout(function(){ }, 100);
         this.handleShownPosts("followed");
     }
 
@@ -92,7 +91,8 @@ class MainPage extends Component {
             currentComponent.setState({postCards:data.posts})
         })
         .catch(function(err){
-            alert(err)
+            //TODO
+            console.log(err);
         })
     }
 

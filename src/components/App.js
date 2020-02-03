@@ -46,7 +46,8 @@ class App extends Component {
             localStorage.setItem("access-token",data.access)
         })
         .catch(function(){
-        //    window.location.href="login/"
+            console.log("change page")
+            window.location.href="login/"
         });
     }
 
