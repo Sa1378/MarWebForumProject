@@ -14,6 +14,7 @@ import PostPage from "./post/PostPage";
 import Channel from "./channel/Channel";
 import 'bootstrap/dist/css/bootstrap.css';
 import CreateChannel from "./channel/CreateChannel";
+import SignUp from "./login/SignUp";
 
 class App extends Component {
     state = {
@@ -29,7 +30,7 @@ class App extends Component {
                     <div className="mainContainer">
                         <Route exact path="/" component={MainPage}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/register" component={Register}/>
+                        <Route path="/signup" component={SignUp}/>
                         <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>
                         <Route path="/editprofile/:username" component={EditProfile}/>
                         <Route path="/newpost" component={NewPost}/>
