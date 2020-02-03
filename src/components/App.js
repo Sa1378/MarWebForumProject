@@ -17,9 +17,38 @@ import CreateChannel from "./channel/CreateChannel";
 import SignUp from "./login/SignUp";
 
 class App extends Component {
-    state = {
-        my_name: 'reza'
-    };
+
+    constructor(props){
+        super(props);
+        this.refreshToken=this.refreshToken.bind(this);
+    }
+
+    refreshToken(){
+        console.log("refreeeshhh "+localStorage.getItem("refresh-token"))
+        var data={refresh:localStorage.getItem("refresh-token")}
+        fetch("http://localhost:8000/account/token/refresh", {
+                method: "POST",
+                headers: {"Content-Type": "application/json",
+                         "Access-Control-Origin": "*"},
+                body: JSON.stringify(data)
+        })
+        .then(function(response){ 
+            console.log("refresshhh "+response)
+            if(response.status=="200"){
+                console.log(response)
+                //
+                return response.json();
+            }
+            throw new Error();
+        })
+        .then(function(data){
+            console.log(data)
+            localStorage.setItem("access-token",data.access)
+        })
+        .catch(function(){
+        //    window.location.href="login/"
+        });
+    }
 
     render() {
         return (<div style={{whiteSpace: "pre-wrap"}}>
@@ -28,20 +57,16 @@ class App extends Component {
                 <Header/>
                 <BrowserRouter>
                     <div className="mainContainer">
-                        <Route exact path="/" component={MainPage}/>
+                        <Route exact path="/" render={(props) => <MainPage {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/profile/:username" my_name={this.state.my_name} component={Profile}/>
-                        <Route path="/editprofile/:username" component={EditProfile}/>
-                        <Route path="/newpost" component={NewPost}/>
-                        <Route path="/channel/:channelName" component={Channel}/>
-                        <Route path="/channel/create" component={CreateChannel}/>
-                        <Route path="/notifications" component={Notifications}/>
-                        <Route path="/search/:searchQuery" component={Search}/>
-                        <Route path={"/post/:name"} component={PostPage}/>
-                        <Route path="/logout">
-                            {localStorage.removeItem("username")}
-                            <Redirect to="/login"/>
-                        </Route>
+                        <Route path="/profile/:username" render={(props) => <Profile {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/editprofile/:username" render={(props) => <EditProfile {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/newpost" render={(props) => <NewPost {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/channel/:channelName" render={(props) => <Channel {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/channel/create" render={(props) => <CreateChannel {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/notifications" render={(props) => <Notifications {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/search/:searchQuery" render={(props) => <Search {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path={"/post/:name"} render={(props) => <PostPage {...props} refreshToken={this.refreshToken}/>}/>
                     </div>
                 </BrowserRouter>
                 </div>)

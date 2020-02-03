@@ -5,6 +5,12 @@ import Typography from "@material-ui/core/Typography";
 import SimpleTabs from "../TwoTab";
 
 class Login extends Component {
+
+    componentWillMount(){
+        localStorage.removeItem("access-token")
+        localStorage.removeItem("refresh-token")
+    }
+
     render() {
         return (
             <React.Fragment>

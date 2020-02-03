@@ -21,118 +21,9 @@ class MainPage extends Component {
         this.handleShownPosts = this.handleShownPosts.bind(this);
     }
 
-
-    // state = {
-    //     postCards: [
-    //         {
-    //             id: 1,
-    //             author: 'alireza',
-    //             title: 'Hello World',
-    //             postSummary: 'this message is bullshit\nasfjasfjasf ',
-    //             liked: true,
-    //             disliked: false,
-    //         },
-    //         {
-    //             id: 2,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
-    //             liked: false,
-    //             disliked: true
-    //         },
-    //         {
-    //             id: 3,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 4,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: false,
-    //             disliked: true
-    //         },
-    //         {
-    //             id: 5,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 6,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: false,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 7,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 8,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: false,
-    //             disliked: true
-    //         },
-    //         {
-    //             id: 9,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: false,
-    //             disliked: true
-    //         },
-    //         {
-    //             id: 10,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 11,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 12,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: true,
-    //             disliked: false
-    //         },
-    //         {
-    //             id: 13,
-    //             author: 'alireza',
-    //             title: 'Bye World',
-    //             postSummary: 'this message is not bullshit ',
-    //             liked: false,
-    //             disliked: false
-    //         },
-
-    //     ],
-    // };
-
     componentWillMount() {
+        this.props.refreshToken();
+        setTimeout(function(){ }, 100);
         this.handleShownPosts("followed");
     }
 
@@ -207,7 +98,6 @@ class MainPage extends Component {
 
     render() {
         const {classes} = this.props;
-
         return (
             <Container >
                 <SortBy onChange={this.handleShownPosts}/>
