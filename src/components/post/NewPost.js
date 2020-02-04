@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -11,11 +11,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 class NewPost extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.props.refreshToken();
-        this.createPost=this.createPost.bind(this);
-    //    this.changePlace=this.changePlace.bind(this);
+        this.createPost = this.createPost.bind(this);
+        //    this.changePlace=this.changePlace.bind(this);
     }
 
     state = {
@@ -23,65 +23,66 @@ class NewPost extends Component {
         channels: []
     };
 
-    componentWillMount(){
-        let currentComponent=this;
-        fetch('http://localhost:8000/channel/channels',{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+    componentWillMount() {
+        let currentComponent = this;
+        fetch('http://localhost:8000/channel/channels', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
-            console.log(data.channels)
-            currentComponent.setState({channels:data.channels})
-        })
-        .catch(function(err){
-            //TODO
-            console.log(err);
-        })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log(data.channels)
+                currentComponent.setState({ channels: data.channels })
+            })
+            .catch(function (err) {
+                //TODO
+                console.log(err);
+            })
 
     }
 
-    
+
 
     render() {
-        const changePlace= (event)=>{
+        const changePlace = (event) => {
             console.log(event);
-            this.setState({value:event.target.value})
+            this.setState({ value: event.target.value })
         }
         return (
             <div>
-                <CssBaseline/>
+                <CssBaseline />
                 <Container>
-                    <Typography component="div" style={{backgroundColor: 'white', width: '1000px'}}
-                                className="border rounded">
+                    <Typography component="div" style={{ backgroundColor: 'white', width: '1000px' }}
+                        className="border rounded">
                         <form className="jumbotron d-flex flex-column justify-content-center">
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField name="title" id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
+                                <TextField name="title" id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()} />
                             </div>
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField style={{width: '100%'}} id="content" label="Content" variant="filled"
-                                           multiline={true} defaultValue={this.checkForContent()}/>
+                                <TextField style={{ width: '100%' }} id="content" label="Content" variant="filled"
+                                    multiline={true} defaultValue={this.checkForContent()} />
 
                             </div>
                             <div className="form-group d-flex justify-content-center">
                                 <Button className='mx-1'
-                                        variant="contained"
-                                        component="label"
+                                    variant="contained"
+                                    component="label"
                                 >
                                     Post Image
                                     <input
                                         type="file"
                                         id='media'
-                                        style={{display: "none"}}
+                                        style={{ display: "none" }}
                                     />
                                 </Button>
                             </div>
@@ -92,13 +93,13 @@ class NewPost extends Component {
                                 <Select labelId="label" id="select" value={this.state.value} onChange={changePlace}>
                                     {this.state.channels.map(item => (
                                         <MenuItem name='value' key={item.id} value={item.id}
-                                                  onClick={changePlace}>{item.title}</MenuItem>
+                                            onClick={changePlace}>{item.title}</MenuItem>
                                     ))}
                                 </Select>
                             </div>
                             <div className='d-flex justify-content-center'>
                                 <Button className="btn btn-primary" color="primary"
-                                        variant="contained" onClick={this.createPost}>{this.buttonName()}</Button>
+                                    variant="contained" onClick={this.createPost}>{this.buttonName()}</Button>
                             </div>
 
                         </form>
@@ -108,89 +109,91 @@ class NewPost extends Component {
         );
     };
 
-    checkForTitle(){
+    checkForTitle() {
         if (this.props.post)
             return this.props.post.title;
         return ''
     }
 
-    checkForContent(){
+    checkForContent() {
         if (this.props.post)
             return this.props.post.content;
         return ''
     }
 
-    buttonName(){
+    buttonName() {
         if (this.props.post)
             return 'Edit';
         return 'Create'
     }
 
-    createPost(){
+    createPost() {
         var userId;
-        var currentComponent=this;
-        fetch('http://localhost:8000/account/profile/'+localStorage.getItem("username"),{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/profile/' + localStorage.getItem("username"), {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
-            console.log(data)
-            userId=data.user.id
-        })
-        .then(function(){
-            var data={title:document.getElementById("title").value,
-                    user:userId,
-                    channel:parseInt(currentComponent.state.value),
-                    body:document.getElementById("content").value,
-                    }
-            var formData=new FormData();
-            formData.append('title',document.getElementById("title").value)
-            formData.append('user',userId)
-            formData.append('channel',parseInt(currentComponent.state.value))
-            formData.append('body',document.getElementById("content").value)
-            formData.append('media',document.getElementById("media").files[0])
-            console.log(formData.get("title"))
-            console.log(document.getElementById("title").value)
-            //console.log(data);
-            //console.log(JSON.stringify(data))
-            fetch('http://localhost:8000/post/ez/',{
-                    method:"POST",
-                    headers:{
-                        "Content-Type":"multipart/form-data",
-                        'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
-                    body: formData
-            }})
-            .then(function(response) {
+            .then(function (response) {
                 console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
-            .then(function(data) {
-                console.log(data);
-                window.location.href="/";
+            .then(function (data) {
+                console.log(data)
+                userId = data.user.id
             })
-            .catch(function(err){
+            .then(function () {
+                var data = {
+                    title: document.getElementById("title").value,
+                    user: userId,
+                    channel: parseInt(currentComponent.state.value),
+                    body: document.getElementById("content").value,
+                }
+                const formData = new FormData();
+                formData.append('title', document.getElementById("title").value)
+                formData.append('user', userId)
+                formData.append('channel', parseInt(currentComponent.state.value))
+                formData.append('body', document.getElementById("content").value)
+                formData.append('media', document.getElementById("media").files[0])
+                console.log(formData.get("title"))
+                console.log(document.getElementById("title").value)
+                //console.log(data);
+                //console.log(JSON.stringify(data))
+                fetch('http://localhost:8000/post/post-view', {
+                    method: "POST",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+                    },
+                    body: formData
+                })
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error("Server Error!");
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        window.location.href = "/";
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+            })
+            .catch(function (err) {
+                //TODO
                 console.log(err);
             })
-        })
-        .catch(function(err){
-            //TODO
-            console.log(err);
-        })
 
-        
+
     }
 
 }
