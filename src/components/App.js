@@ -15,6 +15,7 @@ import Channel from "./channel/Channel";
 import 'bootstrap/dist/css/bootstrap.css';
 import CreateChannel from "./channel/CreateChannel";
 import SignUp from "./login/SignUp";
+import NotFound from "./NotFound";
 
 class App extends Component {
 
@@ -68,6 +69,7 @@ class App extends Component {
                         <Route path="/notifications" render={(props) => <Notifications {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/search/:searchQuery" render={(props) => <Search {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path={"/post/:name"} render={(props) => <PostPage {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path={"/notfound"} render={(props) => <NotFound {...props} refreshToken={this.refreshToken}/>}/>
                     </div>
                 </BrowserRouter>
                 </div>)

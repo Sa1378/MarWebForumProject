@@ -16,9 +16,37 @@ class Profile extends Component {
         super(props);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.props.refreshToken();
+    }
+
+    componentWillMount(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/profile/id/'+this.props.match.params.username,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log(data)
+            currentComponent.setState({profile:data})
+        })
+        .catch(function(err){
+            console.log(err);
+            window.location.href="/notfound";
+        })
     }
 
     state = {
+        profile:{age:null,telephone_number:null,user:{id:0, email:null, username:"loading...", password:null, first_name:null,last_name:null}},
         my_name: 'reza',
         username: null,
         avatar_src: 'images/download.jpeg',
@@ -161,13 +189,6 @@ class Profile extends Component {
         this.setState({postCards: postCards});
     }
 
-
-    componentDidMount() {
-        this.setState(() => this.props.match.params);
-        console.log("----------")
-        console.log(localStorage.getItem('username'))
-    }
-
     render() {
         return (
             <React.Fragment>
@@ -181,7 +202,9 @@ class Profile extends Component {
                         <div className='mx-5'>
                             {this.formatAvatar()}
                         </div>
-                        <Data name={this.state.username} numberOfPosts={this.state.numberOfPosts}
+                        <Data name={this.state.profile.user.username} firstName={this.state.profile.user.first_name}
+                              lastName={this.state.profile.user.last_name}
+                              numberOfPosts={this.state.numberOfPosts}
                               numberOfFollower={this.state.numberOfFollower}
                               numberOfFollowing={this.state.numberOfFollowing} follower={this.state.follower}
                               following={this.state.following}/>

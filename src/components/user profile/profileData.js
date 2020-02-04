@@ -12,6 +12,9 @@ class Data extends Component {
                     <div className="d-flex justify-content-center pb-4">
                         <h2>{this.props.name}</h2>
                     </div>
+                    <div className="d-flex justify-content-center pb-4" style={{marginTop:"-20px",color:"gray"}}>
+                        <h6>{this.props.firstName} {this.props.lastName}</h6>
+                    </div>
                     <div className='d-flex justify-content-around pl-5 pb-3'>
                         <div className="d-flex flex-column">
                             <Button>Posts</Button>
