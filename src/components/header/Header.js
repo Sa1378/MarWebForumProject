@@ -138,27 +138,7 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        fetch('http://localhost:8000/account/profile/'+localStorage.getItem("username"),{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Server Error!");
-        })
-        .then(function(data) {
-            console.log(data)
-            window.location.href="/profile/"+data.user.id;
-        })
-        .catch(function(err){
-            console.log(err);
-        })
+        window.location.href="/profile/"+localStorage.getItem("username");
     }
 
 
@@ -189,7 +169,7 @@ class Header extends Component {
                     {popupState => (
                         <div>
                             <div className={classes.newPostButton}>
-                                <TransitionsModal content="newpost" buttonName="new post" variant="contained" />
+                                <TransitionsModal content="newpost" buttonName="new post" variant="contained" refreshToken={this.props.refreshToken}/>
                             </div>
                             <IconButton aria-label="show new notifications" color="inherit"
                                         className={classes.icon} {...bindTrigger(popupState)}>

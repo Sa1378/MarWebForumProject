@@ -56,7 +56,7 @@ class App extends Component {
         return (<div style={{whiteSpace: "pre-wrap"}}>
                 {(false) ? (<Login/>):(
                 <div>
-                <Header/>
+                <Header refreshToken={this.refreshToken}/>
                 <BrowserRouter>
                     <div className="mainContainer">
                         <Route exact path="/" render={(props) => <MainPage {...props} refreshToken={this.refreshToken}/>}/>

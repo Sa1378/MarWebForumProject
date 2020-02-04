@@ -87,8 +87,8 @@ export default function SimpleTabs(props) {
 
 
     function post(props) {
-        return <PostList onDisLike={props.handleDisLikePost}
-                         onLike={props.handleLikePost}
+        return <PostList onDisLike={props.onDisLike}
+                         onLike={props.onLike}
                          postListStyle={props.postListStyle}
                          postCards={props.postCards}/>
     }

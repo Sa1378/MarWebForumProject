@@ -22,13 +22,13 @@ class Data extends Component {
                         </div>
                         <div className="d-flex flex-column">
                             <TransitionsModal content="account" buttonName="follower" variant=""
-                                              follower={this.props.follower}/>
-                            <b className="d-flex justify-content-center">{this.props.numberOfFollower}</b>
+                                              followers={this.props.followers}/>
+                            <b className="d-flex justify-content-center">{this.props.numberOfFollowers}</b>
                         </div>
                         <div className="d-flex flex-column">
                             <TransitionsModal content="account" buttonName="following" variant=""
-                                              following={this.props.following}/>
-                            <b className="d-flex justify-content-center">{this.props.numberOfFollowing}</b>
+                                              followings={this.props.followings}/>
+                            <b className="d-flex justify-content-center">{this.props.numberOfFollowings}</b>
                         </div>
                     </div>
                 </div>

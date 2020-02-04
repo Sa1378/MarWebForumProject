@@ -65,7 +65,7 @@ class NewPost extends Component {
                                 className="border rounded">
                         <form className="jumbotron d-flex flex-column justify-content-center">
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
+                                <TextField name="title" id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()}/>
                             </div>
                             <div className="form-group d-flex justify-content-center my-3">
                                 <TextField style={{width: '100%'}} id="content" label="Content" variant="filled"
@@ -80,7 +80,7 @@ class NewPost extends Component {
                                     Post Image
                                     <input
                                         type="file"
-                                        id='image'
+                                        id='media'
                                         style={{display: "none"}}
                                     />
                                 </Button>
@@ -151,16 +151,24 @@ class NewPost extends Component {
             var data={title:document.getElementById("title").value,
                     user:userId,
                     channel:parseInt(currentComponent.state.value),
-                    body:document.getElementById("content").value}
-            console.log(data);
-            console.log(JSON.stringify(data))
-            fetch('http://localhost:8000/post/post-view',{
+                    body:document.getElementById("content").value,
+                    }
+            var formData=new FormData();
+            formData.append('title',document.getElementById("title").value)
+            formData.append('user',userId)
+            formData.append('channel',parseInt(currentComponent.state.value))
+            formData.append('body',document.getElementById("content").value)
+            formData.append('media',document.getElementById("media").files[0])
+            console.log(formData.get("title"))
+            console.log(document.getElementById("title").value)
+            //console.log(data);
+            //console.log(JSON.stringify(data))
+            fetch('http://localhost:8000/post/ez/',{
                     method:"POST",
                     headers:{
-                        "Content-Type": "multipart/form-data", 
-                        "Access-Control-Origin": "*",
+                        "Content-Type":"multipart/form-data",
                         'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
-                    body: JSON.stringify(data),
+                    body: formData
             }})
             .then(function(response) {
                 console.log(response)

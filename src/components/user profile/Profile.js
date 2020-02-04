@@ -16,12 +16,122 @@ class Profile extends Component {
         super(props);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.changeFollowStatus=this.changeFollowStatus.bind(this);
         this.props.refreshToken();
     }
 
+    
     componentWillMount(){
+        this.getUserData()
+        this.getFollowers()
+        this.getFollowings()
+        this.getPostCards()
+    }
+
+    getPostCards(){
         var currentComponent=this;
-        fetch('http://localhost:8000/account/profile/id/'+this.props.match.params.username,{
+        fetch('http://localhost:8000/post/userposts/'+this.props.match.params.username,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("POSTTTSSSSS")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<data.posts.length;i++){
+                var post=data.posts[i];
+                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
+            }
+            currentComponent.setState({postCards:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
+    getFollowings(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/followings/'+this.props.match.params.username,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("FOLOWINGSSSSSSSSSSS")
+            console.log(data.followings)
+            console.log()
+            var tmp=[]
+            for(let i=0;i<data.followings.length;i++){
+                if(data.followings[i].resourcetype=="FollowChannel")continue;
+                tmp.push({username:data.followings[i].target_name,avatar_src:'src/static/images/avatar/download.jpeg'})
+            }
+            console.log(tmp)
+            currentComponent.setState({followings:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
+    getFollowers(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/followers/'+this.props.match.params.username,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("FOLOWERSSSSSSSSSSSSSSSSSSS")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<data.followers.length;i++){
+                if(data.followers[i].resourcetype=="FollowChannel")continue;
+                if(data.followers[i].source_name==localStorage.getItem("username")){
+                    currentComponent.setState({followed:true});
+                    console.log("kjdsjkdsjkdskjdskj")
+                }
+                tmp.push({username:data.followers[i].source_name,avatar_src:'src/static/images/avatar/download.jpeg'})
+            }
+            console.log(tmp)
+            currentComponent.setState({followers:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
+    getUserData(){
+        
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/profile/'+this.props.match.params.username,{
                 method:"GET",
                 headers:{
                     "Content-Type": "application/json", 
@@ -45,14 +155,10 @@ class Profile extends Component {
         })
     }
 
+
     state = {
         profile:{age:null,telephone_number:null,user:{id:0, email:null, username:"loading...", password:null, first_name:null,last_name:null}},
-        my_name: 'reza',
-        username: null,
         avatar_src: 'images/download.jpeg',
-        numberOfPosts: 20,
-        numberOfFollower: 354,
-        numberOfFollowing: 323,
         followed: false,
 
         channels: [
@@ -62,98 +168,9 @@ class Profile extends Component {
             {id: 4, title: '4', creator: 'MarWeb_studio'},
             {id: 5, title: '5', creator: 'MarWeb_studio'},
         ],
-        postCards: [
-            {
-                id: 1,
-                author: 'alireza',
-                title: 'Hello World',
-                postSummary: 'this message is bullshit\nasfjasfjasf ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 2,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 3,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 4,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 5,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 6,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: false
-            }
-        ],
-        follower: [
-            {
-                username: 'follower1',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower2',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower3',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower4',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower5',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower6',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }
-        ], following: [
-            {
-                username: 'following1',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'following2',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'following3',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'following4',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'following5',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'following6sdsjgn;isgbaflgnafd;g',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }
-        ]
-
+        postCards: [],
+        followers: [],
+        followings: []
     };
 
     postListStyle = {
@@ -189,6 +206,12 @@ class Profile extends Component {
         this.setState({postCards: postCards});
     }
 
+    changeFollowStatus(){
+        var followed=this.state.followed;
+        this.setState({followed:!followed});
+        this.getFollowers()
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -204,12 +227,12 @@ class Profile extends Component {
                         </div>
                         <Data name={this.state.profile.user.username} firstName={this.state.profile.user.first_name}
                               lastName={this.state.profile.user.last_name}
-                              numberOfPosts={this.state.numberOfPosts}
-                              numberOfFollower={this.state.numberOfFollower}
-                              numberOfFollowing={this.state.numberOfFollowing} follower={this.state.follower}
-                              following={this.state.following}/>
-                        <Follow followed={this.state.followed} my_name={this.state.my_name}
-                                username={this.state.username}/>
+                              numberOfPosts={this.state.postCards.length}
+                              numberOfFollowers={this.state.followers.length}
+                              numberOfFollowings={this.state.followings.length} followers={this.state.followers}
+                              followings={this.state.followings}/>
+                        <Follow followed={this.state.followed} my_name={localStorage.getItem("username")}
+                                username={this.state.profile.user.username} changeStatus={this.changeFollowStatus}/>
                         <SimpleTabs name1="Posts" name2="Channels" page="profile" postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
@@ -225,7 +248,7 @@ class Profile extends Component {
     }
 
     formatSetting() {
-        if (this.state.username !== this.state.my_name)
+        if (this.state.profile.user.username !== localStorage.getItem("username"))
             return;
         else return <TransitionsModal content="edit profile" buttonName="setting" variant="contained"/>
     }
