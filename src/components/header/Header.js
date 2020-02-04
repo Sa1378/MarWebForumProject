@@ -18,7 +18,6 @@ import TransitionsModal from "../TransitionsModal";
 import Button from '@material-ui/core/Button';
 
 
-
 const styles = theme => ({
     grow: {
         flexGrow: 2,
@@ -103,20 +102,24 @@ const styles = theme => ({
             cursor: "pointer",
         }
     },
-    newPostButton:{
-        display:"inline",
+    newPostButton: {
+        display: "inline",
         [theme.breakpoints.down('sm')]: {
             display: 'none',
-          },
+        },
     },
-    logoutButton:{
-        color:"white",
-        fontSize:"10px",
-        marginLeft:"5px",
+    logoutButton: {
+        color: "white",
+        fontSize: "10px",
+        marginLeft: "5px",
     }
 });
 
 class Header extends Component {
+    state = {
+        notifications: {}
+    };
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -124,7 +127,7 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        if(!localStorage.getItem("access-token"))return ;
+        if (!localStorage.getItem("access-token")) return;
         var searchTextField = document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress", event => {
             var key = event.keyCode;
@@ -135,99 +138,117 @@ class Header extends Component {
                 searchTextField.value = "";
             }
         });
+        let myThis = this;
+        fetch("http://localhost:8000/account/login", {
+            method: "GET",
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+            myThis.setState({notifications: data.notifications})
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     handleProfileClick() {
-        window.location.href="/profile/"+localStorage.getItem("username");
+        window.location.href = "/profile/" + localStorage.getItem("username");
+    }
+
+    notificationType(type, classes) {
+        if (type === "comment") {
+            return classes.commentIcon
+        } else if (type === "post") {
+            return classes.postIcon
+        } else if (type === "like") {
+            return classes.likeIcon
+        } else {
+            return classes.followIcon
+        }
     }
 
 
     render() {
         const {classes} = this.props;
-        var loggedInParts1,loggedInParts2,loggedInParts3;
-        if(localStorage.getItem("access-token")){
-            loggedInParts1=(
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon/>
-                </div>
-                <InputBase
-                    placeholder="Search…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    id="searchTextField"
-                    inputProps={{'aria-label': 'search'}}
-                />
-            </div>)
-            loggedInParts2=(
-            <div className={classes.grow}/>)
-            loggedInParts3=(
-            <div className={classes.iconContainer}>
-                <PopupState variant="popover" popupId="demo-popup-popover">
-                    {popupState => (
-                        <div>
-                            <div className={classes.newPostButton}>
-                                <TransitionsModal content="newpost" buttonName="new post" variant="contained" refreshToken={this.props.refreshToken}/>
+        var loggedInParts1, loggedInParts2, loggedInParts3;
+        if (localStorage.getItem("access-token")) {
+            loggedInParts1 = (
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon/>
+                    </div>
+                    <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        id="searchTextField"
+                        inputProps={{'aria-label': 'search'}}
+                    />
+                </div>)
+            loggedInParts2 = (
+                <div className={classes.grow}/>)
+            loggedInParts3 = (
+                <div className={classes.iconContainer}>
+                    <PopupState variant="popover" popupId="demo-popup-popover">
+                        {popupState => (
+                            <div>
+                                <div className={classes.newPostButton}>
+                                    <TransitionsModal content="newpost" buttonName="new post" variant="contained"
+                                                      refreshToken={this.props.refreshToken}/>
+                                </div>
+                                <IconButton aria-label="show new notifications" color="inherit"
+                                            className={classes.icon} {...bindTrigger(popupState)}>
+                                    <Badge badgeContent={3} color="secondary" id="notifBadge">
+                                        <NotificationsIcon/>
+                                    </Badge>
+                                </IconButton>
+                                <Popover
+                                    {...bindPopover(popupState)}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                >
+
+                                    {this.state.notifications.map(item => (
+                                        <Box p={2} className={classes.notifBox} onClick={() => {
+                                            window.location.href = "/profile/Mahdis";
+                                        }}>
+                                            <PeopleIcon
+                                                className={classes.notifIcon + " " + this.notificationType(item.type, classes)}/>
+                                            {item.message}
+                                        </Box>
+                                    ))}
+
+                                </Popover>
                             </div>
-                            <IconButton aria-label="show new notifications" color="inherit"
-                                        className={classes.icon} {...bindTrigger(popupState)}>
-                                <Badge badgeContent={3} color="secondary" id="notifBadge">
-                                    <NotificationsIcon/>
-                                </Badge>
-                            </IconButton>
-                            <Popover
-                                {...bindPopover(popupState)}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'right',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                            >
-                                <Box p={2} className={classes.notifBox} onClick={() => {
-                                    window.location.href = "/profile/Mahdis";
-                                }}>
-                                    <PeopleIcon
-                                        className={classes.notifIcon + " " + classes.followIcon}/> Mahdis
-                                    followed you
-                                </Box>
-                                <Box p={2} className={classes.notifBox} onClick={() => {
-                                    window.location.href = "/post/1";
-                                }}>
-                                    <ChatBubbleIcon
-                                        className={classes.notifIcon + " " + classes.commentIcon}/> Mohammad
-                                    commented on your post
-                                </Box>
-                                <Box p={2} className={classes.notifBox} onClick={() => {
-                                    window.location.href = "/profile/Akbar";
-                                }}>
-                                    <PeopleIcon
-                                        className={classes.notifIcon + " " + classes.followIcon}/> Akbar
-                                    followed you
-                                </Box>
-                            </Popover>
-                        </div>
-                    )}
-                </PopupState>
+                        )}
+                    </PopupState>
 
-                <IconButton className={classes.icon}
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-haspopup="true"
-                            onClick={this.handleProfileClick}
-                            color="inherit"
-                >
+                    <IconButton className={classes.icon}
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                onClick={this.handleProfileClick}
+                                color="inherit"
+                    >
 
-                    <AccountCircle/>
-                </IconButton>
-                <Button className={classes.logoutButton} onClick={()=>{window.location.href="/login"}}>
-                    Logout
-                </Button>
-            </div>)
+                        <AccountCircle/>
+                    </IconButton>
+                    <Button className={classes.logoutButton} onClick={() => {
+                        window.location.href = "/login"
+                    }}>
+                        Logout
+                    </Button>
+                </div>)
         }
         return (
             <div className={classes.grow}>
