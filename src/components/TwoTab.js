@@ -46,6 +46,11 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
     },
+    outline:{
+        "&:focus": {
+            outline: "none",
+        }
+    }
 }));
 
 export default function SimpleTabs(props) {
@@ -60,8 +65,8 @@ export default function SimpleTabs(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab label={props.name1} {...a11yProps(0)} />
-                    <Tab label={props.name2} {...a11yProps(1)} />
+                    <Tab label={props.name1} {...a11yProps(0)} className={classes.outline}/>
+                    <Tab label={props.name2} {...a11yProps(1)} className={classes.outline}/>
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

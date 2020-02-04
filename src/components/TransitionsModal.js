@@ -50,6 +50,11 @@ const useStyles = makeStyles(theme => ({
         "&:focus": {
             outline: "none",
         }
+    },
+    outline:{
+        "&:focus": {
+            outline: "none",
+        }
     }
 }));
 

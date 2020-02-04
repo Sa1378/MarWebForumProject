@@ -8,6 +8,15 @@ import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import '../../static/css/material.css'
+import {withStyles} from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+    outline:{
+        
+    }
+});
 
 class NewPost extends Component {
 
@@ -58,8 +67,9 @@ class NewPost extends Component {
             console.log(event);
             this.setState({ value: event.target.value })
         }
+        const {classes}=this.props;
         return (
-            <div>
+            <div className={classes.outline}>
                 <CssBaseline />
                 <Container>
                     <Typography component="div" style={{ backgroundColor: 'white', width: '1000px' }}
@@ -199,4 +209,4 @@ class NewPost extends Component {
 }
 
 
-export default NewPost;
+export default withStyles(styles)(NewPost);

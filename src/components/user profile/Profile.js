@@ -8,7 +8,17 @@ import Data from "./profileData";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Follow from "./follow";
 import TransitionsModal from "../TransitionsModal";
+import {withStyles} from '@material-ui/core/styles';
+import '../../static/css/material.css'
 
+
+const styles = theme => ({
+    outline:{
+        "&:focus": {
+            outline: "none",
+        }
+    }
+});
 
 class Profile extends Component {
 
@@ -19,7 +29,7 @@ class Profile extends Component {
         this.changeFollowStatus=this.changeFollowStatus.bind(this);
         this.props.refreshToken();
     }
-
+    
     
     componentWillMount(){
         this.getUserData()
@@ -243,10 +253,11 @@ class Profile extends Component {
     }
 
     render() {
+        const {classes}=this.props;
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <Container maxWidth="lg">
+                <Container>
                     <Typography component="div" style={{backgroundColor: 'white', height: '88vh',}}
                                 className="border rounded">
                         <div className="d-flex justify-content-end p-2">
@@ -266,7 +277,7 @@ class Profile extends Component {
                         <SimpleTabs name1="Posts" name2="Channels" page="profile" postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
-                                    postListStyle={this.postListStyle}/>
+                                    postListStyle={this.postListStyle} className={classes.outline}/>
                     </Typography>
                 </Container>
             </React.Fragment>
@@ -285,4 +296,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default withStyles(styles)(Profile);

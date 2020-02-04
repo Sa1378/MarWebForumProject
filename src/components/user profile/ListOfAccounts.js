@@ -3,6 +3,7 @@ import GridList from '@material-ui/core/GridList';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AccountCard from "./AccountCard";
 import Divider from "@material-ui/core/Divider";
+import '../../static/css/material.css'
 
 class ListOfAccounts extends Component {
     gridList = {
