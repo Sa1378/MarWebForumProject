@@ -26,6 +26,43 @@ class Profile extends Component {
         this.getFollowers()
         this.getFollowings()
         this.getPostCards()
+        this.getChannels()
+    }
+
+    getChannels(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/channel/channels/'+this.props.match.params.username,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log("Channel response")
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("CHAAAANNEEEEEELLLLL")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<data.channels.length;i++){
+                var channel=data.channels[i]
+                console.log(channel.title)
+                if(channel.title==currentComponent.props.match.params.username)continue;
+                tmp.push({id:channel.id,title:channel.title,creator:channel.creator_username})
+            }
+            console.log(tmp);
+            currentComponent.setState({channels:tmp})
+            
+        })
+        .catch(function(err){
+            console.log(err);
+        })
     }
 
     getPostCards(){
@@ -160,14 +197,7 @@ class Profile extends Component {
         profile:{age:null,telephone_number:null,user:{id:0, email:null, username:"loading...", password:null, first_name:null,last_name:null}},
         avatar_src: 'images/download.jpeg',
         followed: false,
-
-        channels: [
-            {id: 1, title: '1', creator: 'MarWeb_studio'},
-            {id: 2, title: '2', creator: 'MarWeb_studio'},
-            {id: 3, title: '3', creator: 'MarWeb_studio'},
-            {id: 4, title: '4', creator: 'MarWeb_studio'},
-            {id: 5, title: '5', creator: 'MarWeb_studio'},
-        ],
+        channels: [],
         postCards: [],
         followers: [],
         followings: []
