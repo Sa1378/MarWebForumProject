@@ -15,6 +15,7 @@ import PopupState, {bindTrigger, bindPopover} from 'material-ui-popup-state';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
 import TransitionsModal from "../TransitionsModal";
+import Button from '@material-ui/core/Button';
 
 
 
@@ -107,6 +108,11 @@ const styles = theme => ({
         [theme.breakpoints.down('sm')]: {
             display: 'none',
           },
+    },
+    logoutButton:{
+        color:"white",
+        fontSize:"10px",
+        marginLeft:"5px",
     }
 });
 
@@ -118,6 +124,7 @@ class Header extends Component {
     }
 
     componentDidMount() {
+        if(!localStorage.getItem("access-token"))return ;
         var searchTextField = document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress", event => {
             var key = event.keyCode;
@@ -131,13 +138,117 @@ class Header extends Component {
     }
 
     handleProfileClick() {
-        window.location.href = "/profile/reza";
+        fetch('http://localhost:8000/account/profile/'+localStorage.getItem("username"),{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log(data)
+            window.location.href="/profile/"+data.user.id;
+        })
+        .catch(function(err){
+            console.log(err);
+        })
     }
 
 
     render() {
         const {classes} = this.props;
+        var loggedInParts1,loggedInParts2,loggedInParts3;
+        if(localStorage.getItem("access-token")){
+            loggedInParts1=(
+            <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                    <SearchIcon/>
+                </div>
+                <InputBase
+                    placeholder="Search…"
+                    classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                    }}
+                    id="searchTextField"
+                    inputProps={{'aria-label': 'search'}}
+                />
+            </div>)
+            loggedInParts2=(
+            <div className={classes.grow}/>)
+            loggedInParts3=(
+            <div className={classes.iconContainer}>
+                <PopupState variant="popover" popupId="demo-popup-popover">
+                    {popupState => (
+                        <div>
+                            <div className={classes.newPostButton}>
+                                <TransitionsModal content="newpost" buttonName="new post" variant="contained" />
+                            </div>
+                            <IconButton aria-label="show new notifications" color="inherit"
+                                        className={classes.icon} {...bindTrigger(popupState)}>
+                                <Badge badgeContent={3} color="secondary" id="notifBadge">
+                                    <NotificationsIcon/>
+                                </Badge>
+                            </IconButton>
+                            <Popover
+                                {...bindPopover(popupState)}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                            >
+                                <Box p={2} className={classes.notifBox} onClick={() => {
+                                    window.location.href = "/profile/Mahdis";
+                                }}>
+                                    <PeopleIcon
+                                        className={classes.notifIcon + " " + classes.followIcon}/> Mahdis
+                                    followed you
+                                </Box>
+                                <Box p={2} className={classes.notifBox} onClick={() => {
+                                    window.location.href = "/post/1";
+                                }}>
+                                    <ChatBubbleIcon
+                                        className={classes.notifIcon + " " + classes.commentIcon}/> Mohammad
+                                    commented on your post
+                                </Box>
+                                <Box p={2} className={classes.notifBox} onClick={() => {
+                                    window.location.href = "/profile/Akbar";
+                                }}>
+                                    <PeopleIcon
+                                        className={classes.notifIcon + " " + classes.followIcon}/> Akbar
+                                    followed you
+                                </Box>
+                            </Popover>
+                        </div>
+                    )}
+                </PopupState>
 
+                <IconButton className={classes.icon}
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            onClick={this.handleProfileClick}
+                            color="inherit"
+                >
+
+                    <AccountCircle/>
+                </IconButton>
+                <Button className={classes.logoutButton} onClick={()=>{window.location.href="/login"}}>
+                    Logout
+                </Button>
+            </div>)
+        }
         return (
             <div className={classes.grow}>
                 <AppBar position="fixed" className={classes.appBar}>
@@ -145,82 +256,9 @@ class Header extends Component {
                         <Typography className={classes.title} variant="h6" noWrap href="/">
                             <a href="/" className={classes.link}>MarWeb</a>
                         </Typography>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon/>
-                            </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                id="searchTextField"
-                                inputProps={{'aria-label': 'search'}}
-                            />
-                        </div>
-                        <div className={classes.grow}/>
-                        <div className={classes.iconContainer}>
-                            <PopupState variant="popover" popupId="demo-popup-popover">
-                                {popupState => (
-                                    <div>
-                                        <div className={classes.newPostButton}>
-                                            <TransitionsModal content="newpost" buttonName="new post" variant="contained" />
-                                        </div>
-                                      <IconButton aria-label="show new notifications" color="inherit"
-                                                    className={classes.icon} {...bindTrigger(popupState)}>
-                                            <Badge badgeContent={3} color="secondary" id="notifBadge">
-                                                <NotificationsIcon/>
-                                            </Badge>
-                                        </IconButton>
-                                        <Popover
-                                            {...bindPopover(popupState)}
-                                            anchorOrigin={{
-                                                vertical: 'bottom',
-                                                horizontal: 'right',
-                                            }}
-                                            transformOrigin={{
-                                                vertical: 'top',
-                                                horizontal: 'right',
-                                            }}
-                                        >
-                                            <Box p={2} className={classes.notifBox} onClick={() => {
-                                                window.location.href = "/profile/Mahdis";
-                                            }}>
-                                                <PeopleIcon
-                                                    className={classes.notifIcon + " " + classes.followIcon}/> Mahdis
-                                                followed you
-                                            </Box>
-                                            <Box p={2} className={classes.notifBox} onClick={() => {
-                                                window.location.href = "/post/1";
-                                            }}>
-                                                <ChatBubbleIcon
-                                                    className={classes.notifIcon + " " + classes.commentIcon}/> Mohammad
-                                                commented on your post
-                                            </Box>
-                                            <Box p={2} className={classes.notifBox} onClick={() => {
-                                                window.location.href = "/profile/Akbar";
-                                            }}>
-                                                <PeopleIcon
-                                                    className={classes.notifIcon + " " + classes.followIcon}/> Akbar
-                                                followed you
-                                            </Box>
-                                        </Popover>
-                                    </div>
-                                )}
-                            </PopupState>
-
-                            <IconButton className={classes.icon}
-                                        edge="end"
-                                        aria-label="account of current user"
-                                        aria-haspopup="true"
-                                        onClick={this.handleProfileClick}
-                                        color="inherit"
-                            >
-
-                                <AccountCircle/>
-                            </IconButton>
-                        </div>
+                        {loggedInParts1}
+                        {loggedInParts2}
+                        {loggedInParts3}
                     </Toolbar>
                 </AppBar>
             </div>

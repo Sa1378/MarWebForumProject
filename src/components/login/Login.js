@@ -7,8 +7,12 @@ import SimpleTabs from "../TwoTab";
 class Login extends Component {
 
     componentWillMount(){
+        var accessToken=localStorage.getItem("access-token");
         localStorage.removeItem("access-token")
         localStorage.removeItem("refresh-token")
+        if(accessToken){
+            window.location.reload();
+        }
     }
 
     render() {
