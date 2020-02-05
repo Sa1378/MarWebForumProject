@@ -163,6 +163,8 @@ class Header extends Component {
         let myThis = this;
         setInterval(() => this.sendRequest(myThis), 10000);
 
+        setInterval(this.props.refreshToken, 240000);
+
     }
 
     sendRequest(myThis) {
@@ -247,13 +249,13 @@ class Header extends Component {
                                                       refreshToken={this.props.refreshToken}/>
                                 </div>
                                 <div onClick={this.clickNotif} className="d-inline">
-                                <IconButton aria-label="show new notifications" color="inherit"
-                                            className={classes.icon} {...bindTrigger(popupState)}
-                                >
-                                    <Badge badgeContent={this.state.badgeContent} color="secondary" id="notifBadge">
-                                        <NotificationsIcon/>
-                                    </Badge>
-                                </IconButton>
+                                    <IconButton aria-label="show new notifications" color="inherit"
+                                                className={classes.icon} {...bindTrigger(popupState)}
+                                    >
+                                        <Badge badgeContent={this.state.badgeContent} color="secondary" id="notifBadge">
+                                            <NotificationsIcon/>
+                                        </Badge>
+                                    </IconButton>
                                 </div>
                                 <Popover
                                     {...bindPopover(popupState)}

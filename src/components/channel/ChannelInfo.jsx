@@ -37,6 +37,7 @@ class ChannelInfo extends Component {
     }
 
     checkFollowedState(){
+        this.setState({followed:false});
         for(let i=0;i<this.props.info.followers_channel.length;i++){
             console.log("||||||||||||||||||||||||||||||||||||")
             console.log(this.props.info.followers_channel[i].source_name)
@@ -61,10 +62,12 @@ class ChannelInfo extends Component {
                     }
                     action={
                         <ChannelInfoSettingButton canEdit={localStorage.getItem("username") === this.props.info.creator_username}
-                                                  followers={this.state.follower} linkClass={classes.link}/>
+                                                  followers={this.props.followers}
+                                                  authors={this.props.authors}
+                                                  linkClass={classes.link}/>
                     }
-                    title="Channel Info"
-                    subheader={this.props.info.title}
+                    title={this.props.info.title}
+                    subheader={"followers: "+this.props.followers.length}
                 />
                 <CardMedia
                     image="/static/images/cards/paella.jpg"
@@ -98,9 +101,9 @@ class ChannelInfo extends Component {
         var followed=this.state.followed;
         console.log("FOLOOWWEDDD: "+followed)
         if (followed) {
-            return <RemoveCircleIcon color={"secondary"}/>
+            return <RemoveCircleIcon onClick={this.props.unfollow} color={"secondary"}/>
         }
-        return <AddCircleIcon color={"primary"}/>
+        return <AddCircleIcon onClick={this.props.follow} color={"primary"}/>
     }
 
 

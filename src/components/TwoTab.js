@@ -67,6 +67,7 @@ export default function SimpleTabs(props) {
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                     <Tab label={props.name1} {...a11yProps(0)} className={classes.outline}/>
                     <Tab label={props.name2} {...a11yProps(1)} className={classes.outline}/>
+                    <Tab label={props.name3} {...a11yProps(2)} className={classes.outline}/>
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -74,6 +75,9 @@ export default function SimpleTabs(props) {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {loginOrProfileSecondTab(props)}
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                {loginOrProfileThirdTab(props)}
             </TabPanel>
         </div>
     );
@@ -88,6 +92,16 @@ export default function SimpleTabs(props) {
         if (props.page === 'profile')
             return channel(props);
         else return signUp()
+    }
+
+    function loginOrProfileThirdTab(props) {
+        if (props.page === 'profile')
+            return info(props);
+        else return ;
+    }
+
+    function info(props){
+        return <h1>salam</h1>
     }
 
 

@@ -106,6 +106,13 @@ export default function TransitionsModal(props) {
                     props.onClose();
                 }}>Subscribers</MenuItem>
             )
+        } else if (props.buttonName === 'authors') {
+            return (
+                <MenuItem onClick={function () {
+                    handleOpen();
+                    props.onClose();
+                }}>Authors</MenuItem>
+            )
         } else if (props.buttonName === 'follower' || props.buttonName === 'following') {
             return (
                 <Button className={classes.link2} onClick={handleOpen} variant=''
@@ -150,6 +157,8 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'reply') {
             return <NewComment/>
         } else if (props.buttonName === 'subscribers') {
+            return <ListOfAccounts listOfAccount={props.accounts}/>
+        } else if (props.buttonName === 'authors') {
             return <ListOfAccounts listOfAccount={props.accounts}/>
         } else if (props.buttonName === 'editPost') {
             return <NewPost post={props.post}/>

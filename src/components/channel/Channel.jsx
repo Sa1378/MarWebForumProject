@@ -11,6 +11,8 @@ class Channel extends Component {
         super(props);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.follow=this.follow.bind(this);
+        this.unfollow=this.unfollow.bind(this);
         this.props.refreshToken();
     }
 
@@ -80,7 +82,7 @@ class Channel extends Component {
 
     state = {
         postCards: [],
-        info:{followers_channel:[]},
+        info:{followers_channel:[],authors:[]},
         offset: 0,
         accounts: [
             'alireza',
@@ -102,6 +104,59 @@ class Channel extends Component {
         width: '100vh',
         justifyContent: 'center',
     };
+
+    follow(){
+        console.log("FOLLOOOWWWWW")
+        var currentComponent=this;
+        fetch('http://localhost:8000/channel/followchannel/'+this.props.match.params.channelId,{
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("POSTTTSSSSS")
+            console.log(data)
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+        this.getInfo();
+    }
+
+    unfollow(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/channel/followchannel/'+this.props.match.params.channelId,{
+                method:"DELETE",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("POSTTTSSSSS")
+            console.log(data)
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+        this.getInfo();
+    }
 
     handleLikePost(postId) {
         const postCards = [];
@@ -136,7 +191,9 @@ class Channel extends Component {
         return (
             <Container className="d-flex justify-content-center">
                 <Container>
-                    <ChannelInfo info={this.state.info}/>
+                    <ChannelInfo followers={this.state.info.followers_channel.map(follow=>{return {username:follow.source_name,avatar_src:'src/static/images/avatar/download.jpeg'}})}
+                    authors={this.state.info.authors.map(author=>{return {username:author.username,avatar_src:'src/static/images/avatar/download.jpeg'}})}
+                     info={this.state.info} follow={this.follow} unfollow={this.unfollow}/>
                 </Container>
                 <Container className="">
                     <PostList onDisLike={this.handleDisLikePost}

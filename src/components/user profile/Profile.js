@@ -274,7 +274,7 @@ class Profile extends Component {
                               followings={this.state.followings}/>
                         <Follow followed={this.state.followed} my_name={localStorage.getItem("username")}
                                 username={this.state.profile.user.username} changeStatus={this.changeFollowStatus}/>
-                        <SimpleTabs name1="Posts" name2="Channels" page="profile" postCards={this.state.postCards}
+                        <SimpleTabs name1="Posts" name2="Channels" name3="Info" page="profile" postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
                                     postListStyle={this.postListStyle} className={classes.outline}/>
