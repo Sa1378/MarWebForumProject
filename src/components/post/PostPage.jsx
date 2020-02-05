@@ -17,15 +17,6 @@ import NewComment from "./NewComment";
 import img from '../../static/images/cards/wallpaper4.jpg'
 import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
 import Sidebar from "../main-page/Sidebar";
-import img3 from '../../static/images/avatar/download.jpeg'
-import img4 from '../../static/images/avatar/photo_2020-01-02_22-01-43.jpg'
-import img5 from '../../static/images/avatar/photo_2020-01-02_22-01-52.jpg'
-import img6 from '../../static/images/avatar/photo_2020-01-02_22-01-58.jpg'
-import img7 from '../../static/images/avatar/photo_2020-01-02_22-02-02.jpg'
-import img8 from '../../static/images/avatar/photo_2020-01-02_22-02-06.jpg'
-import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
-import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
-import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
 import EditDeletePost from "./EditDeletePost";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import Badge from "@material-ui/core/Badge/Badge";
@@ -59,7 +50,12 @@ class PostPage extends Component {
     }
 
     componentDidMount() {
-        console.log("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222")
+        console.log("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
+        this.getPost()
+    }
+
+    getPost() {
+        let myThis = this;
         fetch("http://localhost:8000/post/post-view/" + this.props.match.params.name, {
             method: "GET",
             headers: {
@@ -73,9 +69,9 @@ class PostPage extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-            console.log("---------")
-            console.log(data)
-            console.log("---------")
+            console.log(data);
+            myThis.setState({post: data.post})
+            myThis.setState({comments: data.post.comments})
         }).catch(function (error) {
             console.log(error)
         })
@@ -133,34 +129,7 @@ class PostPage extends Component {
                 loggedInUser: 'alireza',
                 liked: true,
                 disliked: false
-            },
-            {
-                id: 2,
-                message: 'Second Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'reza',
-                loggedInUser: 'alireza',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 3,
-                message: 'Third Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'mehrdad',
-                loggedInUser: 'alireza',
-                liked: false,
-                disliked: false
-            },
-            {
-                id: 4,
-                message: 'Fourth df;askdf;askdb\nComment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'alireza',
-                loggedInUser: 'alireza',
-                liked: true,
-                disliked: false
-            },
+            }
         ],
     };
 
@@ -208,7 +177,6 @@ class PostPage extends Component {
             post.disliked = !post.disliked;
         }
         this.setState({post: post});
-        this.likeDisLikePost()
     }
 
     handleDisLikePost(postId) {
@@ -237,48 +205,18 @@ class PostPage extends Component {
 
                                     <EditDeletePost post={this.state.post}/>
                                 }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
+                                title={this.state.post.title}
+                                subheader={this.state.post.create_date}
                             />
                             <CardMedia
                                 image="../../static/images/cards/wallpaper4.jpg"
                                 title="Paella dish"
                             />
                             {this.randomImage()}
+
                             <CardContent>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    This impressive paella is a perfect party dish and a fun meal to cook together with
-                                    your
-                                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardContent>
-                                <Typography paragraph>Method:</Typography>
                                 <Typography paragraph>
-                                    Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                                    minutes.
-                                </Typography>
-                                <Typography paragraph>
-                                    Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                                    heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                                    browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-                                    chicken
-                                    and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                                    pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-                                    saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                                </Typography>
-                                <Typography paragraph>
-                                    Add rice and stir very gently to distribute. Top with artichokes and peppers, and
-                                    cook
-                                    without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce
-                                    heat to
-                                    medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-                                    cook
-                                    again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                                    minutes more. (Discard any mussels that don’t open.)
-                                </Typography>
-                                <Typography>
-                                    Set aside off of the heat to let rest for 10 minutes, and then serve.
+                                    {this.state.post.body}
                                 </Typography>
                             </CardContent>
                             <Divider variant="middle"/>
@@ -300,6 +238,7 @@ class PostPage extends Component {
                         {this.state.comments.map(comment => <Comment
                             key={comment.id}
                             comment={comment}
+                            post={this.state.post}
                             onLike={this.handleLikeComment}
                             onDisLike={this.handleDisLikeComment}
                         />)}
@@ -314,33 +253,11 @@ class PostPage extends Component {
     }
 
     randomImage() {
-        let a = (Math.floor(Math.random() * 2)) / 2 + 1;
-        if (a === 1) {
-            return <img src={img} width={'100%'} alt="Can't be shown."/>
-        } else return <img src={img2} width={'100%'} alt="Can't be shown."/>
+        return <img src={this.state.post.media} width={'100%'} alt={"HI"}/>
     }
 
     randomAvatarImage() {
-        let number = (Math.floor(Math.random() * 9)) + 3;
-        if (number === 3) {
-            return img3
-        } else if (number === 4) {
-            return img4
-        } else if (number === 5) {
-            return img5
-        } else if (number === 6) {
-            return img6
-        } else if (number === 7) {
-            return img7
-        } else if (number === 8) {
-            return img8
-        } else if (number === 9) {
-            return img9
-        } else if (number === 10) {
-            return img10
-        } else if (number === 11) {
-            return img11
-        } else return img
+        return this.state.post.profile_image
     }
 
 }
