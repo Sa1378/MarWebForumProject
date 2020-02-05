@@ -86,7 +86,7 @@ class Comment extends Component {
                     />
                     <CardContent>
                         <Typography paragraph>
-                            {this.props.comment.message}
+                            {this.props.comment.body}
                         </Typography>
                     </CardContent>
                     <Divider variant="middle"/>
@@ -117,26 +117,7 @@ class Comment extends Component {
     }
 
     randomAvatarImage() {
-        let number = (Math.floor(Math.random() * 9)) + 3;
-        if (number === 3) {
-            return img3
-        } else if (number === 4) {
-            return img4
-        } else if (number === 5) {
-            return img5
-        } else if (number === 6) {
-            return img6
-        } else if (number === 7) {
-            return img7
-        } else if (number === 8) {
-            return img8
-        } else if (number === 9) {
-            return img9
-        } else if (number === 10) {
-            return img10
-        } else if (number === 11) {
-            return img11
-        } else return img
+      return this.props.comment.media
     }
 }
 
