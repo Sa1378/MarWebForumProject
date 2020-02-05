@@ -117,13 +117,33 @@ const styles = theme => ({
 
 class Header extends Component {
     state = {
-        notifications: {}
+        notifications: [],
+        badgeContent: 0
     };
 
     constructor(props) {
         super(props);
-        this.state = {};
         this.handleProfileClick = this.handleProfileClick.bind(this);
+        this.clickNotif = this.clickNotif.bind(this);
+    }
+
+    clickNotif() {
+        // this.sendRequest(this)
+        // fetch("http://localhost:8000/notificatioan/seen-notifications", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Access-Control-Origin": "*",
+        //         'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        //     }
+        // }).then(function (response) {
+        //     if (response.ok) {
+        //     }
+        //     throw new Error("Server Error!");
+        // }).catch(function (error) {
+        //     console.log(error)
+        // })
+        // this.setState({badgeContent: 0})
     }
 
     componentDidMount() {
@@ -131,7 +151,7 @@ class Header extends Component {
         var searchTextField = document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress", event => {
             var key = event.keyCode;
-            console.log(key)
+            console.log(key);
             if (key === 13) {
                 window.location.href = "/search/" + searchTextField.value;
                 //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
@@ -139,15 +159,27 @@ class Header extends Component {
             }
         });
         let myThis = this;
-        fetch("http://localhost:8000/account/login", {
+        setInterval(() => this.sendRequest(myThis), 1000);
+
+    }
+
+    sendRequest(myThis) {
+        fetch("http://localhost:8000/notification/notifications", {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
         }).then(function (response) {
             if (response.ok) {
-                return response.json
+                return response.json()
             }
             throw new Error("Server Error!");
         }).then(function (data) {
             myThis.setState({notifications: data.notifications})
+            myThis.setState({badgeContent: data.notifications.length})
+
         }).catch(function (error) {
             console.log(error)
         })
@@ -166,6 +198,18 @@ class Header extends Component {
             return classes.likeIcon
         } else {
             return classes.followIcon
+        }
+    }
+
+    notificationUrl(type, item) {
+        if (type === "comment") {
+            return "post/" + item.target_id
+        } else if (type === "post") {
+            return "post/" + item.target_id
+        } else if (type === "like") {
+            return "profile/" + item.from_user_username
+        } else {
+            return "profile/" + item.from_user_username
         }
     }
 
@@ -201,8 +245,9 @@ class Header extends Component {
                                                       refreshToken={this.props.refreshToken}/>
                                 </div>
                                 <IconButton aria-label="show new notifications" color="inherit"
-                                            className={classes.icon} {...bindTrigger(popupState)}>
-                                    <Badge badgeContent={3} color="secondary" id="notifBadge">
+                                            className={classes.icon} {...bindTrigger(popupState)}
+                                            >
+                                    <Badge badgeContent={this.state.badgeContent} color="secondary" id="notifBadge">
                                         <NotificationsIcon/>
                                     </Badge>
                                 </IconButton>
@@ -220,7 +265,7 @@ class Header extends Component {
 
                                     {this.state.notifications.map(item => (
                                         <Box p={2} className={classes.notifBox} onClick={() => {
-                                            window.location.href = "/profile/Mahdis";
+                                            window.location.href = this.notificationUrl(item.type, item)
                                         }}>
                                             <PeopleIcon
                                                 className={classes.notifIcon + " " + this.notificationType(item.type, classes)}/>
