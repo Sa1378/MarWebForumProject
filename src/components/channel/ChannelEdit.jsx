@@ -12,10 +12,11 @@ class ChannelEdit extends Component {
 
     constructor(props){
         super(props)
-        this.createChannel=this.createChannel.bind(this);
+        this.editChannel=this.editChannel.bind(this);
         this.state={users:[],authors:this.props.authors.map(author=>{return {username:author.username,id:author.id}})}
         console.log("EDDIIIIIIIIITTTTT CHAAAANNNNNNEEEEEELLLLL")
         console.log(this.props.authors.map(author=>{return {username:author.username,id:author.id}}))
+        console.log(this.props.info)
     }
 
     state={
@@ -23,7 +24,7 @@ class ChannelEdit extends Component {
         authors:[]
     }
 
-    createChannel(){
+    editChannel(){
         var currentComponent=this;
         var userId=localStorage.getItem("userId");
         var flg=false;
@@ -40,19 +41,17 @@ class ChannelEdit extends Component {
         var authorIds=currentComponent.state.authors.map(author=>{return parseInt(author.id)});
         const formData = new FormData();
         formData.append('creator', userId)
-        formData.append('title', document.getElementById("title").value)
-        formData.append('subject', document.getElementById("subject").value)
+        if(document.getElementById("title").value)formData.append('title', document.getElementById("title").value)
+        if(document.getElementById("subject").value)formData.append('subject', document.getElementById("subject").value)
         formData.append('image', ((document.getElementById("image").files[0]=="")?null:document.getElementById("image").files[0]))
         for(let i=0;i<authorIds.length;i++){
             formData.append('authors',authorIds[i])
         }
-        formData.append('description', document.getElementById("description").value)
-        console.log(formData.get("title"))
-        console.log(document.getElementById("title").value)
+        if(document.getElementById("description").value)formData.append('description', document.getElementById("description").value)
         //console.log(data);
         //console.log(JSON.stringify(data))
-        fetch('http://localhost:8000/channel/channel/create', {
-            method: "POST",
+        fetch('http://localhost:8000/channel/channel/'+this.props.info.id, {
+            method: "PUT",
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
@@ -67,7 +66,7 @@ class ChannelEdit extends Component {
         })
         .then(function (data) {
             console.log(data);
-            window.location.href = "/channel/"+data.detail.id;
+            window.location.href = "/channel/"+currentComponent.props.info.id;
         })
         .catch(function (err) {
             console.log(err);
@@ -190,7 +189,7 @@ class ChannelEdit extends Component {
                         />
                     </div>
                     <div className="w-100">
-                        <Button className="w-100 " variant='contained' color='primary' onClick={this.createChannel}>Edit</Button>
+                        <Button className="w-100 " variant='contained' color='primary' onClick={this.editChannel}>Edit</Button>
                     </div>
                 </form>
             </div>

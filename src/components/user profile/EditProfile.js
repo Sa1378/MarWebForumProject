@@ -40,7 +40,7 @@ class EditProfile extends Component {
         formData.append('image',null)
         if(document.getElementById("image"))formData.append('image', document.getElementById("image").files[0])
      //   if(!isNaN(document.getElementById("age")))console.log("dsdsa");
-     //   console.log(formData.get("age"))
+        //console.log(formData.get("first_name"))
         //console.log(data);
         //console.log(JSON.stringify(data))
         fetch('http://localhost:8000/account/profile-update', {

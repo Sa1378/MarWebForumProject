@@ -17,6 +17,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DeletePostAlert from "./post/DeletePostAlert";
 import ChannelEdit from './channel/ChannelEdit';
+import ChannelDelete from './channel/ChannelDelete';
 
 
 const useStyles = makeStyles(theme => ({
@@ -114,6 +115,13 @@ export default function TransitionsModal(props) {
                     props.onClose();
                 }}>Edit</MenuItem>
             )
+        } else if (props.buttonName === 'delete channel') {
+            return (
+                <MenuItem onClick={function () {
+                    handleOpen();
+                    props.onClose();
+                }}>Delete</MenuItem>
+            )
         } else if (props.buttonName === 'authors') {
             return (
                 <MenuItem onClick={function () {
@@ -155,7 +163,9 @@ export default function TransitionsModal(props) {
         if (props.buttonName === 'setting') {
             return <EditProfile/>
         } else if (props.buttonName === 'edit channel') {
-            return <ChannelEdit authors={props.accounts}/>
+            return <ChannelEdit authors={props.accounts} info={props.info}/>
+        } else if (props.buttonName === 'delete channel') {
+            return <ChannelDelete info={props.info}/>
         } else if (props.buttonName === 'follower') {
             return <ListOfAccounts listOfAccount={props.followers}/>
         } else if (props.buttonName === 'following') {

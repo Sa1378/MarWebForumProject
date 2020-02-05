@@ -12,6 +12,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import ChannelInfoSettingButton from "./ChannelInfoSettingButton";
 import {withStyles} from "@material-ui/core";
+import ImageAvatars from "../user profile/Avatar";
 
 const styles = theme => (
     {
@@ -56,15 +57,14 @@ class ChannelInfo extends Component {
             <Card className="position-sticky w-100" style={{top: 90}}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="recipe">
-                            R
-                        </Avatar>
+                        <ImageAvatars avatarSrc={this.props.info.image} isList='true'/>
                     }
                     action={
                         <ChannelInfoSettingButton canEdit={localStorage.getItem("username") === this.props.info.creator_username}
                                                   followers={this.props.followers}
                                                   authors={this.props.authors}
                                                   editAuthors={this.props.info.authors}
+                                                  info={this.props.info}
                                                   linkClass={classes.link}/>
                     }
                     title={<h5>{this.props.info.title}</h5>}

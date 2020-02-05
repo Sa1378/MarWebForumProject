@@ -40,10 +40,12 @@ class Channel extends Component {
         .then(function(data) {
             console.log("INFOOOOOOOOOOOOOOOOO")
             console.log(data)
+            data.channel.image="http://localhost:8000"+data.channel.image;
             currentComponent.setState({info:data.channel})
         })
         .catch(function(err){
             console.log(err);
+            window.location.href="/notfound";
         })
     }
 

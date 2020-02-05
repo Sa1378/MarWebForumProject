@@ -144,7 +144,7 @@ class Header extends Component {
             throw new Error("Server Error!");
         }).catch(function (error) {
             console.log(error)
-        });
+        })
         this.setState({badgeContent: 0})
     }
 

@@ -44,10 +44,11 @@ export default function ChannelInfoSettingButton(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <TransitionsModal accounts={props.editAuthors} onClose={handleClose} buttonName="edit channel"/>
+                <TransitionsModal accounts={props.editAuthors} info={props.info} onClose={handleClose} buttonName="edit channel"/>
                 <TransitionsModal accounts={props.followers} onClose={handleClose} buttonName="subscribers"/>
                 {/*<MenuItem onClick={handleClose}>Subscribers</MenuItem>*/}
                 <TransitionsModal accounts={props.authors} onClose={handleClose} buttonName="authors"/>
+                <TransitionsModal info={props.info} onClose={handleClose} buttonName="delete channel"/>
             </Menu>
         </div>
     );
