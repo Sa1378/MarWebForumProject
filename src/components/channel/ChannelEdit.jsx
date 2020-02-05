@@ -8,11 +8,14 @@ import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
-class CreateChannel extends Component {
+class ChannelEdit extends Component {
 
     constructor(props){
         super(props)
         this.createChannel=this.createChannel.bind(this);
+        this.state={users:[],authors:this.props.authors.map(author=>{return {username:author.username,id:author.id}})}
+        console.log("EDDIIIIIIIIITTTTT CHAAAANNNNNNEEEEEELLLLL")
+        console.log(this.props.authors.map(author=>{return {username:author.username,id:author.id}}))
     }
 
     state={
@@ -102,6 +105,9 @@ class CreateChannel extends Component {
     }
 
     render() {
+        console.log(this.state.users);
+        console.log("|||||||")
+        console.log(this.state.authors);
         return (
             <div style={{backgroundColor: 'white'}} className="p-5">
                 <form noValidate autoComplete="off">
@@ -138,12 +144,25 @@ class CreateChannel extends Component {
                         <Autocomplete
                             multiple
                             onChange={(event, value) => {
+                                for(let i=0;i<value.length;i++)
+                                {
+                                    for(let j=i+1;j<value.length;j++)
+                                    {
+                                        if(value[i].username==value[j].username && value[i].id==value[j].id){
+                                            value.splice(j,1);
+                                            value.splice(i,1);
+                                            i--;
+                                            break;
+                                        }
+                                    }
+                                }
+                                console.log(value)
                                 this.setState({authors:value})
                             }}
                             id="authors"
                             options={this.state.users}
                             getOptionLabel={option => option.username}
-                            defaultValue={[]}
+                            defaultValue={this.props.authors.map(author=>{return {username:author.username,id:author.id}})}
                             renderTags={(value, getTagProps) =>
                                 value.map((option, index) => (
                                 <Chip label={option.username} {...getTagProps({ index })} disabled={index === 0} />
@@ -171,7 +190,7 @@ class CreateChannel extends Component {
                         />
                     </div>
                     <div className="w-100">
-                        <Button className="w-100 " variant='contained' color='primary' onClick={this.createChannel}>Create</Button>
+                        <Button className="w-100 " variant='contained' color='primary' onClick={this.createChannel}>Edit</Button>
                     </div>
                 </form>
             </div>
@@ -181,4 +200,4 @@ class CreateChannel extends Component {
 
 }
 
-export default CreateChannel;
+export default ChannelEdit;

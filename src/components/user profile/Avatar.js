@@ -51,7 +51,7 @@ class ImageAvatar extends Component {
 
     randomAvatarImage() {
         let number = (Math.floor(Math.random() * 9)) + 3;
-        if (number === 3) {
+   /*     if (number === 3) {
             return img3
         } else if (number === 4) {
             return img4
@@ -69,7 +69,8 @@ class ImageAvatar extends Component {
             return img10
         } else if (number === 11) {
             return img11
-        } else return img
+        } else return img*/
+        return this.props.avatarSrc;
     }
 
 }

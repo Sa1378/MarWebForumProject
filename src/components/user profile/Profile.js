@@ -17,6 +17,9 @@ const styles = theme => ({
         "&:focus": {
             outline: "none",
         }
+    },
+    tabs:{
+        backgroundColor:"gray",
     }
 });
 
@@ -95,6 +98,7 @@ class Profile extends Component {
             console.log("POSTTTSSSSS")
             console.log(data)
             var tmp=[]
+            data.posts.reverse();
             for(let i=0;i<data.posts.length;i++){
                 var post=data.posts[i];
                 tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
@@ -193,6 +197,7 @@ class Profile extends Component {
             throw new Error("Server Error!");
         })
         .then(function(data) {
+            console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
             console.log(data)
             currentComponent.setState({profile:data})
         })
@@ -215,6 +220,7 @@ class Profile extends Component {
 
     postListStyle = {
         width: '100vh',
+        marginLeft:"20%",
         justifyContent: 'center',
     };
 
@@ -277,7 +283,7 @@ class Profile extends Component {
                         <SimpleTabs name1="Posts" name2="Channels" name3="Info" page="profile" postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
-                                    postListStyle={this.postListStyle} className={classes.outline}/>
+                                    postListStyle={this.postListStyle} className={classes.tabs}/>
                     </Typography>
                 </Container>
             </React.Fragment>
@@ -285,7 +291,7 @@ class Profile extends Component {
     };
 
     formatAvatar() {
-        return <ImageAvatars avatarSrc={this.state.avatar_src} isList='false'/>
+        return <ImageAvatars avatarSrc={this.state.profile.image} isList='false'/>
     }
 
     formatSetting() {

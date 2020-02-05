@@ -64,10 +64,11 @@ class ChannelInfo extends Component {
                         <ChannelInfoSettingButton canEdit={localStorage.getItem("username") === this.props.info.creator_username}
                                                   followers={this.props.followers}
                                                   authors={this.props.authors}
+                                                  editAuthors={this.props.info.authors}
                                                   linkClass={classes.link}/>
                     }
-                    title={this.props.info.title}
-                    subheader={"followers: "+this.props.followers.length}
+                    title={<h5>{this.props.info.title}</h5>}
+                    subheader={"subject: "+this.props.info.subject+"\nfollowers: "+this.props.followers.length}
                 />
                 <CardMedia
                     image="/static/images/cards/paella.jpg"

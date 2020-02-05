@@ -43,6 +43,11 @@ const styles = theme => (
             "&:focus": {
                 outline: "none",
             }
+        },
+        card:{
+            backgroundColor: "rgb(240,240,240)",
+            marginBottom:"20px",
+            padding:"10px",
         }
     }
 );
@@ -55,7 +60,7 @@ class PostCard extends Component {
         const {classes} = this.props;
         console.log(this.props.postSummary)
         return (
-            <Card className="mt-3 w-100">
+            <Card className={classes.card}>
                 <CardHeader
                     avatar={
                         <Avatar src={this.randomAvatarImage()} aria-label="recipe">

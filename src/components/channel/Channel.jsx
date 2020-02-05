@@ -67,6 +67,7 @@ class Channel extends Component {
             console.log("POSTTTSSSSS")
             console.log(data)
             var tmp=[]
+            data.posts.reverse();
             for(let i=0;i<data.posts.length;i++){
                 var post=data.posts[i];
                 tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
@@ -125,11 +126,11 @@ class Channel extends Component {
         .then(function(data) {
             console.log("POSTTTSSSSS")
             console.log(data)
+            currentComponent.getInfo();
         })
         .catch(function(err){
             console.log(err);
         })
-        this.getInfo();
     }
 
     unfollow(){
@@ -151,11 +152,11 @@ class Channel extends Component {
         .then(function(data) {
             console.log("POSTTTSSSSS")
             console.log(data)
+            currentComponent.getInfo();
         })
         .catch(function(err){
             console.log(err);
         })
-        this.getInfo();
     }
 
     handleLikePost(postId) {
