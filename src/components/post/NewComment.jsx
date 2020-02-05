@@ -22,7 +22,9 @@ const styles = theme => (
 
 
 class NewComment extends Component {
+    insert() {
 
+    }
 
     render() {
         return (
@@ -38,7 +40,8 @@ class NewComment extends Component {
                                    defaultValue={this.checkComment()}
                         />
                         <div className="d-flex justify-content-center w-100">
-                            <Button className="m-2 w-100" type='submit' color='primary' variant='contained'>
+                            <Button className="m-2 w-100" type='submit' color='primary' variant='contained'
+                                    onClick={this.insert}>
                                 Insert
                             </Button>
                         </div>
@@ -48,8 +51,8 @@ class NewComment extends Component {
         );
     }
 
-    checkComment(){
-        if (this.props.comment){
+    checkComment() {
+        if (this.props.comment) {
             return this.props.comment;
         }
         return ''
