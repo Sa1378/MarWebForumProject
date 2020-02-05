@@ -57,9 +57,11 @@ class PostPage extends Component {
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
     }
-    componentDidMount(): void {
-        fetch("http://localhost:8000/", {
-            method: "POST",
+
+    componentDidMount() {
+        console.log("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222")
+        fetch("http://localhost:8000/post/post-view/" + this.props.match.params.name, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -71,15 +73,95 @@ class PostPage extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-
+            console.log("---------")
+            console.log(data)
+            console.log("---------")
         }).catch(function (error) {
             console.log(error)
         })
     }
 
+    likePost() {
+
+    }
+
+    disLikePost() {
+
+    }
+
+    likeComment() {
+
+    }
+
+    disLikeComment() {
+
+    }
+
+    insertComment() {
+
+    }
+
+    replyComment() {
+
+    }
+
+    editPost() {
+
+    }
+
+    deletePost() {
+
+    }
+
+    editComment() {
+
+    }
+
+    deleteComment() {
+
+    }
+
+
     state = {
-        post: null,
-        comments: [],
+        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit'},
+        comments: [
+            {
+                id: 1,
+                message: 'First Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'alireza',
+                loggedInUser: 'alireza',
+                liked: true,
+                disliked: false
+            },
+            {
+                id: 2,
+                message: 'Second Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'reza',
+                loggedInUser: 'alireza',
+                liked: false,
+                disliked: true
+            },
+            {
+                id: 3,
+                message: 'Third Comment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'mehrdad',
+                loggedInUser: 'alireza',
+                liked: false,
+                disliked: false
+            },
+            {
+                id: 4,
+                message: 'Fourth df;askdf;askdb\nComment',
+                avatar_src: 'src/static/images/wallpaper4.jpg',
+                name: 'alireza',
+                loggedInUser: 'alireza',
+                liked: true,
+                disliked: false
+            },
+        ],
     };
 
 
@@ -89,6 +171,7 @@ class PostPage extends Component {
     };
 
     handleLikeComment(commentId) {
+        this.likeComment();
         const postCards = [];
         this.state.comments.forEach(function (comment) {
             if (commentId === comment.id) {
@@ -103,6 +186,7 @@ class PostPage extends Component {
     }
 
     handleDisLikeComment(commentId) {
+        this.disLikeComment();
         const postCards = [];
         this.state.comments.forEach(function (comment) {
             if (commentId === comment.id) {
@@ -117,15 +201,18 @@ class PostPage extends Component {
     }
 
     handleLikePost(postId) {
+        this.likePost();
         const post = this.state.post;
         post.liked = !post.liked;
         if (post.disliked) {
             post.disliked = !post.disliked;
         }
         this.setState({post: post});
+        this.likeDisLikePost()
     }
 
     handleDisLikePost(postId) {
+        this.disLikePost();
         const post = this.state.post;
         post.disliked = !post.disliked;
         if (post.liked) {
