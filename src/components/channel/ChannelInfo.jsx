@@ -27,28 +27,26 @@ const styles = theme => (
 class ChannelInfo extends Component {
 
     state = {
-        follower: [
-            {
-                username: 'follower1',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower2',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower3',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower4',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower5',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }, {
-                username: 'follower6',
-                avatar_src: 'src/static/images/avatar/download.jpeg'
-            }
-        ],
+        followed:false,
     };
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps==this.props)return ;
+        this.checkFollowedState();
+        
+    }
+
+    checkFollowedState(){
+        for(let i=0;i<this.props.info.followers_channel.length;i++){
+            console.log("||||||||||||||||||||||||||||||||||||")
+            console.log(this.props.info.followers_channel[i].source_name)
+            if(this.props.info.followers_channel[i].source_name==localStorage.getItem("username")){
+                this.setState({followed:true});
+                break;
+            }
+        }
+        console.log("dskskdjksdksadksadksdak "+this.state.followed)
+    }
 
 
     render() {
@@ -62,11 +60,11 @@ class ChannelInfo extends Component {
                         </Avatar>
                     }
                     action={
-                        <ChannelInfoSettingButton canEdit={this.props.loggedInUser === this.props.channelFounder}
+                        <ChannelInfoSettingButton canEdit={localStorage.getItem("username") === this.props.info.creator_username}
                                                   followers={this.state.follower} linkClass={classes.link}/>
                     }
                     title="Channel Info"
-                    subheader="Alireza Channel"
+                    subheader={this.props.info.title}
                 />
                 <CardMedia
                     image="/static/images/cards/paella.jpg"
@@ -74,13 +72,12 @@ class ChannelInfo extends Component {
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        This impressive paella is a perfect party dish and a fun meal to cook together with your
-                        guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                        {this.props.info.description}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton className={classes.link} aria-label={this.followOrUnFollowLabel(false)}>
-                        {this.followOrUnFollowIcon(false)}
+                        {this.followOrUnFollowIcon()}
                     </IconButton>
                     <IconButton className={classes.link} aria-label="share">
                         <ShareIcon color={"primary"}/>
@@ -97,9 +94,11 @@ class ChannelInfo extends Component {
         return "UnFollow";
     }
 
-    followOrUnFollowIcon(followed) {
+    followOrUnFollowIcon() {
+        var followed=this.state.followed;
+        console.log("FOLOOWWEDDD: "+followed)
         if (followed) {
-            return <RemoveCircleIcon color={"primary"}/>
+            return <RemoveCircleIcon color={"secondary"}/>
         }
         return <AddCircleIcon color={"primary"}/>
     }

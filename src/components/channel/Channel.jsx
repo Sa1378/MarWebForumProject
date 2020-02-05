@@ -11,124 +11,76 @@ class Channel extends Component {
         super(props);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.props.refreshToken();
+    }
+
+    componentWillMount(){
+        this.getInfo();
+        this.getPostCards();
+    }
+
+    getInfo(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/channel/channel/'+this.props.match.params.channelId,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("INFOOOOOOOOOOOOOOOOO")
+            console.log(data)
+            currentComponent.setState({info:data.channel})
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
+    getPostCards(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/post/channelposts/'+this.props.match.params.channelId,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("POSTTTSSSSS")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<data.posts.length;i++){
+                var post=data.posts[i];
+                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
+            }
+            console.log(tmp);
+            currentComponent.setState({postCards:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
     }
 
 
     state = {
-        postCards: [
-            {
-                id: 1,
-                author: 'alireza',
-                title: 'Hello World',
-                postSummary: 'this message is bullshit\nasfjasfjasf ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 2,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit\nlsakfja;lskdjf;alksjdf;lasjf ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 3,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 4,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 5,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 6,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: false
-            },
-            {
-                id: 7,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 8,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 9,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 10,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 11,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 12,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 13,
-                author: 'alireza',
-                title: 'Bye World',
-                postSummary: 'this message is not bullshit ',
-                liked: false,
-                disliked: false
-            },
-
-        ],
-        channels: [
-            {id: 1, creator: 'alireza', title: 'MarWeb studio'},
-            {id: 2, creator: 'alireza', title: 'MarWeb studio'},
-            {id: 3, creator: 'alireza', title: 'MarWeb studio'},
-            {id: 4, creator: 'alireza', title: 'MarWeb studio'},
-            {id: 5, creator: 'alireza', title: 'MarWeb studio'},
-        ],
+        postCards: [],
+        info:{followers_channel:[]},
         offset: 0,
         accounts: [
             'alireza',
@@ -184,16 +136,13 @@ class Channel extends Component {
         return (
             <Container className="d-flex justify-content-center">
                 <Container>
-                    <ChannelInfo loggedInUser={this.state.loggedInUser} channelFounder={this.state.channelFounder}/>
+                    <ChannelInfo info={this.state.info}/>
                 </Container>
                 <Container className="">
                     <PostList onDisLike={this.handleDisLikePost}
                               onLike={this.handleLikePost}
                               postListStyle={this.postListStyle}
                               postCards={this.state.postCards}/>
-                </Container>
-                <Container>
-                    <ChannelsList channels={this.state.channels}/>
                 </Container>
                 <Container>
                     <CreateChannelButton accounts={this.state.accounts}/>

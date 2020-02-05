@@ -34,7 +34,7 @@ class NewPost extends Component {
 
     componentWillMount() {
         let currentComponent = this;
-        fetch('http://localhost:8000/channel/channels', {
+        fetch('http://localhost:8000/channel/channels/'+localStorage.getItem("username"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
