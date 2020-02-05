@@ -16,6 +16,7 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import PeopleIcon from '@material-ui/icons/People';
 import TransitionsModal from "../TransitionsModal";
 import Button from '@material-ui/core/Button';
+import {bindHover, bindPopper} from "material-ui-popup-state/core";
 
 
 const styles = theme => ({
@@ -128,22 +129,23 @@ class Header extends Component {
     }
 
     clickNotif() {
-        // this.sendRequest(this)
-        // fetch("http://localhost:8000/notificatioan/seen-notifications", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Access-Control-Origin": "*",
-        //         'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        //     }
-        // }).then(function (response) {
-        //     if (response.ok) {
-        //     }
-        //     throw new Error("Server Error!");
-        // }).catch(function (error) {
-        //     console.log(error)
-        // })
-        // this.setState({badgeContent: 0})
+        console.log("hi")
+        this.sendRequest(this);
+        fetch("http://localhost:8000/notification/seen", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+            }
+            throw new Error("Server Error!");
+        }).catch(function (error) {
+            console.log(error)
+        })
+        this.setState({badgeContent: 0})
     }
 
     componentDidMount() {
@@ -159,8 +161,10 @@ class Header extends Component {
             }
         });
         let myThis = this;
-        setInterval(() => this.sendRequest(myThis), 1000);
+        setInterval(() => this.sendRequest(myThis), 10000);
+
         setInterval(this.props.refreshToken, 240000);
+
     }
 
     sendRequest(myThis) {
@@ -177,7 +181,7 @@ class Header extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-            myThis.setState({notifications: data.notifications})
+            myThis.setState({notifications: data.notifications});
             myThis.setState({badgeContent: data.notifications.length})
 
         }).catch(function (error) {
@@ -244,13 +248,15 @@ class Header extends Component {
                                     <TransitionsModal content="newpost" buttonName="new post" variant="contained"
                                                       refreshToken={this.props.refreshToken}/>
                                 </div>
-                                <IconButton aria-label="show new notifications" color="inherit"
-                                            className={classes.icon} {...bindTrigger(popupState)}
-                                            >
-                                    <Badge badgeContent={this.state.badgeContent} color="secondary" id="notifBadge">
-                                        <NotificationsIcon/>
-                                    </Badge>
-                                </IconButton>
+                                <div onClick={this.clickNotif} className="d-inline">
+                                    <IconButton aria-label="show new notifications" color="inherit"
+                                                className={classes.icon} {...bindTrigger(popupState)}
+                                    >
+                                        <Badge badgeContent={this.state.badgeContent} color="secondary" id="notifBadge">
+                                            <NotificationsIcon/>
+                                        </Badge>
+                                    </IconButton>
+                                </div>
                                 <Popover
                                     {...bindPopover(popupState)}
                                     anchorOrigin={{
@@ -262,6 +268,7 @@ class Header extends Component {
                                         horizontal: 'right',
                                     }}
                                 >
+
 
                                     {this.state.notifications.map(item => (
                                         <Box p={2} className={classes.notifBox} onClick={() => {

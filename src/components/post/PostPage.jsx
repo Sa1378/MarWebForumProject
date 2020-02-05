@@ -57,47 +57,29 @@ class PostPage extends Component {
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
     }
+    componentDidMount(): void {
+        fetch("http://localhost:8000/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+
+        }).catch(function (error) {
+            console.log(error)
+        })
+    }
 
     state = {
-        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit', liked: true, disliked: false},
-        comments: [
-            {
-                id: 1,
-                message: 'First Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'alireza',
-                loggedInUser: 'alireza',
-                liked: true,
-                disliked: false
-            },
-            {
-                id: 2,
-                message: 'Second Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'reza',
-                loggedInUser: 'alireza',
-                liked: false,
-                disliked: true
-            },
-            {
-                id: 3,
-                message: 'Third Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'mehrdad',
-                loggedInUser: 'alireza',
-                liked: false,
-                disliked: false
-            },
-            {
-                id: 4,
-                message: 'Fourth df;askdf;askdb\nComment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'alireza',
-                loggedInUser: 'alireza',
-                liked: true,
-                disliked: false
-            },
-        ],
+        post: null,
+        comments: [],
     };
 
 
@@ -222,7 +204,7 @@ class PostPage extends Component {
                                     className={classes.link} aria-label="share">
                                     <ShareIcon/>
                                 </IconButton>
-                                <Badge badgeContent={120} color={'primary'} >
+                                <Badge badgeContent={120} color={'primary'}>
                                     <ScoreIcon/>
                                 </Badge>
                             </CardActions>
