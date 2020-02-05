@@ -40,7 +40,7 @@ class ChannelInfoAsListItem extends Component {
                                 style={this.inlineStyle}
                                 color="textPrimary"
                             >
-                                <Link style={{...this.linkStyle, ...this.channelName}} to={'/channel/' + this.props.channel.title}>
+                                <Link style={{...this.linkStyle, ...this.channelName}} to={'/channel/' + this.props.channel.id}>
                                     {this.props.channel.title}
                                 </Link>
                             </Typography>
