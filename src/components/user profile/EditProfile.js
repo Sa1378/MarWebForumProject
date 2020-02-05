@@ -5,13 +5,19 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornments from "../Password";
+import {withStyles} from '@material-ui/core/styles';
+import '../../static/css/material.css'
+
+const styles = theme => ({
+});
 
 class EditProfile extends Component {
     render() {
+        const {classes}=this.props;
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <Container maxWidth="lg">
+                <Container  className={classes.outline}>
                     <Typography component="div" style={{backgroundColor: 'white', height: '50vh'}}>
                         <form autoComplete="on">
                             <div className="p-3">
@@ -58,4 +64,4 @@ class EditProfile extends Component {
 
 }
 
-export default EditProfile;
+export default withStyles(styles)(EditProfile);

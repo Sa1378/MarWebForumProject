@@ -14,12 +14,16 @@ class ChannelInfoAsListItem extends Component {
     };
     linkStyle = {
         textDecoration: "none",
-        color: "black",
+        color: "gray",
         "&:hover": {
             color: "white",
             textDecoration: "none",
         }
     };
+    channelName={
+        color:"black",
+        fontSize:"20px",
+    }
 
     render() {
         return (
@@ -28,7 +32,20 @@ class ChannelInfoAsListItem extends Component {
                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg"/>
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.channel.title}
+                    primary={
+                        <React.Fragment>
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                style={this.inlineStyle}
+                                color="textPrimary"
+                            >
+                                <Link style={{...this.linkStyle, ...this.channelName}} to={'/channel/' + this.props.channel.title}>
+                                    {this.props.channel.title}
+                                </Link>
+                            </Typography>
+                        </React.Fragment>
+                    }
                     secondary={
                         <React.Fragment>
                             <Typography

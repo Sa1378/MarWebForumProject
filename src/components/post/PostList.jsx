@@ -7,6 +7,7 @@ class PostList extends Component {
 
 
     render() {
+       // console.log(this.props.postCards[0].summary)
         return (
             <GridList style={this.props.postListStyle}>
                 {this.props.postCards.map(postCard => (
@@ -15,7 +16,7 @@ class PostList extends Component {
                               postCard={postCard}
                               key={postCard.id}
                               title={postCard.title}
-                              postSummary={postCard.summary}/>
+                              postSummary={postCard.postSummary}/>
                 ))}
             </GridList>
         )

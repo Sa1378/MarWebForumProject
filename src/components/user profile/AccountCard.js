@@ -3,6 +3,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
+import {withStyles} from '@material-ui/core/styles'
 import Typography from "@material-ui/core/Typography";
 import img from '../../static/images/avatar/download.jpeg'
 import img3 from '../../static/images/avatar/download.jpeg'
@@ -14,20 +15,37 @@ import img8 from '../../static/images/avatar/photo_2020-01-02_22-02-06.jpg'
 import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
 import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
 import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
+
+const styles = {
+    item: {
+        cursor:"pointer",
+    }
+}
+
+
 class AccountCard extends Component {
+    constructor(props){
+        super(props);
+        this.openProfile=this.openProfile.bind(this);
+    }
 
     inlineStyle = {
         display: 'inline',
     };
 
+    openProfile(){
+        window.location.href="/profile/"+this.props.user.username;
+    }
+
     render() {
+        const {classes} = this.props;
         return (
             <div className='d-flex justify-content-around'>
-                <ListItem style={{width: '150%'}}>
+                <ListItem style={{width: '150%'}} className={classes.item}>
                     <ListItemAvatar>
                         <Avatar alt="User" src={this.randomAvatarImage()}/>
                     </ListItemAvatar>
-                    <ListItemText
+                    <ListItemText onClick={this.openProfile}
                         primary={this.props.user.username}
                         secondary={
                             <React.Fragment>
@@ -71,4 +89,4 @@ class AccountCard extends Component {
 
 }
 
-export default AccountCard;
+export default withStyles(styles)(AccountCard);

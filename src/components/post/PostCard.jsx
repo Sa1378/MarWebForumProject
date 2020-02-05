@@ -53,6 +53,7 @@ class PostCard extends Component {
 
     render() {
         const {classes} = this.props;
+        console.log(this.props.postSummary)
         return (
             <Card className="mt-3 w-100">
                 <CardHeader
