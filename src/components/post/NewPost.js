@@ -22,7 +22,6 @@ class NewPost extends Component {
 
     constructor(props) {
         super(props);
-        this.props.refreshToken();
         this.createPost = this.createPost.bind(this);
         //    this.changePlace=this.changePlace.bind(this);
     }

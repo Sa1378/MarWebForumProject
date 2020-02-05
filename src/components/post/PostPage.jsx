@@ -177,7 +177,6 @@ class PostPage extends Component {
             post.disliked = !post.disliked;
         }
         this.setState({post: post});
-        this.likeDisLikePost()
     }
 
     handleDisLikePost(postId) {
@@ -206,8 +205,8 @@ class PostPage extends Component {
 
                                     <EditDeletePost post={this.state.post}/>
                                 }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
+                                title={this.state.post.title}
+                                subheader={this.state.post.create_date}
                             />
                             <CardMedia
                                 image="../../static/images/cards/wallpaper4.jpg"
@@ -239,6 +238,7 @@ class PostPage extends Component {
                         {this.state.comments.map(comment => <Comment
                             key={comment.id}
                             comment={comment}
+                            post={this.state.post}
                             onLike={this.handleLikeComment}
                             onDisLike={this.handleDisLikeComment}
                         />)}
@@ -253,11 +253,11 @@ class PostPage extends Component {
     }
 
     randomImage() {
-        return <img src={this.state.post.media} width={'100%'} alt="Can't be shown."/>
+        return <img src={this.state.post.media} width={'100%'} alt={"HI"}/>
     }
 
     randomAvatarImage() {
-        return this.state.post.media
+        return this.state.post.profile_image
     }
 
 }

@@ -30,7 +30,6 @@ import Badge from "@material-ui/core/Badge/Badge";
 import ScoreIcon from '@material-ui/icons/Score';
 
 
-
 const styles = theme => (
     {
         link: {
@@ -96,7 +95,7 @@ class Comment extends Component {
                                             onDisLike={this.props.onDisLike}
                                             postCard={this.props.comment}/>
                         <TransitionsModal content="post" buttonName="reply"/>
-                        <Badge badgeContent={120} color={'primary'} >
+                        <Badge badgeContent={120} color={'primary'}>
                             <ScoreIcon/>
                         </Badge>
                     </CardActions>
@@ -117,7 +116,7 @@ class Comment extends Component {
     }
 
     randomAvatarImage() {
-      return this.props.comment.media
+        return this.props.comment.profile_image
     }
 }
 
