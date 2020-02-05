@@ -160,7 +160,7 @@ class Header extends Component {
         });
         let myThis = this;
         setInterval(() => this.sendRequest(myThis), 1000);
-
+        setInterval(this.props.refreshToken, 240000);
     }
 
     sendRequest(myThis) {

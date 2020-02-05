@@ -43,8 +43,12 @@ class App extends Component {
             throw new Error();
         })
         .then(function(data){
-            console.log(data)
+            console.log("||||||||||||||||||||||||||||||||||||||||")
+            console.log(data.access)
+            console.log(localStorage.getItem("access-token"))
+            if(localStorage.getItem("access-token")==data.access)return 
             localStorage.setItem("access-token",data.access)
+        //    window.location.reload();
         })
         .catch(function(){
             console.log("change page")

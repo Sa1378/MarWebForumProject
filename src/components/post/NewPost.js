@@ -138,71 +138,38 @@ class NewPost extends Component {
     }
 
     createPost() {
-        var userId;
         var currentComponent = this;
-        fetch('http://localhost:8000/account/profile/' + localStorage.getItem("username"), {
-            method: "GET",
+        const formData = new FormData();
+        formData.append('title', document.getElementById("title").value)
+        formData.append('user', parseInt(localStorage.getItem("userId")))
+        formData.append('channel', parseInt(currentComponent.state.value))
+        formData.append('body', document.getElementById("content").value)
+        formData.append('media', document.getElementById("media").files[0])
+        console.log(formData.get("title"))
+        console.log(document.getElementById("title").value)
+        //console.log(data);
+        //console.log(JSON.stringify(data))
+        fetch('http://localhost:8000/post/post-view', {
+            method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-            }
+            },
+            body: formData
         })
-            .then(function (response) {
-                console.log(response)
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error("Server Error!");
-            })
-            .then(function (data) {
-                console.log(data)
-                userId = data.user.id
-            })
-            .then(function () {
-                var data = {
-                    title: document.getElementById("title").value,
-                    user: userId,
-                    channel: parseInt(currentComponent.state.value),
-                    body: document.getElementById("content").value,
-                }
-                const formData = new FormData();
-                formData.append('title', document.getElementById("title").value)
-                formData.append('user', userId)
-                formData.append('channel', parseInt(currentComponent.state.value))
-                formData.append('body', document.getElementById("content").value)
-                formData.append('media', document.getElementById("media").files[0])
-                console.log(formData.get("title"))
-                console.log(document.getElementById("title").value)
-                //console.log(data);
-                //console.log(JSON.stringify(data))
-                fetch('http://localhost:8000/post/post-view', {
-                    method: "POST",
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-                    },
-                    body: formData
-                })
-                    .then(function (response) {
-                        console.log(response)
-                        if (response.ok) {
-                            return response.json();
-                        }
-                        throw new Error("Server Error!");
-                    })
-                    .then(function (data) {
-                        console.log(data);
-                        window.location.href = "/";
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                    })
-            })
-            .catch(function (err) {
-                //TODO
-                console.log(err);
-            })
-
+        .then(function (response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function (data) {
+            console.log(data);
+            window.location.href = "/";
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
 
     }
 

@@ -32,15 +32,42 @@ class SignIn extends Component {
                 return response.json();
             }
             alert("Your Username or Password are incorrect!")
-            return response.json();
+            throw new Error("Server Error!");
         })
         .then(function(data){
             console.log(data)
             localStorage.setItem("refresh-token",data.refresh)
             localStorage.setItem("access-token",data.access)
             localStorage.setItem("username",document.getElementById("username").value)
+            fetch('http://localhost:8000/account/profile/' + localStorage.getItem("username"), {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+                }
+            })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log(data)
+                localStorage.setItem("userId",data.user.id); 
+            })
+            .catch(function (err) {
+                //TODO
+                console.log(err);
+            })
             window.location.href="/"
-        });
+        })
+        .catch(function (err) {
+            //TODO
+            console.log(err);
+        })
     }
 
     render() {

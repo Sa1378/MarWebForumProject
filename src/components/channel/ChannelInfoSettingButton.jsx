@@ -47,7 +47,7 @@ export default function ChannelInfoSettingButton(props) {
                 <MenuItem disabled={!props.canEdit} onClick={handleClose}>Edit</MenuItem>
                 <TransitionsModal accounts={props.followers} onClose={handleClose} buttonName="subscribers"/>
                 {/*<MenuItem onClick={handleClose}>Subscribers</MenuItem>*/}
-                <MenuItem onClick={handleClose}>Authors</MenuItem>
+                <TransitionsModal accounts={props.authors} onClose={handleClose} buttonName="authors"/>
             </Menu>
         </div>
     );
