@@ -131,7 +131,7 @@ class Header extends Component {
     clickNotif() {
         console.log("hi")
         this.sendRequest(this);
-        fetch("http://localhost:8000/notificatioan/seen-notifications", {
+        fetch("http://localhost:8000/notification/seen", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
