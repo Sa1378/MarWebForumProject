@@ -96,7 +96,7 @@ class Comment extends Component {
         const {classes} = this.props;
         if (loggedInUser === name) {
             return (
-                <EditDeleteComment comment={this.state.message}/>
+                <EditDeleteComment comment={this.props.comment}/>
             )
         } else {
             return null;

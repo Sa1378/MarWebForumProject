@@ -25,11 +25,11 @@ class DeletePostAlert extends Component {
         })
     }
 
-    url(){
-        if (this.props.isPost === true){
+    url() {
+        if (this.props.isPost === true) {
             return "http://localhost:8000/post/delete-action/" + this.props.id
-        }else {
-            return "http://localhost:8000/post/delete-action/"
+        } else {
+            return "http://localhost:8000/post/delete-action/" + this.props.id + "/" + this.props.comment_id
         }
     }
 
@@ -43,8 +43,6 @@ class DeletePostAlert extends Component {
             </React.Fragment>
         );
     }
-
-
 
 
 }
