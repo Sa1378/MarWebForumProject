@@ -187,7 +187,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'editComment') {
             return <NewComment comment={props.comment}/>
         } else if (props.buttonName === 'deleteComment') {
-            return <DeletePostAlert id={props.comments.target_id}/>
+            return <DeletePostAlert comment_id={props.comments.target_id} id={props.post.target_id}/>
         }
     }
 }

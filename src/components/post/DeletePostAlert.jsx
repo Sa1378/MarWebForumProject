@@ -6,7 +6,7 @@ class DeletePostAlert extends Component {
 
     deleteComment() {
         let myThis = this;
-        fetch("http://localhost:8000/post/delete-comment/" , {
+        fetch("http://localhost:8000/post/delete-comment/" + myThis.id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

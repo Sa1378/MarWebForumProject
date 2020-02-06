@@ -7,8 +7,8 @@ class EditDeleteComment extends Component {
     render() {
         return (
             <React.Fragment>
-                <TransitionsModal post={this.props.comment} buttonName="editComment"/>
-                <TransitionsModal buttonName="deleteComment"/>
+                <TransitionsModal comment={this.props.comment} post={this.props.post} buttonName="editComment"/>
+                <TransitionsModal comment={this.props.comment} post={this.props.post} buttonName="deleteComment"/>
             </React.Fragment>
         );
     }
