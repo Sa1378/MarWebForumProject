@@ -6,24 +6,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
 import TransitionsModal from "../TransitionsModal";
 import {Link} from "react-router-dom";
-import img3 from '../../static/images/avatar/download.jpeg'
-import img4 from '../../static/images/avatar/photo_2020-01-02_22-01-43.jpg'
-import img5 from '../../static/images/avatar/photo_2020-01-02_22-01-52.jpg'
-import img6 from '../../static/images/avatar/photo_2020-01-02_22-01-58.jpg'
-import img7 from '../../static/images/avatar/photo_2020-01-02_22-02-02.jpg'
-import img8 from '../../static/images/avatar/photo_2020-01-02_22-02-06.jpg'
-import img9 from '../../static/images/avatar/photo_2020-01-02_22-02-11.jpg'
-import img10 from '../../static/images/avatar/photo_2020-01-02_22-02-15.jpg'
-import img11 from '../../static/images/avatar/photo_2020-01-02_22-02-19.jpg'
-import img from "../../static/images/cards/wallpaper4.jpg";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import EditDeleteComment from "./EditDeleteComment";
 import Badge from "@material-ui/core/Badge/Badge";
@@ -94,7 +82,8 @@ class Comment extends Component {
                                             onLike={this.props.onLike}
                                             onDisLike={this.props.onDisLike}
                                             postCard={this.props.comment}/>
-                        <TransitionsModal content="post" buttonName="reply"/>
+                        <TransitionsModal content="post" buttonName="reply" postPage={this.props.postPage}
+                                          comment={this.props.comment}/>
                         <Badge badgeContent={120} color={'primary'}>
                             <ScoreIcon/>
                         </Badge>
@@ -108,7 +97,7 @@ class Comment extends Component {
         const {classes} = this.props;
         if (loggedInUser === name) {
             return (
-                <EditDeleteComment comment={this.state.message}/>
+                <EditDeleteComment comment={this.props.comment} postPage={this.props.postPage}/>
             )
         } else {
             return null;
