@@ -6,8 +6,8 @@ class DeletePostAlert extends Component {
 
     deleteComment() {
         let myThis = this;
-        fetch("http://localhost:8000/post/delete-comment/" + myThis.id, {
-            method: "GET",
+        fetch(this.url(), {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -25,6 +25,14 @@ class DeletePostAlert extends Component {
         })
     }
 
+    url(){
+        if (this.props.isPost === true){
+            return "http://localhost:8000/post/delete-action/" + this.props.id
+        }else {
+            return "http://localhost:8000/post/delete-action/"
+        }
+    }
+
 
     render() {
         return (
@@ -35,6 +43,8 @@ class DeletePostAlert extends Component {
             </React.Fragment>
         );
     }
+
+
 
 
 }
