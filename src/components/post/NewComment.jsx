@@ -32,16 +32,19 @@ class NewComment extends Component {
     insert() {
         const data = new FormData();
         let myThis = this;
+        console.log(document.getElementById("body").value);
+
         data.append('body', document.getElementById("body").value);
-        data.append('post_related', this.postPage);
+        data.append('post_related', parseInt(this.props.postPage));
+        // console.log(this.postPage)
         if (this.props.comment)
             data.append('comment_id', this.props.comment.target_id);
-        data.append('media', ((document.getElementById("media").files[0] === "") ? null : document
-            .getElementById("image").files[0]));
+        data.append('media', ((document.getElementById("media").files[0] == "") ? null : document
+            .getElementById("media").files[0]));
         fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "multipart/form-data",
                 "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
@@ -78,7 +81,7 @@ class NewComment extends Component {
                                     variant="contained"
                                     component="label"
                             >
-                                Post Image
+                                Image
                                 <input
                                     type="file"
                                     id='media'
@@ -99,6 +102,8 @@ class NewComment extends Component {
     }
 
     checkComment() {
+        if (this.props.isEdit)
+            return '';
         if (this.props.comment) {
             return this.props.comment.body;
         }
@@ -106,9 +111,6 @@ class NewComment extends Component {
     }
 
     replyTo() {
-        if (this.props.comment) {
-            return "http://localhost:8000/post/insert-comment"
-        }
         return "http://localhost:8000/post/insert-comment"
     }
 
