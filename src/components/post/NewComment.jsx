@@ -26,7 +26,7 @@ class NewComment extends Component {
         let myThis = this;
         console.log("NEW COMMENT" + this.props.postPage);
         fetch("http://localhost:8000/post/insert-comment/" + myThis.replyTo(), {
-            method: "POST",
+            method: myThis.typeOfRequest(),
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -83,6 +83,13 @@ class NewComment extends Component {
             return "http://localhost:8000/post/insert-comment/" + this.postPage + "/" + this.props.comment.target_id
         }
         return "http://localhost:8000/post/insert-comment/" + this.postPage
+    }
+
+    typeOfRequest() {
+        if (this.props.isEdit) {
+            return "PUT"
+        }
+        return "POST"
     }
 
 
