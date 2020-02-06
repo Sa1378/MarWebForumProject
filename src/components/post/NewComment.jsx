@@ -30,9 +30,14 @@ class NewComment extends Component {
     }
 
     insert() {
+        const data = new FormData();
         let myThis = this;
-        console.log("NEW COMMENT");
-        let data = document.getElementById("body").value;
+        data.append('body', document.getElementById("body").value);
+        data.append('post_related', this.postPage);
+        if (this.props.comment)
+            data.append('comment_id', this.props.comment.target_id);
+        data.append('media', ((document.getElementById("media").files[0] === "") ? null : document
+            .getElementById("image").files[0]));
         fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
@@ -40,7 +45,7 @@ class NewComment extends Component {
                 "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
-            body: JSON.stringify(data),
+            body: data,
         }).then(function (response) {
             if (response.ok) {
                 return response.json()
@@ -68,6 +73,19 @@ class NewComment extends Component {
                                    multiline
                                    defaultValue={this.checkComment()}
                         />
+                        <div className="m-3 form-group d-flex justify-content-center">
+                            <Button className='mx-1'
+                                    variant="contained"
+                                    component="label"
+                            >
+                                Post Image
+                                <input
+                                    type="file"
+                                    id='media'
+                                    style={{display: "none"}}
+                                />
+                            </Button>
+                        </div>
                         <div className="d-flex justify-content-center w-100">
                             <Button className="m-2 w-100" color='primary' variant='contained'
                                     onClick={this.insert}>
@@ -89,9 +107,9 @@ class NewComment extends Component {
 
     replyTo() {
         if (this.props.comment) {
-            return "http://localhost:8000/post/insert-comment/" + this.props.comment.target_id
+            return "http://localhost:8000/post/insert-comment"
         }
-        return "http://localhost:8000/post/insert-comment/" + this.postPage
+        return "http://localhost:8000/post/insert-comment"
     }
 
     typeOfRequest() {
