@@ -117,17 +117,7 @@ class PostPage extends Component {
 
     state = {
         post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit'},
-        comments: [
-            {
-                id: 1,
-                message: 'First Comment',
-                avatar_src: 'src/static/images/wallpaper4.jpg',
-                name: 'alireza',
-                loggedInUser: 'alireza',
-                liked: true,
-                disliked: false
-            }
-        ],
+        comments: [],
     };
 
 

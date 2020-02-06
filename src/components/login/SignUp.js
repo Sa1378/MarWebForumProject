@@ -2,11 +2,26 @@ import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import InputAdornments from "../Password";
 import Button from "@material-ui/core/Button";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 
 class SignUp extends Component {
 
+    constructor(props){
+        super(props);
+        this.singupClick=this.singupClick.bind(this);
+    }
+
+    state={
+        signupSuccess:false,
+        signupFail:false,
+        errors:"",
+        errorsNum:0
+    }
+
     singupClick(){
+        var currentComponent=this;
         var data={'email':document.getElementById("email").value,
                     'username':document.getElementById("username").value,
                     'password':document.getElementById("password").value,
@@ -23,29 +38,57 @@ class SignUp extends Component {
         })
         .then(function(response){ 
             console.log(response)
-            if(response.status=="200"){
+            if(response.ok){
+                currentComponent.setState({signupSuccess:true});
                 window.location.href = "/login";
-                return ;
             }
-            return response.json();
+            else{
+                return response.json();
+            }
         })
         .then(function(data){
             console.log(data)
-            alert(data.detail)
-
+            var errorsNum=0;
+            var str=""
+            var errors=["username","age","telephone_number","email","password","repeat_password"]
+            for(let i=0;i<errors.length;i++){
+                var error=errors[i];
+                if(data.detail.includes(error)){
+                    if(str.length)str+=", ";
+                    str+=error;
+                    errorsNum++;
+                }
+            }
+            currentComponent.setState({signupFail:true,errors:str,errorsNum:errorsNum});
         });
     }
 
     render() {
+        const handleClose = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            this.setState({signupSuccess:false,signupFail:false,errors:"",errorsNum:0})
+        }
         return (
             <React.Fragment>
+                <Snackbar open={this.state.signupSuccess} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Your account was singed up successfully!
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={this.state.signupFail} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        Your {this.state.errors} {(this.state.errorsNum>1)?"are":"is"} invalid!
+                    </Alert>
+                </Snackbar>
                 <div className="d-flex flex-column justify-content-around my-5">
                     <TextField className="mx-5 my-2" id="firstName" label="First Name" variant="outlined"/>
                     <TextField className="mx-5 my-2" id="lastName" label="Last Name" variant="outlined"/>
                     <TextField className="mx-5 my-2" id="username" label="User Name" variant="outlined"/>
                     <TextField className="mx-5 my-2" type="number" id="age" label="Age"
                                variant="outlined"/>
-                    <TextField className="mx-5 my-2" type="number" id="telephoneNumber" label="telephone number"
+                    <TextField className="mx-5 my-2" type="number" id="telephoneNumber" label="Telephone Number"
                                variant="outlined"/>
                     <TextField className="mx-5 my-2" type="email" id="email" label="E-mail"
                                variant="outlined"/>

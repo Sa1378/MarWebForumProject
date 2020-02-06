@@ -72,7 +72,8 @@ class Channel extends Component {
             data.posts.reverse();
             for(let i=0;i<data.posts.length;i++){
                 var post=data.posts[i];
-                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
+                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
+                        postMedia:post.media});
             }
             console.log(tmp);
             currentComponent.setState({postCards:tmp});
