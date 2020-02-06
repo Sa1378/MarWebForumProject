@@ -105,12 +105,12 @@ class PostPage extends Component {
     }
 
     likeComment(target_id) {
-        let url = "http://localhost:8000/post/like/" + target_id;
+        let url = "http://localhost:8000/post/like/" + this.props.match.params.name + "/" + target_id;
         this.sendPostRequest(url)
     }
 
     disLikeComment(target_id) {
-        let url = "http://localhost:8000/post/like/" + target_id;
+        let url = "http://localhost:8000/post/like/" + this.props.match.params.name + "/" + target_id;
         this.sendPostRequest(url)
     }
 
