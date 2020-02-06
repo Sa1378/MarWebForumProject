@@ -74,9 +74,9 @@ class PostPage extends Component {
         })
     }
 
-    sendPostRequest(url) {
+    sendPostRequest(url, type) {
         fetch(url, {
-            method: "POST",
+            method: type,
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -94,24 +94,32 @@ class PostPage extends Component {
         })
     }
 
-    likePost() {
+    likePost(isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
         let url = "http://localhost:8000/post/like/" + this.props.match.params.name;
-        this.sendPostRequest(url)
+        this.sendPostRequest(url, type)
     }
 
-    disLikePost() {
+    disLikePost(isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
         let url = "http://localhost:8000/post/dislike/" + this.props.match.params.name;
-        this.sendPostRequest(url)
+        this.sendPostRequest(url, type)
     }
 
     likeComment(target_id) {
         let url = "http://localhost:8000/post/like/" + target_id;
-        this.sendPostRequest(url)
+        this.sendPostRequest(url, "POST")
     }
 
     disLikeComment(target_id) {
         let url = "http://localhost:8000/post/like/" + target_id;
-        this.sendPostRequest(url)
+        this.sendPostRequest(url, "POST")
     }
 
 
@@ -167,8 +175,8 @@ class PostPage extends Component {
     }
 
     handleLikePost(postId) {
-        this.likePost();
         const post = this.state.post;
+        this.likePost(post.liked);
         post.liked = !post.liked;
         if (post.disliked) {
             post.disliked = !post.disliked;
@@ -177,8 +185,8 @@ class PostPage extends Component {
     }
 
     handleDisLikePost(postId) {
-        this.disLikePost();
         const post = this.state.post;
+        this.disLikePost(post.disliked);
         post.disliked = !post.disliked;
         if (post.liked) {
             post.liked = !post.liked;
