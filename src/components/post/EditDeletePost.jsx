@@ -7,7 +7,7 @@ class EditDeletePost extends Component {
         return (
             <React.Fragment>
                 <TransitionsModal post={this.props.post} buttonName="editPost"/>
-                <TransitionsModal buttonName="deletePost"deletePost/>
+                <TransitionsModal post={this.props.post} buttonName="deletePost" />
             </React.Fragment>
         );
     }
