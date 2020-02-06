@@ -115,29 +115,6 @@ class PostPage extends Component {
     }
 
 
-    replyComment() {
-        let myThis = this;
-        fetch("http://localhost:8000/post/post-view/" + this.props.match.params.name, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Origin": "*",
-                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-            }
-        }).then(function (response) {
-            if (response.ok) {
-                return response.json()
-            }
-            throw new Error("Server Error!");
-        }).then(function (data) {
-            console.log(data);
-            myThis.setState({post: data.post});
-            myThis.setState({comments: data.post.comments})
-        }).catch(function (error) {
-            console.log(error)
-        })
-    }
-
     editPost() {
 
     }
