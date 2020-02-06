@@ -253,6 +253,7 @@ class PostPage extends Component {
                             key={comment.id}
                             comment={comment}
                             post={this.state.post}
+                            postPage={this.props.match.params.name}
                             onLike={this.handleLikeComment}
                             onDisLike={this.handleDisLikeComment}
                         />)}

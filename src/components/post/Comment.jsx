@@ -82,7 +82,8 @@ class Comment extends Component {
                                             onLike={this.props.onLike}
                                             onDisLike={this.props.onDisLike}
                                             postCard={this.props.comment}/>
-                        <TransitionsModal content="post" buttonName="reply"/>
+                        <TransitionsModal content="post" buttonName="reply" postPage={this.props.postPage}
+                                          comment={this.props.comment}/>
                         <Badge badgeContent={120} color={'primary'}>
                             <ScoreIcon/>
                         </Badge>

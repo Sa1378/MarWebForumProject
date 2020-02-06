@@ -175,7 +175,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'new post') {
             return <NewPost refreshToken={props.refreshToken}/>
         } else if (props.buttonName === 'reply') {
-            return <NewComment/>
+            return <NewComment postPage={props.postPage} comment={props.comment}/>
         } else if (props.buttonName === 'subscribers') {
             return <ListOfAccounts listOfAccount={props.accounts}/>
         } else if (props.buttonName === 'authors') {
@@ -187,7 +187,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'editComment') {
             return <NewComment comment={props.comment}/>
         } else if (props.buttonName === 'deleteComment') {
-            return <DeletePostAlert comment_id={props.comments.target_id} id={props.post.target_id} isPost={false}/>
+            return <DeletePostAlert comment_id={props.comment.target_id} id={props.post.target_id} isPost={false}/>
         }
     }
 }
