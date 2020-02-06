@@ -22,10 +22,17 @@ const styles = theme => (
 
 
 class NewComment extends Component {
+
+    constructor(props) {
+        super(props);
+        this.insert = this.insert.bind(this);
+
+    }
+
     insert() {
         let myThis = this;
-        console.log("NEW COMMENT" + this.props.postPage);
-        let data = document.getElementById("body");
+        console.log("NEW COMMENT");
+        let data = document.getElementById("body").value;
         fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
@@ -33,7 +40,7 @@ class NewComment extends Component {
                 "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         }).then(function (response) {
             if (response.ok) {
                 return response.json()
@@ -62,7 +69,7 @@ class NewComment extends Component {
                                    defaultValue={this.checkComment()}
                         />
                         <div className="d-flex justify-content-center w-100">
-                            <Button className="m-2 w-100" type='submit' color='primary' variant='contained'
+                            <Button className="m-2 w-100" color='primary' variant='contained'
                                     onClick={this.insert}>
                                 Insert
                             </Button>

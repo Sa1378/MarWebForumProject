@@ -112,14 +112,22 @@ class PostPage extends Component {
         this.sendPostRequest(url, type)
     }
 
-    likeComment(target_id) {
+    likeComment(target_id, isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
         let url = "http://localhost:8000/post/like/" + target_id;
-        this.sendPostRequest(url, "POST")
+        this.sendPostRequest(url, type)
     }
 
-    disLikeComment(target_id) {
-        let url = "http://localhost:8000/post/like/" + target_id;
-        this.sendPostRequest(url, "POST")
+    disLikeComment(target_id, isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
+        let url = "http://localhost:8000/post/dislike/" + target_id;
+        this.sendPostRequest(url, type)
     }
 
 
@@ -145,10 +153,11 @@ class PostPage extends Component {
     };
 
     handleLikeComment(commentId) {
-        this.likeComment(commentId);
+        let myThis = this;
         const postCards = [];
         this.state.comments.forEach(function (comment) {
             if (commentId === comment.id) {
+                myThis.likeComment(commentId, comment.liked);
                 comment.liked = !comment.liked;
                 if (comment.disliked) {
                     comment.disliked = !comment.disliked;
@@ -160,10 +169,11 @@ class PostPage extends Component {
     }
 
     handleDisLikeComment(commentId) {
-        this.disLikeComment(commentId);
+        let myThis = this;
         const postCards = [];
         this.state.comments.forEach(function (comment) {
             if (commentId === comment.id) {
+                myThis.disLikeComment(commentId, comment.disliked);
                 comment.disliked = !comment.disliked;
                 if (comment.liked) {
                     comment.liked = !comment.liked;
