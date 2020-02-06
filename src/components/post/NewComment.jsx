@@ -25,13 +25,15 @@ class NewComment extends Component {
     insert() {
         let myThis = this;
         console.log("NEW COMMENT" + this.props.postPage);
-        fetch("http://localhost:8000/post/insert-comment/" + myThis.replyTo(), {
+        let data = document.getElementById("body");
+        fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-            }
+            },
+            body: JSON.stringify(data)
         }).then(function (response) {
             if (response.ok) {
                 return response.json()
@@ -52,7 +54,7 @@ class NewComment extends Component {
                 <Paper>
                     <form>
                         <TextField className="w-100"
-                                   id="outlined-textarea"
+                                   id="body"
                                    label="Your Comment"
                                    placeholder="Comment"
                                    variant="filled"
