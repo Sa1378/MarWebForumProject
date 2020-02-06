@@ -80,9 +80,9 @@ class NewComment extends Component {
 
     replyTo() {
         if (this.props.comment) {
-            return "http://localhost:8000/post/insert-comment/"
+            return "http://localhost:8000/post/insert-comment/" + this.postPage + "/" + this.props.comment.target_id
         }
-        return ''
+        return "http://localhost:8000/post/insert-comment/" + this.postPage
     }
 
 
