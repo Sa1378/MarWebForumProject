@@ -11,6 +11,7 @@ import img9 from "../../static/images/avatar/photo_2020-01-02_22-02-11.jpg";
 import img10 from "../../static/images/avatar/photo_2020-01-02_22-02-15.jpg";
 import img11 from "../../static/images/avatar/photo_2020-01-02_22-02-19.jpg";
 import img from "../../static/images/cards/wallpaper4.jpg";
+import { CodeSharp } from '@material-ui/icons';
 
 class ImageAvatar extends Component {
 
@@ -50,6 +51,8 @@ class ImageAvatar extends Component {
     }
 
     randomAvatarImage() {
+        console.log("AVAAATTTTAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRR")
+        console.log(this.props.avatarSrc)
         let number = (Math.floor(Math.random() * 9)) + 3;
    /*     if (number === 3) {
             return img3

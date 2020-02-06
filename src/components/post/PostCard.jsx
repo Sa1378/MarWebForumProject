@@ -13,20 +13,10 @@ import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {withStyles} from "@material-ui/core";
-import img from '../../static/images/cards/wallpaper4.jpg'
-import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
-import img3 from '../../static/images/avatar/download.jpeg'
-import img4 from "../../static/images/avatar/photo_2020-01-02_22-01-43.jpg";
-import img5 from "../../static/images/avatar/photo_2020-01-02_22-01-52.jpg";
-import img6 from "../../static/images/avatar/photo_2020-01-02_22-01-58.jpg";
-import img7 from "../../static/images/avatar/photo_2020-01-02_22-02-02.jpg";
-import img8 from "../../static/images/avatar/photo_2020-01-02_22-02-06.jpg";
-import img9 from "../../static/images/avatar/photo_2020-01-02_22-02-11.jpg";
-import img10 from "../../static/images/avatar/photo_2020-01-02_22-02-15.jpg";
-import img11 from "../../static/images/avatar/photo_2020-01-02_22-02-19.jpg";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import Badge from "@material-ui/core/Badge";
 import ScoreIcon from '@material-ui/icons/Score';
+import ImageAvatar from '../user profile/Avatar';
 
 
 
@@ -54,19 +44,18 @@ const styles = theme => (
 
 
 class PostCard extends Component {
-
+    state={
+        avatar:{}
+    }
 
     render() {
         const {classes} = this.props;
-        console.log(this.props.postSummary)
+        console.log("EEEEEEEEEEEEEEEEEEEZZZZZZZZZZZZZZZZZZZZ")
+        console.log(this.state.avatar)
         return (
             <Card className={classes.card}>
                 <CardHeader
-                    avatar={
-                        <Avatar src={this.randomAvatarImage()} aria-label="recipe">
-                            M
-                        </Avatar>
-                    }
+                    avatar={<ImageAvatar avatarSrc={this.state.avatar} isList="true"/>}
                     action={
                         <IconButton className={classes.link} aria-label="settings">
                             <MoreVertIcon/>
@@ -79,7 +68,7 @@ class PostCard extends Component {
                     subheader={<Link className={classes.link + " nav-link"}
                                      to={"/profile/" + this.props.postCard.author}>{this.props.postCard.author}</Link>}
                 />
-                {this.randomImage()}
+                {this.showMedia()}
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia
@@ -113,34 +102,41 @@ class PostCard extends Component {
         );
     }
 
-    randomImage() {
-        let a = (Math.floor(Math.random() * 2)) / 2 + 1;
-        if (a === 1) {
-            return <img src={img} width={'100%'} alt="Can't be shown."/>
-        } else return <img src={img2} width={'100%'} alt="Can't be shown."/>
+    showMedia() {
+        console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa")
+        console.log(this.props.postMedia)
+        return (
+            <img src={this.props.postMedia} width={'100%'} style={{maxWidth:"600px",minWidth:"600px"}} alt="Can't be shown."/>
+        )
     }
 
-    randomAvatarImage() {
-        let number = (Math.floor(Math.random() * 9)) + 3;
-        if (number === 3) {
-            return img3
-        } else if (number === 4) {
-            return img4
-        } else if (number === 5) {
-            return img5
-        } else if (number === 6) {
-            return img6
-        } else if (number === 7) {
-            return img7
-        } else if (number === 8) {
-            return img8
-        } else if (number === 9) {
-            return img9
-        } else if (number === 10) {
-            return img10
-        } else if (number === 11) {
-            return img11
-        } else return img
+    componentWillMount() {
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/profile/'+this.props.postCard.author,{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json", 
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+
+            console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+            console.log(data.image);
+            currentComponent.setState({avatar:data.image});
+            
+        })
+        .catch(function(err){
+            console.log(err);
+        //    window.location.href="/notfound";
+        })
     }
 }
 

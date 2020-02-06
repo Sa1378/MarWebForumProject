@@ -88,7 +88,14 @@ class MainPage extends Component {
         })
         .then(function(data) {
             console.log(data)
-            currentComponent.setState({postCards:data.posts})
+            var tmp=[]
+            data.posts.reverse();
+            for(let i=0;i<data.posts.length;i++){
+                var post=data.posts[i];
+                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
+                    postMedia:post.media});
+            }
+            currentComponent.setState({postCards:tmp});
         })
         .catch(function(err){
             //TODO

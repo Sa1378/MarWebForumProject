@@ -10,6 +10,10 @@ import SignIn from "./login/SignIn";
 import SignUp from "./login/SignUp";
 import PostList from "./post/PostList";
 import ChannelsList from "./channel/ChannelsList";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Grid from '@material-ui/core/Grid';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -101,7 +105,46 @@ export default function SimpleTabs(props) {
     }
 
     function info(props){
-        return <h1>salam</h1>
+        return (
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                <div className={classes.demo}>
+                    <List dense={true}>
+                        <ListItem>
+                        <ListItemText
+                            primary={props.profile.user.first_name}
+                            secondary='First Name'
+                        />
+                        </ListItem>
+                        <ListItem>
+                        <ListItemText
+                            primary={props.profile.user.last_name}
+                            secondary='Last Name'
+                        />
+                        </ListItem>
+                        <ListItem>
+                        <ListItemText
+                            primary={props.profile.age}
+                            secondary='Age'
+                        />
+                        </ListItem>
+                        <ListItem>
+                        <ListItemText
+                            primary={props.profile.user.email}
+                            secondary='E-mail'
+                        />
+                        </ListItem>
+                        <ListItem>
+                        <ListItemText
+                            primary={props.profile.telephone_number}
+                            secondary='Telephone Number'
+                        />
+                        </ListItem>
+                    </List>
+                </div>
+                </Grid>
+            </Grid>
+        );
     }
 
 

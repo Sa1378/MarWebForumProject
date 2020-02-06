@@ -101,7 +101,8 @@ class Profile extends Component {
             data.posts.reverse();
             for(let i=0;i<data.posts.length;i++){
                 var post=data.posts[i];
-                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false});
+                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
+                    postMedia:post.media});
             }
             currentComponent.setState({postCards:tmp});
         })
@@ -260,6 +261,8 @@ class Profile extends Component {
 
     render() {
         const {classes}=this.props;
+        console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+        console.log(this.state.info)
         return (
             <React.Fragment>
                 <CssBaseline/>
@@ -283,6 +286,7 @@ class Profile extends Component {
                         <SimpleTabs name1="Posts" name2="Channels" name3="Info" page="profile" postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
+                                    profile={this.state.profile}
                                     postListStyle={this.postListStyle} className={classes.tabs}/>
                     </Typography>
                 </Container>
