@@ -7,15 +7,12 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import Container from "@material-ui/core/Container";
 import Comment from "./Comment";
 import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
 import NewComment from "./NewComment";
-import img from '../../static/images/cards/wallpaper4.jpg'
-import img2 from '../../static/images/cards/photyoe-LEqYrDZWLH4-unsplash.jpg'
 import Sidebar from "../main-page/Sidebar";
 import EditDeletePost from "./EditDeletePost";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
@@ -70,35 +67,75 @@ class PostPage extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
-            myThis.setState({post: data.post})
+            myThis.setState({post: data.post});
             myThis.setState({comments: data.post.comments})
         }).catch(function (error) {
             console.log(error)
         })
     }
 
-    likePost() {
+    sendPostRequest(url) {
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+            console.log(data);
+        }).catch(function (error) {
+            console.log(error)
+        })
+    }
 
+    likePost() {
+        let url = "http://localhost:8000/post/like/" + this.props.match.params.name;
+        this.sendPostRequest(url)
     }
 
     disLikePost() {
-
+        let url = "http://localhost:8000/post/dislike/" + this.props.match.params.name;
+        this.sendPostRequest(url)
     }
 
-    likeComment() {
-
+    likeComment(target_id) {
+        let url = "http://localhost:8000/post/like/" + target_id;
+        this.sendPostRequest(url)
     }
 
-    disLikeComment() {
-
+    disLikeComment(target_id) {
+        let url = "http://localhost:8000/post/like/" + target_id;
+        this.sendPostRequest(url)
     }
 
-    insertComment() {
-
-    }
 
     replyComment() {
-
+        let myThis = this;
+        fetch("http://localhost:8000/post/post-view/" + this.props.match.params.name, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+            console.log(data);
+            myThis.setState({post: data.post});
+            myThis.setState({comments: data.post.comments})
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     editPost() {
@@ -243,7 +280,7 @@ class PostPage extends Component {
                             onDisLike={this.handleDisLikeComment}
                         />)}
 
-                        <NewComment/>
+                        <NewComment postPage={this.props.match.params.name}/>
                     </Container>
                     <Sidebar/>
                 </div>

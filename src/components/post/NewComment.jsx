@@ -23,7 +23,27 @@ const styles = theme => (
 
 class NewComment extends Component {
     insert() {
-
+        let myThis = this;
+        console.log("NEW COMMENT" + this.props.postPage);
+        fetch("http://localhost:8000/post/insert-comment/" + myThis.replyTo(), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+            console.log(data);
+            myThis.setState({post: data.post});
+            myThis.setState({comments: data.post.comments})
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     render() {
@@ -56,6 +76,13 @@ class NewComment extends Component {
             return this.props.comment;
         }
         return ''
+    }
+
+    replyTo() {
+        if (this.props.comment) {
+            return this.props.comment.target_id
+        }
+        return this.props.postPage
     }
 
 

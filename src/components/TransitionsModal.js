@@ -183,7 +183,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'editPost') {
             return <NewPost post={props.post}/>
         } else if (props.buttonName === 'deletePost') {
-            return <DeletePostAlert/>
+            return <DeletePostAlert id={props.comments.target_id}/>
         } else if (props.buttonName === 'editComment') {
             return <NewComment comment={props.comment}/>
         } else if (props.buttonName === 'deleteComment') {
