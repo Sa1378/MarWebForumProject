@@ -73,14 +73,14 @@ class NewComment extends Component {
 
     checkComment() {
         if (this.props.comment) {
-            return this.props.comment;
+            return this.props.comment.body;
         }
         return ''
     }
 
     replyTo() {
-        if (this.props.comment) {
-            return this.props.comment.target_id
+        if (this.props.postPage) {
+            return this.props
         }
         return this.props.postPage
     }
