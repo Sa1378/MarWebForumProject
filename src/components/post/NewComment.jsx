@@ -22,16 +22,32 @@ const styles = theme => (
 
 
 class NewComment extends Component {
+
+    constructor(props) {
+        super(props);
+        this.insert = this.insert.bind(this);
+    }
+
     insert() {
+        const data = new FormData();
         let myThis = this;
-        console.log("NEW COMMENT" + this.props.postPage);
-        fetch("http://localhost:8000/post/insert-comment/" + myThis.replyTo(), {
+        console.log(this.props.comment);
+        data.append('body', document.getElementById("body" + this.getId()).value);
+        data.append('post_related', parseInt(this.props.postPage));
+        // console.log(this.postPage)
+        if (this.props.comment)
+            data.append('replies', parseInt(this.props.comment.id));
+
+        data.append('media', ((document.getElementById("media" + this.getId()).files[0] == "") ? null : document
+            .getElementById("media" + this.getId()).files[0]));
+        fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "multipart/form-data",
                 "Access-Control-Origin": "*",
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-            }
+            },
+            body: data,
         }).then(function (response) {
             if (response.ok) {
                 return response.json()
@@ -39,8 +55,6 @@ class NewComment extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
-            myThis.setState({post: data.post});
-            myThis.setState({comments: data.post.comments})
         }).catch(function (error) {
             console.log(error)
         })
@@ -52,15 +66,28 @@ class NewComment extends Component {
                 <Paper>
                     <form>
                         <TextField className="w-100"
-                                   id="outlined-textarea"
+                                   id={"body" + this.getId()}
                                    label="Your Comment"
                                    placeholder="Comment"
                                    variant="filled"
                                    multiline
                                    defaultValue={this.checkComment()}
                         />
+                        <div className="m-3 form-group d-flex justify-content-center">
+                            <Button className='mx-1'
+                                    variant="contained"
+                                    component="label"
+                            >
+                                Image
+                                <input
+                                    type="file"
+                                    id={'media' + this.getId()}
+                                    style={{display: "none"}}
+                                />
+                            </Button>
+                        </div>
                         <div className="d-flex justify-content-center w-100">
-                            <Button className="m-2 w-100" type='submit' color='primary' variant='contained'
+                            <Button className="m-2 w-100" color='primary' variant='contained'
                                     onClick={this.insert}>
                                 Insert
                             </Button>
@@ -72,17 +99,13 @@ class NewComment extends Component {
     }
 
     checkComment() {
-        if (this.props.comment) {
+        if (this.props.isEdit)
             return this.props.comment.body;
-        }
         return ''
     }
 
     replyTo() {
-        if (this.props.comment) {
-            return "http://localhost:8000/post/insert-comment/" + this.props.comment.target_id
-        }
-        return "http://localhost:8000/post/insert-comment/" + this.postPage
+        return "http://localhost:8000/post/insert-comment"
     }
 
     typeOfRequest() {
@@ -90,6 +113,13 @@ class NewComment extends Component {
             return "PUT"
         }
         return "POST"
+    }
+
+    getId() {
+        if (this.props.comment) {
+            return 'edit';
+        }
+        return '';
     }
 
 
