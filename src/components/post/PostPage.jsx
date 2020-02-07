@@ -68,10 +68,18 @@ class PostPage extends Component {
         }).then(function (data) {
             console.log(data);
             myThis.setState({post: data.post});
+            let newComments = [];
+            myThis.setComments(data.post.comments, newComments);
             myThis.setState({comments: data.post.comments})
         }).catch(function (error) {
             console.log(error)
         })
+    }
+
+    setComments(comments , target) {
+        for (let i = 0; i < comments.length; i++) {
+            // if (comments[i].reply !== )
+        }
     }
 
     sendPostRequest(url, type) {

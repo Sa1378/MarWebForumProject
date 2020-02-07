@@ -26,21 +26,20 @@ class NewComment extends Component {
     constructor(props) {
         super(props);
         this.insert = this.insert.bind(this);
-
     }
 
     insert() {
         const data = new FormData();
         let myThis = this;
-        console.log(document.getElementById("body").value);
-
-        data.append('body', document.getElementById("body").value);
+        console.log(this.props.comment);
+        data.append('body', document.getElementById("body" + this.getId()).value);
         data.append('post_related', parseInt(this.props.postPage));
         // console.log(this.postPage)
         if (this.props.comment)
-            data.append('comment_id', this.props.comment.target_id);
-        data.append('media', ((document.getElementById("media").files[0] == "") ? null : document
-            .getElementById("media").files[0]));
+            data.append('replies', parseInt(this.props.comment.id));
+
+        data.append('media', ((document.getElementById("media" + this.getId()).files[0] == "") ? null : document
+            .getElementById("media" + this.getId()).files[0]));
         fetch(myThis.replyTo(), {
             method: myThis.typeOfRequest(),
             headers: {
@@ -56,8 +55,6 @@ class NewComment extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
-            myThis.setState({post: data.post});
-            myThis.setState({comments: data.post.comments})
         }).catch(function (error) {
             console.log(error)
         })
@@ -69,7 +66,7 @@ class NewComment extends Component {
                 <Paper>
                     <form>
                         <TextField className="w-100"
-                                   id="body"
+                                   id={"body" + this.getId()}
                                    label="Your Comment"
                                    placeholder="Comment"
                                    variant="filled"
@@ -84,7 +81,7 @@ class NewComment extends Component {
                                 Image
                                 <input
                                     type="file"
-                                    id='media'
+                                    id={'media' + this.getId()}
                                     style={{display: "none"}}
                                 />
                             </Button>
@@ -103,10 +100,7 @@ class NewComment extends Component {
 
     checkComment() {
         if (this.props.isEdit)
-            return '';
-        if (this.props.comment) {
             return this.props.comment.body;
-        }
         return ''
     }
 
@@ -119,6 +113,13 @@ class NewComment extends Component {
             return "PUT"
         }
         return "POST"
+    }
+
+    getId() {
+        if (this.props.comment) {
+            return 'edit';
+        }
+        return '';
     }
 
 
