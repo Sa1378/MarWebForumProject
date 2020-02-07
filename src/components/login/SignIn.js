@@ -19,12 +19,12 @@ class SignIn extends Component {
         loginFail: false,
     };
 
-    loginClick() {
-        var currentComponent = this;
-        var data = {
-            'username': document.getElementById("username").value,
-            'password': document.getElementById("password").value
-        }
+
+    loginClick()
+    {
+        var currentComponent=this;
+        var data={'username':document.getElementById("username").value,
+                    'password':document.getElementById("password").value};
         console.log(JSON.stringify(data))
         fetch("http://localhost:8000/account/login", {
             method: "POST",

@@ -61,6 +61,87 @@ const styles={
 };
 
 class Sidebar extends Component{
+
+    constructor(props){
+        super(props);
+        this.getUsers=this.getUsers.bind(this);
+        this.getChannels=this.getChannels.bind(this);
+    }
+
+    state={
+        users:[],
+        channels:[]
+    }
+
+    componentWillMount(){
+        this.getUsers()
+        this.getChannels()
+    }
+
+    getUsers(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/account/users',{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("INFOOOOOOOOOOOOOOOOO")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<5;i++){
+                if(i==data.users.length)break;
+                tmp.push({username:data.users[i].username,id:i+1})
+            }
+            currentComponent.setState({users:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
+    getChannels(){
+        var currentComponent=this;
+        fetch('http://localhost:8000/channel/top-channels',{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Origin": "*",
+                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+        }})
+        .then(function(response) {
+            console.log(response)
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Server Error!");
+        })
+        .then(function(data) {
+            console.log("INFOOOOOOOOOOOOOOOOO")
+            console.log(data)
+            var tmp=[]
+            for(let i=0;i<data.channels.length;i++){
+                if(tmp.length==5)break;
+                if(data.channels[i].main_channel)continue;
+                let x=tmp.length;
+                tmp.push({title:data.channels[i].title,id:data.channels[i].id,num:x+1})
+            }
+            currentComponent.setState({channels:tmp});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
     render(){
         const {classes}=this.props;
         return (
@@ -68,33 +149,19 @@ class Sidebar extends Component{
                 <TransitionsModal content="newpost" buttonName="new post" variant="contained" refreshToken={this.props.refreshToken}/>
                 <Paper className={classes.item+" "+classes.firstItem}>
                     Top Users:
-                    <div className={classes.rankItem}> <Badge badgeContent={1} color="primary" className={classes.rankBadge}/>
-                        <Link to="/profile/rezaaminimajd" className={classes.link}>Reza</Link>
+                    {this.state.users.map(user=>{return (
+                        <div className={classes.rankItem}> <Badge badgeContent={user.id} color="primary" className={classes.rankBadge}/>
+                        <Link to={"/profile/"+user.username} className={classes.link}>{user.username}</Link>
                     </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={2} color="primary" className={classes.rankBadge}/>
-                        <Link to="/profile/shalireza" className={classes.link}>Alireza</Link>
-                    </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={3} color="primary" className={classes.rankBadge}/>
-                        <Link to="/profile/merhdads" className={classes.link}>Mehrdad</Link>
-                    </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={4} color="primary" className={classes.rankBadge}/>
-                        <Link to="/profile/pashmak_haj_abdollah" className={classes.link}>Pashmak</Link>
-                    </div>
+                    )})}
                 </Paper>
                 <Paper className={classes.item}>
                     Top Channels:
-                    <div className={classes.rankItem}> <Badge badgeContent={1} color="primary" className={classes.rankBadge}/>
-                        <Link to="/channel/parsnews" className={classes.link}>Pars News</Link>
+                    {this.state.channels.map(channel=>{return (
+                        <div className={classes.rankItem}> <Badge badgeContent={channel.num} color="primary" className={classes.rankBadge}/>
+                        <Link to={"/channel/"+channel.id} className={classes.link}>{channel.title}</Link>
                     </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={2} color="primary" className={classes.rankBadge}/>
-                        <Link to="/channel/shantajgar" className={classes.link}>Shantaj Gar</Link>
-                    </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={3} color="primary" className={classes.rankBadge}/>
-                        <Link to="/channel/memes" className={classes.link}>Memes</Link>
-                    </div>
-                    <div className={classes.rankItem}> <Badge badgeContent={4} color="primary" className={classes.rankBadge}/>
-                        <Link to="/channel/webproject" className={classes.link}>Web Project</Link>
-                    </div>
+                    )})}
                 </Paper>
                 <Paper className={classes.item}>
                     Marweb
