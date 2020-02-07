@@ -33,6 +33,37 @@ class AccountCard extends Component {
         display: 'inline',
     };
 
+    state={
+        avatar:""
+    }
+
+    componentWillMount(){
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/profile/' + this.props.user.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                console.log(data)
+                currentComponent.setState({avatar: data.image})
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
+
     openProfile(){
         window.location.href="/profile/"+this.props.user.username;
     }
@@ -43,7 +74,7 @@ class AccountCard extends Component {
             <div className='d-flex justify-content-around'>
                 <ListItem style={{width: '150%'}} className={classes.item}>
                     <ListItemAvatar>
-                        <Avatar alt="User" src={this.randomAvatarImage()}/>
+                        <Avatar alt="User" src={this.state.avatar}/>
                     </ListItemAvatar>
                     <ListItemText onClick={this.openProfile}
                         primary={this.props.user.username}
@@ -62,29 +93,6 @@ class AccountCard extends Component {
                 </ListItem>
             </div>
         );
-    }
-
-    randomAvatarImage() {
-        let number = (Math.floor(Math.random() * 9)) + 3;
-        if (number === 3) {
-            return img3
-        } else if (number === 4) {
-            return img4
-        } else if (number === 5) {
-            return img5
-        } else if (number === 6) {
-            return img6
-        } else if (number === 7) {
-            return img7
-        } else if (number === 8) {
-            return img8
-        } else if (number === 9) {
-            return img9
-        } else if (number === 10) {
-            return img10
-        } else if (number === 11) {
-            return img11
-        } else return img
     }
 
 }
