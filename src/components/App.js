@@ -68,8 +68,8 @@ class App extends Component {
                         <Route path="/profile/:username" render={(props) => <Profile {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/editprofile/:username" render={(props) => <EditProfile {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/newpost" render={(props) => <NewPost {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path="/channel-create" render={(props) => <CreateChannel {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/channel/:channelId" render={(props) => <Channel {...props} refreshToken={this.refreshToken}/>}/>
-                        <Route path="/channel/create" render={(props) => <CreateChannel {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/notifications" render={(props) => <Notifications {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/search/:searchQuery" render={(props) => <Search {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path={"/post/:name"} render={(props) => <PostPage {...props} refreshToken={this.refreshToken}/>}/>

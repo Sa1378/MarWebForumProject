@@ -10,6 +10,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import '../../static/css/material.css'
 import {withStyles} from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 
 const styles = theme => ({
@@ -26,7 +28,9 @@ class NewPost extends Component {
         //    this.changePlace=this.changePlace.bind(this);
     }
 
+
     state = {
+        snackBar:false,
         value: "1",
         channels: []
     };
@@ -62,6 +66,11 @@ class NewPost extends Component {
 
 
     render() {
+        const handleClose = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+        }
         const changePlace = (event) => {
             console.log(event);
             this.setState({ value: event.target.value })
@@ -69,6 +78,11 @@ class NewPost extends Component {
         const {classes}=this.props;
         return (
             <div className={classes.outline}>
+                <Snackbar open={this.state.snackBar} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Your post was created successfully!
+                    </Alert>
+                </Snackbar>
                 <CssBaseline />
                 <Container>
                     <Typography component="div" style={{ backgroundColor: 'white', width: '1000px' }}
@@ -164,6 +178,7 @@ class NewPost extends Component {
         })
         .then(function (data) {
             console.log(data);
+            currentComponent.setState({snackBar:true});
             window.location.href = "/";
         })
         .catch(function (err) {

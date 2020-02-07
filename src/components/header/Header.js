@@ -248,6 +248,11 @@ class Header extends Component {
                                     <TransitionsModal content="newpost" buttonName="new post" variant="contained"
                                                       refreshToken={this.props.refreshToken}/>
                                 </div>
+                                <Button style={{margin: '5px'}} className={classes.newPostButton} onClick={() => {
+                                    window.location.href = "/channel-create"
+                                }} variant='contained' color='secondary'>
+                                    New Channel
+                                </Button>
                                 <div onClick={this.clickNotif} className="d-inline">
                                     <IconButton aria-label="show new notifications" color="inherit"
                                                 className={classes.icon} {...bindTrigger(popupState)}
@@ -295,11 +300,13 @@ class Header extends Component {
 
                         <AccountCircle/>
                     </IconButton>
+
                     <Button className={classes.logoutButton} onClick={() => {
                         window.location.href = "/login"
                     }}>
                         Logout
                     </Button>
+
                 </div>)
         }
         return (
@@ -320,46 +327,3 @@ class Header extends Component {
 }
 
 export default withStyles(styles)(Header);
-
-
-/*
-const styles = {
-    element: {
-        margin:"10px",
-    },
-    button: {
-        marginTop:"0px",
-    }
-};
-
-
-class Header extends Component{
-
-    componentDidMount(){
-        var searchTextField=document.getElementById("searchTextField");
-        searchTextField.addEventListener("keypress",event=>{
-            var key=event.keyCode;
-            if(key===13)
-            {
-            //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
-                searchTextField.value="";
-            }
-        });
-    }
-
-    render(){
-        const {classes}=this.props;
-        return (
-            <header>
-                <a href="/" className="title left">This is Header!</a>
-                <div>
-                    <TextField id="searchTextField" className={classes.element+" "+classes.button} label="Search" />
-                    <Button href="/login" className={classes.element} variant="contained" color="primary">Login</Button>
-                </div>
-            </header>
-        );
-    };
-}
-
-export default withStyles(styles)(Header); // chon byd az function haie martabe balatr estefade konim vase override krdne material
-*/

@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import {PhotoCamera} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 
 class CreateChannel extends Component {
@@ -17,7 +17,9 @@ class CreateChannel extends Component {
 
     state={
         users:[],
-        authors:[]
+        authors:[],
+        channelSuccess:false,
+        channelFail:false,
     }
 
     createChannel(){
@@ -64,10 +66,12 @@ class CreateChannel extends Component {
         })
         .then(function (data) {
             console.log(data);
+            currentComponent.setState({channelSuccess:true})
             window.location.href = "/channel/"+data.detail.id;
         })
         .catch(function (err) {
             console.log(err);
+            currentComponent.setState({channelFail:true})
         })
         console.log(userId)
         console.log(typeof userId)
@@ -102,8 +106,24 @@ class CreateChannel extends Component {
     }
 
     render() {
+        const handleClose = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            this.setState({channelSuccess:false,channelFail:false})
+        }
         return (
             <div style={{backgroundColor: 'white'}} className="p-5">
+                <Snackbar open={this.state.channelSuccess} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Your channel was created successfully!
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={this.state.channelFail} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        Your fields are invalid!
+                    </Alert>
+                </Snackbar>
                 <form noValidate autoComplete="off">
                     <div>
                         <Avatar className="" style={{left: '0'}} alt="Alireza" src=""/>

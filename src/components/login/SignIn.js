@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
-import InputAdornments from "../Password";
 import Button from "@material-ui/core/Button";
 import {Tooltip} from "@material-ui/core";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 
 class SignIn extends Component {
@@ -13,8 +14,14 @@ class SignIn extends Component {
         this.loginClick = this.loginClick.bind(this);
     }
 
+    state={
+        loginSuccess:false,
+        loginFail:false,
+    }
+
     loginClick()
     {
+        var currentComponent=this;
         var data={'username':document.getElementById("username").value,
                     'password':document.getElementById("password").value};
         console.log(JSON.stringify(data))
@@ -25,13 +32,13 @@ class SignIn extends Component {
         })
         .then(function(response){ 
             console.log(response)
-            if(response.status=="200"){
+            if(response.ok){
                 console.log(response)
                 console.log("access-token: "+localStorage.getItem("access-token"));
                 //
                 return response.json();
             }
-            alert("Your Username or Password are incorrect!")
+            currentComponent.setState({loginFail:true})
             throw new Error("Server Error!");
         })
         .then(function(data){
@@ -39,6 +46,7 @@ class SignIn extends Component {
             localStorage.setItem("refresh-token",data.refresh)
             localStorage.setItem("access-token",data.access)
             localStorage.setItem("username",document.getElementById("username").value)
+            currentComponent.setState({loginSuccess:true});
             fetch('http://localhost:8000/account/profile/' + localStorage.getItem("username"), {
                 method: "GET",
                 headers: {
@@ -57,12 +65,13 @@ class SignIn extends Component {
             .then(function (data) {
                 console.log(data)
                 localStorage.setItem("userId",data.user.id); 
+
+                window.location.href="/"
             })
             .catch(function (err) {
                 //TODO
                 console.log(err);
             })
-            window.location.href="/"
         })
         .catch(function (err) {
             //TODO
@@ -71,9 +80,24 @@ class SignIn extends Component {
     }
 
     render() {
+        const handleClose = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            this.setState({loginSuccess:false,loginFail:false})
+        }
         return (
             <form className="d-flex flex-column justify-content-around my-5">
-
+                <Snackbar open={this.state.loginSuccess} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        You logged in successfully as {localStorage.getItem("username")}!
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={this.state.loginFail} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        Your username or password are incorrect!
+                    </Alert>
+                </Snackbar>
                 <TextField className="m-5 email_size" type="text" id="username" label="Username"
                            variant="outlined" required />
                 <TextField className="m-5 email_size" type="password" id="password" label="Password"
