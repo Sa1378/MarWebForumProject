@@ -10,16 +10,19 @@ import Follow from "./follow";
 import TransitionsModal from "../TransitionsModal";
 import {withStyles} from '@material-ui/core/styles';
 import '../../static/css/material.css'
+import IconButton from "@material-ui/core/IconButton";
+import ShareIcon from '@material-ui/icons/Share';
+import CardActions from "@material-ui/core/CardActions";
 
 
 const styles = theme => ({
-    outline:{
+    outline: {
         "&:focus": {
             outline: "none",
         }
     },
-    tabs:{
-        backgroundColor:"gray",
+    tabs: {
+        backgroundColor: "gray",
     }
 });
 
@@ -29,188 +32,210 @@ class Profile extends Component {
         super(props);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
-        this.changeFollowStatus=this.changeFollowStatus.bind(this);
+        this.changeFollowStatus = this.changeFollowStatus.bind(this);
         this.props.refreshToken();
     }
-    
-    
-    componentWillMount(){
-        this.getUserData()
-        this.getFollowers()
-        this.getFollowings()
-        this.getPostCards()
-        this.getChannels()
+
+
+    componentWillMount() {
+        this.getUserData();
+        this.getFollowers();
+        this.getFollowings();
+        this.getPostCards();
+        this.getChannels();
     }
 
-    getChannels(){
-        var currentComponent=this;
-        fetch('http://localhost:8000/channel/channels/'+this.props.match.params.username,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log("Channel response")
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+    getChannels() {
+        var currentComponent = this;
+        fetch('http://localhost:8000/channel/channels/' + this.props.match.params.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
-            console.log("CHAAAANNEEEEEELLLLL")
-            console.log(data)
-            var tmp=[]
-            for(let i=0;i<data.channels.length;i++){
-                var channel=data.channels[i]
-                console.log(channel.title)
-                if(channel.title==currentComponent.props.match.params.username)continue;
-                tmp.push({id:channel.id,title:channel.title,creator:channel.creator_username})
-            }
-            console.log(tmp);
-            currentComponent.setState({channels:tmp})
-            
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-    }
-
-    getPostCards(){
-        var currentComponent=this;
-        fetch('http://localhost:8000/post/userposts/'+this.props.match.params.username,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Server Error!");
-        })
-        .then(function(data) {
-            console.log("POSTTTSSSSS")
-            console.log(data)
-            var tmp=[]
-            data.posts.reverse();
-            for(let i=0;i<data.posts.length;i++){
-                var post=data.posts[i];
-                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
-                    postMedia:post.media});
-            }
-            currentComponent.setState({postCards:tmp});
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-    }
-
-    getFollowings(){
-        var currentComponent=this;
-        fetch('http://localhost:8000/account/followings/'+this.props.match.params.username,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Server Error!");
-        })
-        .then(function(data) {
-            console.log("FOLOWINGSSSSSSSSSSS")
-            console.log(data.followings)
-            console.log()
-            var tmp=[]
-            for(let i=0;i<data.followings.length;i++){
-                if(data.followings[i].resourcetype=="FollowChannel")continue;
-                tmp.push({username:data.followings[i].target_name,avatar_src:'src/static/images/avatar/download.jpeg'})
-            }
-            console.log(tmp)
-            currentComponent.setState({followings:tmp});
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-    }
-
-    getFollowers(){
-        var currentComponent=this;
-        fetch('http://localhost:8000/account/followers/'+this.props.match.params.username,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Server Error!");
-        })
-        .then(function(data) {
-            console.log("FOLOWERSSSSSSSSSSSSSSSSSSS")
-            console.log(data)
-            var tmp=[]
-            for(let i=0;i<data.followers.length;i++){
-                if(data.followers[i].resourcetype=="FollowChannel")continue;
-                if(data.followers[i].source_name==localStorage.getItem("username")){
-                    currentComponent.setState({followed:true});
-                    console.log("kjdsjkdsjkdskjdskj")
+            .then(function (response) {
+                console.log("Channel response");
+                console.log(response);
+                if (response.ok) {
+                    return response.json();
                 }
-                tmp.push({username:data.followers[i].source_name,avatar_src:'src/static/images/avatar/download.jpeg'})
-            }
-            console.log(tmp)
-            currentComponent.setState({followers:tmp});
-        })
-        .catch(function(err){
-            console.log(err);
-        })
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("CHAAAANNEEEEEELLLLL")
+                console.log(data)
+                var tmp = []
+                for (let i = 0; i < data.channels.length; i++) {
+                    var channel = data.channels[i]
+                    console.log(channel.title)
+                    if (channel.title == currentComponent.props.match.params.username) continue;
+                    tmp.push({id: channel.id, title: channel.title, creator: channel.creator_username})
+                }
+                console.log(tmp);
+                currentComponent.setState({channels: tmp})
+
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
     }
 
-    getUserData(){
-        
-        var currentComponent=this;
-        fetch('http://localhost:8000/account/profile/'+this.props.match.params.username,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+    getPostCards() {
+        var currentComponent = this;
+        fetch('http://localhost:8000/post/userposts/' + this.props.match.params.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
-            console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-            console.log(data)
-            currentComponent.setState({profile:data})
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("POSTTTSSSSS")
+                console.log(data)
+                var tmp = []
+                data.posts.reverse();
+                for (let i = 0; i < data.posts.length; i++) {
+                    var post = data.posts[i];
+                    tmp.push({
+                        id: post.id,
+                        author: post.post_owner,
+                        title: post.title,
+                        postSummary: post.summary,
+                        liked: false,
+                        disliked: false,
+                        postMedia: post.media
+                    });
+                }
+                currentComponent.setState({postCards: tmp});
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
+
+    getFollowings() {
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/followings/' + this.props.match.params.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
         })
-        .catch(function(err){
-            console.log(err);
-            window.location.href="/notfound";
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("FOLOWINGSSSSSSSSSSS")
+                console.log(data.followings)
+                console.log()
+                var tmp = []
+                for (let i = 0; i < data.followings.length; i++) {
+                    if (data.followings[i].resourcetype == "FollowChannel") continue;
+                    tmp.push({
+                        username: data.followings[i].target_name,
+                        avatar_src: 'src/static/images/avatar/download.jpeg'
+                    })
+                }
+                console.log(tmp)
+                currentComponent.setState({followings: tmp});
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
+
+    getFollowers() {
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/followers/' + this.props.match.params.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
         })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("FOLOWERSSSSSSSSSSSSSSSSSSS")
+                console.log(data)
+                var tmp = []
+                for (let i = 0; i < data.followers.length; i++) {
+                    if (data.followers[i].resourcetype == "FollowChannel") continue;
+                    if (data.followers[i].source_name == localStorage.getItem("username")) {
+                        currentComponent.setState({followed: true});
+                        console.log("kjdsjkdsjkdskjdskj")
+                    }
+                    tmp.push({
+                        username: data.followers[i].source_name,
+                        avatar_src: 'src/static/images/avatar/download.jpeg'
+                    })
+                }
+                console.log(tmp)
+                currentComponent.setState({followers: tmp});
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
+
+    getUserData() {
+
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/profile/' + this.props.match.params.username, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                console.log(data)
+                currentComponent.setState({profile: data})
+            })
+            .catch(function (err) {
+                console.log(err);
+                window.location.href = "/notfound";
+            })
     }
 
 
     state = {
-        profile:{age:null,telephone_number:null,user:{id:0, email:null, username:"loading...", password:null, first_name:null,last_name:null}},
+        profile: {
+            age: null,
+            telephone_number: null,
+            user: {id: 0, email: null, username: "loading...", password: null, first_name: null, last_name: null}
+        },
         avatar_src: 'images/download.jpeg',
         followed: false,
         channels: [],
@@ -221,7 +246,7 @@ class Profile extends Component {
 
     postListStyle = {
         width: '100vh',
-        marginLeft:"20%",
+        marginLeft: "20%",
         justifyContent: 'center',
     };
 
@@ -253,14 +278,14 @@ class Profile extends Component {
         this.setState({postCards: postCards});
     }
 
-    changeFollowStatus(){
-        var followed=this.state.followed;
-        this.setState({followed:!followed});
+    changeFollowStatus() {
+        var followed = this.state.followed;
+        this.setState({followed: !followed});
         this.getFollowers()
     }
 
     render() {
-        const {classes}=this.props;
+        const {classes} = this.props;
         console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
         console.log(this.state.info)
         return (
@@ -271,6 +296,12 @@ class Profile extends Component {
                                 className="border rounded">
                         <div className="d-flex justify-content-end p-2">
                             {this.formatSetting()}
+                        </div>
+                        <div className="d-flex justify-content-end p-2">
+                            <IconButton onClick={() => this.copyToClipboard(window.location.href)}
+                                        aria-label="share">
+                                <ShareIcon color={"primary"}/>
+                            </IconButton>
                         </div>
                         <div className='mx-5'>
                             {this.formatAvatar()}
@@ -283,7 +314,8 @@ class Profile extends Component {
                               followings={this.state.followings}/>
                         <Follow followed={this.state.followed} my_name={localStorage.getItem("username")}
                                 username={this.state.profile.user.username} changeStatus={this.changeFollowStatus}/>
-                        <SimpleTabs name1="Posts" name2="Channels" name3="Info" page="profile" postCards={this.state.postCards}
+                        <SimpleTabs name1="Posts" name2="Channels" name3="Info" page="profile"
+                                    postCards={this.state.postCards}
                                     channels={this.state.channels} onDisLike={this.handleDisLikePost}
                                     onLike={this.handleLikePost}
                                     profile={this.state.profile}
@@ -303,6 +335,28 @@ class Profile extends Component {
             return;
         else return <TransitionsModal content="edit profile" buttonName="setting" variant="contained"/>
     }
+
+
+    copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        const selected =
+            document.getSelection().rangeCount > 0
+                ? document.getSelection().getRangeAt(0)
+                : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
+        }
+        alert("Share link copied to clipboard")
+    };
 }
 
 
