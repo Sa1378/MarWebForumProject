@@ -37,12 +37,11 @@ class SortBy extends Component {
     render() {
         const {classes} = this.props;
         const handleChange = (event, newSearchIn) => {
-            console.log(newSearchIn);
             if (newSearchIn)
             {
-                document.getElementById("searchIn").innerHTML="in "+newSearchIn;
                 this.setState({searchIn: newSearchIn});
             }
+            this.props.onChange(newSearchIn);
         };
 
         return (

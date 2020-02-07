@@ -15,7 +15,7 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state={postCards:[]};
+        this.state = {postCards: []};
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
         this.handleShownPosts = this.handleShownPosts.bind(this);
@@ -59,54 +59,60 @@ class MainPage extends Component {
         this.setState({postCards: postCards});
     }
 
-    handleShownPosts(shownPosts){
-        let currentComponent=this;
-        console.log("MainPage: "+shownPosts)
-        var url="http://localhost:8000/post/posts/"
-        if(shownPosts=="followed"){
-            url+="followed-channels-post";
-        } else if(shownPosts=="newest"){
-            url+="new-posts";
-        } else if(shownPosts=="hottest"){
-            url+="hot-posts";
+    handleShownPosts(shownPosts) {
+        let currentComponent = this;
+        var url = "http://localhost:8000/post/posts/";
+        if (shownPosts == "followed") {
+            url += "followed-channels-post";
+        } else if (shownPosts == "newest") {
+            url += "new-posts";
+        } else if (shownPosts == "hottest") {
+            url += "hot-posts";
         } else {
-            url+="participated-posts";
+            url += "participated-posts";
         }
-        console.log("access-token: "+localStorage.getItem("access-token"))
-        fetch(url, { method: 'GET' ,
-                headers:{
-                        "Content-Type": "application/json", 
-                        "Access-Control-Origin": "*",
-                        'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-                }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+        console.log("access-token: " + localStorage.getItem("access-token"));
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
-            console.log(data)
-            var tmp=[]
-            data.posts.reverse();
-            for(let i=0;i<data.posts.length;i++){
-                var post=data.posts[i];
-                tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
-                    postMedia:post.media});
-            }
-            currentComponent.setState({postCards:tmp});
-        })
-        .catch(function(err){
-            //TODO
-            console.log(err);
-        })
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                var tmp = [];
+                data.posts.reverse();
+                for (let i = 0; i < data.posts.length; i++) {
+                    var post = data.posts[i];
+                    tmp.push({
+                        id: post.id,
+                        author: post.post_owner,
+                        title: post.title,
+                        postSummary: post.summary,
+                        liked: false,
+                        disliked: false,
+                        postMedia: post.media
+                    });
+                }
+                currentComponent.setState({postCards: tmp});
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
     }
 
     render() {
         const {classes} = this.props;
         return (
-            <Container >
+            <Container>
                 <SortBy onChange={this.handleShownPosts}/>
                 <div className={classes.container}>
                     <PostList onDisLike={this.handleDisLikePost}
