@@ -212,8 +212,8 @@ class PostPage extends Component {
                                                     onLike={this.handleLikePost}
                                                     onDisLike={this.handleDisLikePost}
                                                     postCard={this.state.post}/>
-                                <IconButton
-                                    className={classes.link} aria-label="share">
+                                <IconButton onClick={() => this.copyToClipboard(window.location.href)}
+                                            className={classes.link} aria-label="share">
                                     <ShareIcon/>
                                 </IconButton>
                                 <Badge badgeContent={120} color={'primary'}>
@@ -247,6 +247,27 @@ class PostPage extends Component {
     randomAvatarImage() {
         return this.state.post.profile_image
     }
+
+    copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        const selected =
+            document.getSelection().rangeCount > 0
+                ? document.getSelection().getRangeAt(0)
+                : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
+        }
+        alert("Share link copied to clipboard")
+    };
 
 }
 

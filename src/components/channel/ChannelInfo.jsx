@@ -28,26 +28,26 @@ const styles = theme => (
 class ChannelInfo extends Component {
 
     state = {
-        followed:false,
+        followed: false,
     };
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps==this.props)return ;
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps == this.props) return;
         this.checkFollowedState();
-        
+
     }
 
-    checkFollowedState(){
-        this.setState({followed:false});
-        for(let i=0;i<this.props.info.followers_channel.length;i++){
+    checkFollowedState() {
+        this.setState({followed: false});
+        for (let i = 0; i < this.props.info.followers_channel.length; i++) {
             console.log("||||||||||||||||||||||||||||||||||||")
             console.log(this.props.info.followers_channel[i].source_name)
-            if(this.props.info.followers_channel[i].source_name==localStorage.getItem("username")){
-                this.setState({followed:true});
+            if (this.props.info.followers_channel[i].source_name == localStorage.getItem("username")) {
+                this.setState({followed: true});
                 break;
             }
         }
-        console.log("dskskdjksdksadksadksdak "+this.state.followed)
+        console.log("dskskdjksdksadksadksdak " + this.state.followed)
     }
 
 
@@ -60,15 +60,16 @@ class ChannelInfo extends Component {
                         <ImageAvatars avatarSrc={this.props.info.image} isList='true'/>
                     }
                     action={
-                        <ChannelInfoSettingButton canEdit={localStorage.getItem("username") === this.props.info.creator_username}
-                                                  followers={this.props.followers}
-                                                  authors={this.props.authors}
-                                                  editAuthors={this.props.info.authors}
-                                                  info={this.props.info}
-                                                  linkClass={classes.link}/>
+                        <ChannelInfoSettingButton
+                            canEdit={localStorage.getItem("username") === this.props.info.creator_username}
+                            followers={this.props.followers}
+                            authors={this.props.authors}
+                            editAuthors={this.props.info.authors}
+                            info={this.props.info}
+                            linkClass={classes.link}/>
                     }
                     title={<h5>{this.props.info.title}</h5>}
-                    subheader={"subject: "+this.props.info.subject+"\nfollowers: "+this.props.followers.length}
+                    subheader={"subject: " + this.props.info.subject + "\nfollowers: " + this.props.followers.length}
                 />
                 <CardMedia
                     image="/static/images/cards/paella.jpg"
@@ -83,7 +84,7 @@ class ChannelInfo extends Component {
                     <IconButton className={classes.link} aria-label={this.followOrUnFollowLabel(false)}>
                         {this.followOrUnFollowIcon()}
                     </IconButton>
-                    <IconButton className={classes.link} aria-label="share">
+                    <IconButton onClick={() => this.copyToClipboard(window.location.href)} className={classes.link} aria-label="share">
                         <ShareIcon color={"primary"}/>
                     </IconButton>
                 </CardActions>
@@ -99,14 +100,34 @@ class ChannelInfo extends Component {
     }
 
     followOrUnFollowIcon() {
-        var followed=this.state.followed;
-        console.log("FOLOOWWEDDD: "+followed)
+        var followed = this.state.followed;
+        console.log("FOLOOWWEDDD: " + followed)
         if (followed) {
             return <RemoveCircleIcon onClick={this.props.unfollow} color={"secondary"}/>
         }
         return <AddCircleIcon onClick={this.props.follow} color={"primary"}/>
     }
 
+    copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        const selected =
+            document.getSelection().rangeCount > 0
+                ? document.getSelection().getRangeAt(0)
+                : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
+        }
+        alert("Share link copied to clipboard")
+    };
 
 }
 

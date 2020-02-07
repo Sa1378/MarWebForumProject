@@ -19,8 +19,6 @@ import ScoreIcon from '@material-ui/icons/Score';
 import ImageAvatar from '../user profile/Avatar';
 
 
-
-
 const styles = theme => (
     {
         link: {
@@ -34,18 +32,18 @@ const styles = theme => (
                 outline: "none",
             }
         },
-        card:{
+        card: {
             backgroundColor: "rgb(240,240,240)",
-            marginBottom:"20px",
-            padding:"10px",
+            marginBottom: "20px",
+            padding: "10px",
         }
     }
 );
 
 
 class PostCard extends Component {
-    state={
-        avatar:{}
+    state = {
+        avatar: {}
     }
 
     render() {
@@ -91,11 +89,12 @@ class PostCard extends Component {
                                         onLike={this.props.onLike}
                                         onDisLike={this.props.onDisLike}
                                         postCard={this.props.postCard}/>
-                    <IconButton className={classes.link} aria-label="share">
+                    <IconButton id="share" onClick={() => this.copyToClipboard(window.location.href)}
+                                className={classes.link} aria-label="share">
                         <ShareIcon/>
                     </IconButton>
-                    <Badge badgeContent={120} color={'primary'} >
-                        <ScoreIcon />
+                    <Badge badgeContent={120} color={'primary'}>
+                        <ScoreIcon/>
                     </Badge>
                 </CardActions>
             </Card>
@@ -103,41 +102,66 @@ class PostCard extends Component {
     }
 
     showMedia() {
-        console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa")
-        console.log(this.props.postMedia)
+        console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa");
+        console.log(this.props.postMedia);
         return (
-            <img src={this.props.postMedia} width={'100%'} style={{maxWidth:"600px",minWidth:"600px"}} alt="Can't be shown."/>
+            <img src={this.props.postMedia} width={'100%'} style={{maxWidth: "600px", minWidth: "600px"}}
+                 alt="Can't be shown."/>
         )
     }
 
     componentWillMount() {
-        var currentComponent=this;
-        fetch('http://localhost:8000/account/profile/'+this.props.postCard.author,{
-                method:"GET",
-                headers:{
-                    "Content-Type": "application/json", 
-                    "Access-Control-Origin": "*",
-                    'Authorization': 'Bearer ' + localStorage.getItem("access-token")
-        }})
-        .then(function(response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
+        var currentComponent = this;
+        fetch('http://localhost:8000/account/profile/' + this.props.postCard.author, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             }
-            throw new Error("Server Error!");
         })
-        .then(function(data) {
+            .then(function (response) {
+                console.log(response)
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
 
-            console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-            console.log(data.image);
-            currentComponent.setState({avatar:data.image});
-            
-        })
-        .catch(function(err){
-            console.log(err);
-        //    window.location.href="/notfound";
-        })
+                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa");
+                console.log(data.image);
+                currentComponent.setState({avatar: data.image});
+
+            })
+            .catch(function (err) {
+                console.log(err);
+                //    window.location.href="/notfound";
+            })
     }
+
+
+    copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        const selected =
+            document.getSelection().rangeCount > 0
+                ? document.getSelection().getRangeAt(0)
+                : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
+        }
+        alert("Share link copied to clipboard")
+    };
+
 }
 
 export default withStyles(styles)(PostCard);

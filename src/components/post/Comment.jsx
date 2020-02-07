@@ -16,6 +16,8 @@ import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import EditDeleteComment from "./EditDeleteComment";
 import Badge from "@material-ui/core/Badge/Badge";
 import ScoreIcon from '@material-ui/icons/Score';
+import IconButton from "@material-ui/core/IconButton";
+import ShareIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 
 const styles = theme => (
@@ -87,6 +89,10 @@ class Comment extends Component {
                         <Badge badgeContent={120} color={'primary'}>
                             <ScoreIcon/>
                         </Badge>
+                        <IconButton id="share" onClick={() => this.copyToClipboard(window.location.href)}
+                                    className={classes.link} aria-label="share">
+                            <ShareIcon/>
+                        </IconButton>
                     </CardActions>
                 </Card>
             </Container>
@@ -107,6 +113,28 @@ class Comment extends Component {
     randomAvatarImage() {
         return this.props.comment.profile_image
     }
+
+    copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        const selected =
+            document.getSelection().rangeCount > 0
+                ? document.getSelection().getRangeAt(0)
+                : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
+        }
+        alert("Share link copied to clipboard")
+    };
+
 }
 
 export default withStyles(styles)(Comment);
