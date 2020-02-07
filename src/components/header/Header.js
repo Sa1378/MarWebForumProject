@@ -250,7 +250,7 @@ class Header extends Component {
                                 </div>
                                 <Button style={{margin: '5px'}} className={classes.newPostButton} onClick={() => {
                                     window.location.href = "/channel-create"
-                                }} variant='contained'>
+                                }} variant='contained' color='secondary'>
                                     New Channel
                                 </Button>
                                 <div onClick={this.clickNotif} className="d-inline">
