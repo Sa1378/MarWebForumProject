@@ -24,7 +24,6 @@ class DeletePostAlert extends Component {
             console.log(data);
             if (myThis.props.isPost === true) {
                 window.location.href = "/";
-                window.location.reload()
             } else {
                 window.location.reload()
             }
