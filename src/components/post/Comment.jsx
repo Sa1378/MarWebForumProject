@@ -16,6 +16,7 @@ import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import EditDeleteComment from "./EditDeleteComment";
 import Badge from "@material-ui/core/Badge/Badge";
 import ScoreIcon from '@material-ui/icons/Score';
+import CardMedia from "@material-ui/core/CardMedia";
 
 
 const styles = theme => (
@@ -71,6 +72,12 @@ class Comment extends Component {
                                      to={"/profile/" + this.props.comment.name}>{this.props.comment.name}</Link>}
                         subheader="September 14, 2016"
                     />
+                    <CardMedia
+                        image="../../static/images/cards/wallpaper4.jpg"
+                        title="Paella dish"
+                    />
+                    {this.image()}
+
                     <CardContent>
                         <Typography paragraph>
                             {this.props.comment.body}
@@ -106,6 +113,11 @@ class Comment extends Component {
 
     randomAvatarImage() {
         return this.props.comment.profile_image
+    }
+
+    image() {
+        return <img src={this.props.comment.media} width={'100%'} alt={"HI"}/>
+
     }
 }
 
