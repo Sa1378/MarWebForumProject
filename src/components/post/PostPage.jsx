@@ -145,7 +145,7 @@ class PostPage extends Component {
 
 
     state = {
-        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit'},
+        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit', user: {id:'100000'}},
         comments: [],
     };
 
