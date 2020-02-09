@@ -221,7 +221,7 @@ class PostPage extends Component {
                                 }
                                 action={
 
-                                    <EditDeletePost postPage={this.props.match.params.name}/>
+                                    <EditDeletePost postPage={this.props.match.params.name} post={this.state.post}/>
                                 }
                                 title={this.state.post.title}
                                 subheader={this.state.post.create_date}

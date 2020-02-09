@@ -138,7 +138,7 @@ class NewPost extends Component {
 
     checkForContent() {
         if (this.props.post)
-            return this.props.post.content;
+            return this.props.post.body;
         return ''
     }
 
@@ -148,6 +148,20 @@ class NewPost extends Component {
         return 'Create'
     }
 
+    method() {
+        if (this.props.edit) {
+            return 'PUT'
+        }
+        return 'POST'
+    }
+    url(){
+        if (this.props.edit) {
+            return 'http://localhost:8000/post/post-view/edit/' + this.props.id
+        }
+        return 'http://localhost:8000/post/post-view'
+    }
+
+
     createPost() {
         var currentComponent = this;
         const formData = new FormData();
@@ -156,10 +170,10 @@ class NewPost extends Component {
         formData.append('channel', parseInt(currentComponent.state.value))
         formData.append('body', document.getElementById("content").value)
         formData.append('media', document.getElementById("media").files[0])
+        let myThis = this;
 
-
-        fetch('http://localhost:8000/post/post-view/edit/' + this.props.id, {
-            method: "POST",
+        fetch(myThis.url(), {
+            method: myThis.method(),
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
@@ -180,7 +194,9 @@ class NewPost extends Component {
                 console.log(err);
             })
 
+
     }
+
 
 }
 
