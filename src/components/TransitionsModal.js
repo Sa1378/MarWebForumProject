@@ -181,7 +181,7 @@ export default function TransitionsModal(props) {
         } else if (props.buttonName === 'authors') {
             return <ListOfAccounts listOfAccount={props.accounts}/>
         } else if (props.buttonName === 'editPost') {
-            return <NewPost post={props.post}/>
+            return <NewPost post={props.post} edit={true}/>
         } else if (props.buttonName === 'deletePost') {
             return <DeletePostAlert id={props.postPage} isPost={true}/>
         } else if (props.buttonName === 'editComment') {
