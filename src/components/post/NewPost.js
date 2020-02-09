@@ -198,11 +198,12 @@ class NewPost extends Component {
             .then(function (data) {
                 console.log(data);
                 currentComponent.setState({snackBar: true});
-                if (this.props.edit) {
-                    window.location.reload()
-                } else {
-                    window.location.href = "/";
-                }
+                // if (this.props.edit) {
+                //     window.location.reload()
+                // } else {
+                //     window.location.href = "/";
+                // }
+                window.location.reload()
             })
             .catch(function (err) {
                 console.log(err);
