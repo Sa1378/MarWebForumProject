@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -15,9 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 
 
 const styles = theme => ({
-    outline:{
-        
-    }
+    outline: {}
 });
 
 class NewPost extends Component {
@@ -30,14 +28,14 @@ class NewPost extends Component {
 
 
     state = {
-        snackBar:false,
+        snackBar: false,
         value: "1",
         channels: []
     };
 
     componentWillMount() {
         let currentComponent = this;
-        fetch('http://localhost:8000/channel/channels/'+localStorage.getItem("username"), {
+        fetch('http://localhost:8000/channel/channels/' + localStorage.getItem("username"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +52,7 @@ class NewPost extends Component {
             })
             .then(function (data) {
                 console.log(data.channels)
-                currentComponent.setState({ channels: data.channels })
+                currentComponent.setState({channels: data.channels})
             })
             .catch(function (err) {
                 //TODO
@@ -64,18 +62,17 @@ class NewPost extends Component {
     }
 
 
-
     render() {
         const handleClose = (event, reason) => {
             if (reason === 'clickaway') {
-              return;
+                return;
             }
         }
         const changePlace = (event) => {
             console.log(event);
-            this.setState({ value: event.target.value })
+            this.setState({value: event.target.value})
         }
-        const {classes}=this.props;
+        const {classes} = this.props;
         return (
             <div className={classes.outline}>
                 <Snackbar open={this.state.snackBar} autoHideDuration={6000} onClose={handleClose}>
@@ -83,29 +80,30 @@ class NewPost extends Component {
                         Your post was created successfully!
                     </Alert>
                 </Snackbar>
-                <CssBaseline />
+                <CssBaseline/>
                 <Container>
-                    <Typography component="div" style={{ backgroundColor: 'white', width: '1000px' }}
-                        className="border rounded">
+                    <Typography component="div" style={{backgroundColor: 'white', width: '1000px'}}
+                                className="border rounded">
                         <form className="jumbotron d-flex flex-column justify-content-center">
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField name="title" id="title" label="Title" variant="filled" defaultValue={this.checkForTitle()} />
+                                <TextField name="title" id="title" label="Title" variant="filled"
+                                           defaultValue={this.checkForTitle()}/>
                             </div>
                             <div className="form-group d-flex justify-content-center my-3">
-                                <TextField style={{ width: '100%' }} id="content" label="Content" variant="filled"
-                                    multiline={true} defaultValue={this.checkForContent()} />
+                                <TextField style={{width: '100%'}} id="content" label="Content" variant="filled"
+                                           multiline={true} defaultValue={this.checkForContent()}/>
 
                             </div>
                             <div className="form-group d-flex justify-content-center">
                                 <Button className='mx-1'
-                                    variant="contained"
-                                    component="label"
+                                        variant="contained"
+                                        component="label"
                                 >
                                     Post Image
                                     <input
                                         type="file"
                                         id='media'
-                                        style={{ display: "none" }}
+                                        style={{display: "none"}}
                                     />
                                 </Button>
                             </div>
@@ -116,13 +114,13 @@ class NewPost extends Component {
                                 <Select labelId="label" id="select" value={this.state.value} onChange={changePlace}>
                                     {this.state.channels.map(item => (
                                         <MenuItem name='value' key={item.id} value={item.id}
-                                            onClick={changePlace}>{item.title}</MenuItem>
+                                                  onClick={changePlace}>{item.title}</MenuItem>
                                     ))}
                                 </Select>
                             </div>
                             <div className='d-flex justify-content-center'>
                                 <Button className="btn btn-primary" color="primary"
-                                    variant="contained" onClick={this.createPost}>{this.buttonName()}</Button>
+                                        variant="contained" onClick={this.createPost}>{this.buttonName()}</Button>
                             </div>
 
                         </form>
@@ -158,32 +156,29 @@ class NewPost extends Component {
         formData.append('channel', parseInt(currentComponent.state.value))
         formData.append('body', document.getElementById("content").value)
         formData.append('media', document.getElementById("media").files[0])
-        console.log(formData.get("title"))
-        console.log(document.getElementById("title").value)
-        //console.log(data);
-        //console.log(JSON.stringify(data))
-        fetch('http://localhost:8000/post/post-view', {
+
+
+        fetch('http://localhost:8000/post/post-view/edit/' + this.props.id, {
             method: "POST",
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("access-token")
             },
             body: formData
         })
-        .then(function (response) {
-            console.log(response)
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Server Error!");
-        })
-        .then(function (data) {
-            console.log(data);
-            currentComponent.setState({snackBar:true});
-            window.location.href = "/";
-        })
-        .catch(function (err) {
-            console.log(err);
-        })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Server Error!");
+            })
+            .then(function (data) {
+                console.log(data);
+                currentComponent.setState({snackBar: true});
+                window.location.href = "/";
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
 
     }
 
