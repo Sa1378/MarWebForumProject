@@ -102,7 +102,7 @@ class NewPost extends Component {
                                     Post Image
                                     <input
                                         type="file"
-                                        id='media'
+                                        id='postmedia'
                                         style={{display: "none"}}
                                     />
                                 </Button>
@@ -169,7 +169,7 @@ class NewPost extends Component {
         formData.append('user', parseInt(localStorage.getItem("userId")))
         formData.append('channel', parseInt(currentComponent.state.value))
         formData.append('body', document.getElementById("content").value)
-        formData.append('media', document.getElementById("media").files[0])
+        formData.append('media', document.getElementById("postmedia").files[0])
         let myThis = this;
 
         fetch(myThis.url(), {
