@@ -156,7 +156,7 @@ class NewPost extends Component {
     }
     url(){
         if (this.props.edit) {
-            return 'http://localhost:8000/post/post-view/edit/' + this.props.id
+            return 'http://localhost:8000/post/post-view/edit/' + this.props.post.id
         }
         return 'http://localhost:8000/post/post-view'
     }
