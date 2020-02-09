@@ -65,7 +65,7 @@ class Comment extends Component {
                             </Avatar>
                         }
                         action={
-                            this.isMyComment(this.props.comment.loggedInUser, this.props.comment.name)
+                            this.isMyComment(this.props.comment.user.id, localStorage.getItem('userId'))
                         }
                         title={<Link className={classes.link + " nav-link font-weight-bold font-italic"}
                                      style={{color: 'black'}}
