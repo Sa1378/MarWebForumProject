@@ -6,8 +6,8 @@ class DeletePostAlert extends Component {
 
     deleteComment() {
         let myThis = this;
-        fetch(this.url(), {
-            method: "PUT",
+        fetch(myThis.url(), {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -20,6 +20,7 @@ class DeletePostAlert extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
+            window.location.reload()
         }).catch(function (error) {
             console.log(error)
         })
@@ -27,9 +28,9 @@ class DeletePostAlert extends Component {
 
     url() {
         if (this.props.isPost === true) {
-            return "http://localhost:8000/post//" + this.props.id
+            return "http://localhost:8000/post/post-view/delete/" + this.props.id
         } else {
-            return "http://localhost:8000/post/delete-action/" + this.props.id + "/" + this.props.comment_id
+            return "http://localhost:8000/post/delete-comment/" + this.props.comment_id
         }
     }
 
@@ -38,7 +39,7 @@ class DeletePostAlert extends Component {
         return (
             <React.Fragment>
                 <Button type="submit" color="secondary" variant="contained" className="m-2"
-                        onClick={this.deleteComment}> Delete </Button>
+                        onClick={() => this.deleteComment()}> Delete </Button>
                 <Button color="primary" variant="contained" className="m-2"> Cancel </Button>
             </React.Fragment>
         );

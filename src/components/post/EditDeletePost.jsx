@@ -6,8 +6,8 @@ class EditDeletePost extends Component {
     render() {
         return (
             <React.Fragment>
-                <TransitionsModal post={this.props.post} buttonName="editPost"/>
-                <TransitionsModal post={this.props.post} buttonName="deletePost" />
+                <TransitionsModal postPage={this.props.postPage} buttonName="editPost"/>
+                <TransitionsModal postPage={this.props.postPage} buttonName="deletePost" />
             </React.Fragment>
         );
     }

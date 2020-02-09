@@ -33,8 +33,8 @@ const styles = theme => (
                 outline: "none",
             }
         },
-        reply:{
-            marginLeft:"20px",
+        reply: {
+            marginLeft: "20px",
         }
     }
 );
@@ -47,7 +47,7 @@ class PostPage extends Component {
         this.handleDisLikeComment = this.handleDisLikeComment.bind(this);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
-        this.showComments=this.showComments.bind(this);
+        this.showComments = this.showComments.bind(this);
     }
 
     componentDidMount() {
@@ -81,7 +81,7 @@ class PostPage extends Component {
         console.log(this.state.comments)
     }
 
-    setComments(comments , target) {
+    setComments(comments, target) {
         for (let i = 0; i < comments.length; i++) {
             // if (comments[i].reply !== )
         }
@@ -221,7 +221,7 @@ class PostPage extends Component {
                                 }
                                 action={
 
-                                    <EditDeletePost post={this.state.post}/>
+                                    <EditDeletePost postPage={this.props.match.params.name}/>
                                 }
                                 title={this.state.post.title}
                                 subheader={this.state.post.create_date}
@@ -273,13 +273,13 @@ class PostPage extends Component {
         );
     }
 
-    showComments(){
+    showComments() {
         const {classes} = this.props;
-        var tmp=[];
-        for(let i=0;i<this.state.comments.length;i++){
-            var comment=this.state.comments[i];
-            if(!comment.parent_comment){
-                
+        var tmp = [];
+        for (let i = 0; i < this.state.comments.length; i++) {
+            var comment = this.state.comments[i];
+            if (!comment.parent_comment) {
+
             }
         }
     }

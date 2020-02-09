@@ -55,6 +55,7 @@ class NewComment extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
+            window.location.reload()
         }).catch(function (error) {
             console.log(error)
         })
