@@ -84,7 +84,7 @@ class MainPage extends Component {
                         postSummary: post.summary,
                         liked: post.liked,
                         disliked: post.disliked,
-                        postMedia: "http://localhost:8000/G" + post.media
+                        postMedia: "http://localhost:8000" + post.media
                     });
                 }
                 currentComponent.setState({postCards: posts});
@@ -109,8 +109,7 @@ class MainPage extends Component {
             })
             .catch(function (err) {
                 console.log(err);
-                console.log("injaaaaaaaaaaaaa")
-                // window.location.href = "/notfound";
+                window.location.href = "/notfound";
             })
     }
 
