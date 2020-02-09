@@ -76,6 +76,7 @@ class SignIn extends Component {
             .catch(function (err) {
                 console.log(err);
             })
+
     }
 
     forgetPassword() {
