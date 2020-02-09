@@ -114,7 +114,7 @@ class NewPost extends Component {
                                 <Select labelId="label" id="select" value={this.state.value} onChange={changePlace}>
                                     {this.state.channels.map(item => (
                                         <MenuItem name='value' key={item.id} value={item.id}
-                                                  onClick={changePlace}>{item.title}</MenuItem>
+                                                  onClick={changePlace} disabled={this.isEdit()}>{item.title}</MenuItem>
                                     ))}
                                 </Select>
                             </div>
@@ -129,6 +129,10 @@ class NewPost extends Component {
             </div>
         );
     };
+
+    isEdit() {
+        return this.props.edit;
+    }
 
     checkForTitle() {
         if (this.props.post)

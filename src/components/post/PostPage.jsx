@@ -284,9 +284,8 @@ class PostPage extends Component {
     }
 
     canEdit() {
-        if (this.state.post.user.id === localStorage.getItem("userId"))
+        if (this.state.post.user.id == localStorage.getItem("userId"))
             return <EditDeletePost postPage={this.props.match.params.name} post={this.state.post}/>
-
     }
 
     randomImage() {
