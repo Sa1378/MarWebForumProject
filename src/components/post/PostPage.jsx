@@ -68,7 +68,7 @@ class PostPage extends Component {
             if (response.ok) {
                 return response.json()
             }
-            throw new Error("Server Error!");
+            window.location.href = "/notfound"
         }).then(function (data) {
             console.log(data);
             myThis.setState({post: data.post});
