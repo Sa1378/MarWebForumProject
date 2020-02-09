@@ -7,7 +7,7 @@ class DeletePostAlert extends Component {
     deleteComment() {
         let myThis = this;
         fetch(this.url(), {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Origin": "*",
@@ -27,7 +27,7 @@ class DeletePostAlert extends Component {
 
     url() {
         if (this.props.isPost === true) {
-            return "http://localhost:8000/post/delete-action/" + this.props.id
+            return "http://localhost:8000/post//" + this.props.id
         } else {
             return "http://localhost:8000/post/delete-action/" + this.props.id + "/" + this.props.comment_id
         }

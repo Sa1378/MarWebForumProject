@@ -4,18 +4,16 @@ import "../static/css/App.css";
 import Header from "./header/Header";
 import MainPage from "./main-page/MainPage";
 import Login from "./login/Login";
-import Register from "./Register"
 import Profile from "./user profile/Profile";
 import EditProfile from "./user profile/EditProfile";
 import NewPost from "./post/NewPost";
-import Notifications from "./Notifications";
 import Search from "./search/Search";
 import PostPage from "./post/PostPage";
 import Channel from "./channel/Channel";
 import 'bootstrap/dist/css/bootstrap.css';
 import CreateChannel from "./channel/CreateChannel";
-import SignUp from "./login/SignUp";
 import NotFound from "./NotFound";
+import ForgotPassword from "./ForgotPassword";
 
 class App extends Component {
 
@@ -33,7 +31,7 @@ class App extends Component {
                          "Access-Control-Origin": "*"},
                 body: JSON.stringify(data)
         })
-        .then(function(response){ 
+        .then(function(response){
             console.log("refresshhh "+response)
             if(response.status=="200"){
                 console.log(response)
@@ -46,7 +44,7 @@ class App extends Component {
             console.log("||||||||||||||||||||||||||||||||||||||||")
             console.log(data.access)
             console.log(localStorage.getItem("access-token"))
-            if(localStorage.getItem("access-token")==data.access)return 
+            if(localStorage.getItem("access-token")==data.access)return
             localStorage.setItem("access-token",data.access)
         //    window.location.reload();
         })
@@ -70,9 +68,9 @@ class App extends Component {
                         <Route path="/newpost" render={(props) => <NewPost {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/channel-create" render={(props) => <CreateChannel {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/channel/:channelId" render={(props) => <Channel {...props} refreshToken={this.refreshToken}/>}/>
-                        <Route path="/notifications" render={(props) => <Notifications {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path="/search/:searchQuery" render={(props) => <Search {...props} refreshToken={this.refreshToken}/>}/>
                         <Route path={"/post/:name"} render={(props) => <PostPage {...props} refreshToken={this.refreshToken}/>}/>
+                        <Route path={"/password/reset"} component={ForgotPassword}/>
                         <Route path={"/notfound"} render={(props) => <NotFound {...props} refreshToken={this.refreshToken}/>}/>
                     </div>
                 </BrowserRouter>
