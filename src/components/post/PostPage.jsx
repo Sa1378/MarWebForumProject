@@ -32,6 +32,9 @@ const styles = theme => (
             "&:focus": {
                 outline: "none",
             }
+        },
+        reply:{
+            marginLeft:"20px",
         }
     }
 );
@@ -44,6 +47,7 @@ class PostPage extends Component {
         this.handleDisLikeComment = this.handleDisLikeComment.bind(this);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
+        this.showComments=this.showComments.bind(this);
     }
 
     componentDidMount() {
@@ -221,7 +225,9 @@ class PostPage extends Component {
                                 </Badge>
                             </CardActions>
                         </Card>
-
+                        {
+                            this.showComments()
+                        }
                         {this.state.comments.map(comment => <Comment
                             key={comment.id}
                             comment={comment}
@@ -238,6 +244,17 @@ class PostPage extends Component {
 
             </Container>
         );
+    }
+
+    showComments(){
+        const {classes} = this.props;
+        var tmp=[];
+        for(let i=0;i<this.state.comments.length;i++){
+            var comment=this.state.comments[i];
+            if(!comment.parent_comment){
+                
+            }
+        }
     }
 
     randomImage() {
