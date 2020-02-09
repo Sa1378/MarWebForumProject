@@ -102,7 +102,10 @@ class Comment extends Component {
 
     isMyComment(loggedInUser, name) {
         const {classes} = this.props;
-        if (loggedInUser === name) {
+        console.log("--------------------")
+        console.log(loggedInUser, name)
+        console.log("--------------------")
+        if (loggedInUser == name) {
             return (
                 <EditDeleteComment comment={this.props.comment} postPage={this.props.postPage}/>
             )
