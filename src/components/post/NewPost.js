@@ -172,7 +172,12 @@ class NewPost extends Component {
         const formData = new FormData();
         formData.append('title', document.getElementById("title").value)
         formData.append('user', parseInt(localStorage.getItem("userId")))
-        formData.append('channel', parseInt(currentComponent.state.value))
+        if (this.props.edit) {
+            formData.append('channel', parseInt(this.props.post.channel))
+        }
+        else{
+        		formData.append('channel', parseInt(currentComponent.state.value))
+        }
         formData.append('body', document.getElementById("content").value)
         formData.append('media', document.getElementById("postmedia").files[0])
         let myThis = this;
