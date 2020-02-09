@@ -154,7 +154,8 @@ class NewPost extends Component {
         }
         return 'POST'
     }
-    url(){
+
+    url() {
         if (this.props.edit) {
             return 'http://localhost:8000/post/post-view/edit/' + this.props.post.id
         }
@@ -188,7 +189,11 @@ class NewPost extends Component {
             .then(function (data) {
                 console.log(data);
                 currentComponent.setState({snackBar: true});
-                window.location.href = "/";
+                if (this.props.edit) {
+                    window.location.reload()
+                } else {
+                    window.location.href = "/";
+                }
             })
             .catch(function (err) {
                 console.log(err);
