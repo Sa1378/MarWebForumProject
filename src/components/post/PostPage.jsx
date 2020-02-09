@@ -47,7 +47,7 @@ class PostPage extends Component {
     }
 
     componentDidMount() {
-        console.log("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
+        console.log("-----");
         this.getPost()
     }
 
@@ -74,6 +74,7 @@ class PostPage extends Component {
         }).catch(function (error) {
             console.log(error)
         })
+        console.log(this.state.comments)
     }
 
     setComments(comments , target) {

@@ -8,7 +8,7 @@ class EditDeleteComment extends Component {
         return (
             <React.Fragment>
                 <TransitionsModal comment={this.props.comment} postPage={this.props.postPage} buttonName="editComment"/>
-                <TransitionsModal comment={this.props.comment} post={this.props.post} buttonName="deleteComment"/>
+                <TransitionsModal comment={this.props.comment} postPage={this.props.postPage} buttonName="deleteComment"/>
             </React.Fragment>
         );
     }

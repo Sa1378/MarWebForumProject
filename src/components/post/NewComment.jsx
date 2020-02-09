@@ -31,12 +31,12 @@ class NewComment extends Component {
     insert() {
         const data = new FormData();
         let myThis = this;
-        console.log(this.props.comment);
+        console.log(this.getId(), this.props.postPage);
         data.append('body', document.getElementById("body" + this.getId()).value);
         data.append('post_related', parseInt(this.props.postPage));
         // console.log(this.postPage)
         if (this.props.comment)
-            data.append('replies', parseInt(this.props.comment.id));
+            data.append('parent_comment', parseInt(this.props.comment.id));
 
         data.append('media', ((document.getElementById("media" + this.getId()).files[0] == "") ? null : document
             .getElementById("media" + this.getId()).files[0]));
@@ -105,6 +105,9 @@ class NewComment extends Component {
     }
 
     replyTo() {
+        if (this.props.isEdit) {
+            return "http://localhost:8000/post/insert-comment/" + this.props.comment.id
+        }
         return "http://localhost:8000/post/insert-comment"
     }
 
