@@ -220,8 +220,7 @@ class PostPage extends Component {
                                     </Avatar>
                                 }
                                 action={
-
-                                    <EditDeletePost postPage={this.props.match.params.name} post={this.state.post}/>
+                                    this.canEdit()
                                 }
                                 title={this.state.post.title}
                                 subheader={this.state.post.create_date}
@@ -282,6 +281,12 @@ class PostPage extends Component {
 
             }
         }
+    }
+
+    canEdit() {
+        if (this.state.post.user.id === localStorage.getItem("userId"))
+            return <EditDeletePost postPage={this.props.match.params.name} post={this.state.post}/>
+
     }
 
     randomImage() {
