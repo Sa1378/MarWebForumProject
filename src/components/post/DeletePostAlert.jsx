@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 class DeletePostAlert extends Component {
 
     deleteComment() {
+
+
         let myThis = this;
         fetch(myThis.url(), {
             method: "DELETE",
@@ -20,8 +22,9 @@ class DeletePostAlert extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
-            if (this.props.isPost === true) {
+            if (myThis.props.isPost === true) {
                 window.location.href = "/";
+                window.location.reload()
             } else {
                 window.location.reload()
             }
