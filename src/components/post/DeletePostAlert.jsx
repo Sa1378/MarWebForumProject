@@ -20,7 +20,11 @@ class DeletePostAlert extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
-            window.location.reload()
+            if (this.props.isPost === true) {
+                window.location.href = "/";
+            } else {
+                window.location.reload()
+            }
         }).catch(function (error) {
             console.log(error)
         })
