@@ -4,7 +4,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ShareIcon from '@material-ui/icons/Share';
@@ -48,12 +47,12 @@ class PostCard extends Component {
         post: this.props.postCard
     }
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.likePost=this.likePost.bind(this)
-        this.disLikePost=this.disLikePost.bind(this)
-        this.handleLikePost=this.handleLikePost.bind(this)
-        this.handleDisLikePost=this.handleDisLikePost.bind(this)
+        this.likePost = this.likePost.bind(this)
+        this.disLikePost = this.disLikePost.bind(this)
+        this.handleLikePost = this.handleLikePost.bind(this)
+        this.handleDisLikePost = this.handleDisLikePost.bind(this)
     }
 
 
@@ -82,7 +81,11 @@ class PostCard extends Component {
         if (isDelete) {
             type = "DELETE"
         }
+<<<<<<< HEAD
         //console.log(this.props.postCard.id)
+=======
+        console.log(this.props.postCard.id);
+>>>>>>> 191f89e06521604822743f9e92969192875029e3
         let url = "http://localhost:8000/post/like/" + this.props.postCard.id;
         this.sendPostRequest(url, type)
     }
@@ -140,11 +143,7 @@ class PostCard extends Component {
                 <Link to={'/post/' + this.props.postCard.id} style={this.style} className="nav-link">
                     <CardActionArea>
                         <CardMedia
-                            // component={}
-                            // alt={}
-                            // height={}
-                            // image={}
-                            // title={}
+
                         />
                         <CardContent>
                             <Typography variant="body2" color="textSecondary" component="p">
@@ -172,8 +171,12 @@ class PostCard extends Component {
     }
 
     showMedia() {
+<<<<<<< HEAD
         //console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa");
         //console.log(this.props.postMedia);
+=======
+        console.log(this.props.postMedia);
+>>>>>>> 191f89e06521604822743f9e92969192875029e3
         return (
             <img src={this.props.postMedia} width={'100%'} style={{maxWidth: "600px", minWidth: "600px"}}
                  alt="Can't be shown."/>
@@ -198,11 +201,13 @@ class PostCard extends Component {
                 throw new Error("Server Error!");
             })
             .then(function (data) {
+<<<<<<< HEAD
 
                 //console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa");
                 //console.log(data.image);
+=======
+>>>>>>> 191f89e06521604822743f9e92969192875029e3
                 currentComponent.setState({avatar: data.image});
-
             })
             .catch(function (err) {
                 //console.log(err);
