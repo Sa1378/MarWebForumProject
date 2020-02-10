@@ -47,7 +47,6 @@ class PostPage extends Component {
         this.handleDisLikeComment = this.handleDisLikeComment.bind(this);
         this.handleLikePost = this.handleLikePost.bind(this);
         this.handleDisLikePost = this.handleDisLikePost.bind(this);
-        this.showComments = this.showComments.bind(this);
     }
 
     componentDidMount() {
@@ -251,9 +250,6 @@ class PostPage extends Component {
                                 </Badge>
                             </CardActions>
                         </Card>
-                        {
-                            this.showComments()
-                        }
                         {this.state.comments.map(comment => <Comment
                             key={comment.id}
                             comment={comment}
@@ -272,17 +268,6 @@ class PostPage extends Component {
         );
     }
 
-    showComments() {
-        const {classes} = this.props;
-        var tmp = [];
-        for (let i = 0; i < this.state.comments.length; i++) {
-            var comment = this.state.comments[i];
-            if (!comment.parent_comment) {
-
-            }
-        }
-    }
-
     canEdit() {
         if (this.state.post.user.id == localStorage.getItem("userId"))
             return <EditDeletePost postPage={this.props.match.params.name} post={this.state.post}/>
@@ -293,7 +278,12 @@ class PostPage extends Component {
     }
 
     randomAvatarImage() {
-        return this.state.post.profile_image
+        console.log("IMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGEEEEE")
+        console.log(this.state.post)
+        if(this.state.post.user.profile)
+            return this.state.post.user.profile.image
+        else
+            return ""
     }
 
     copyToClipboard(str) {

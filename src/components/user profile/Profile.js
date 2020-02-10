@@ -13,6 +13,8 @@ import '../../static/css/material.css'
 import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from '@material-ui/icons/Share';
 import CardActions from "@material-ui/core/CardActions";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 
 const styles = theme => ({
@@ -36,6 +38,9 @@ class Profile extends Component {
         this.props.refreshToken();
     }
 
+    state={
+        shareCopy:false,
+    }
 
     componentWillMount() {
         this.getUserData();
@@ -100,23 +105,57 @@ class Profile extends Component {
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("POSTTTSSSSS")
-                console.log(data)
-                var tmp = []
+                let tmp = [];
                 data.posts.reverse();
-                for (let i = 0; i < data.posts.length; i++) {
-                    var post = data.posts[i];
-                    tmp.push({
-                        id: post.id,
-                        author: post.post_owner,
-                        title: post.title,
-                        postSummary: post.summary,
-                        liked: false,
-                        disliked: false,
-                        postMedia: post.media
-                    });
+                let len=data.posts.length;
+                console.log("POOOOOOOOOOOOOOOSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTSSSSSSSSS")
+                console.log(data.posts)
+                for (let i = 0; i < len; i++) {
+                    let post = data.posts[i];
+                    console.log(post);
+                    fetch("http://localhost:8000/post/post-view/" + post.id, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Origin": "*",
+                            'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+                        }
+                    }).then(function (response) {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        window.location.href = "/notfound"
+                    }).then(function (data2) {
+                        console.log(data2);
+                        console.log(post.id)
+                        tmp.push(0)
+                        post.liked=data2.post.liked;
+                        post.disliked=data2.post.disliked;
+                        console.log(post.id);
+                        if(tmp.length==len){
+                            tmp=[]
+                            for(let i=0;i<len;i++){
+                                let post=data.posts[i];
+                                console.log(post)
+                                tmp.push({
+                                    id: post.id,
+                                    author: post.post_owner,
+                                    title: post.title,
+                                    postSummary: post.summary,
+                                    liked: post.liked,
+                                    disliked: post.disliked,
+                                    postMedia: post.media
+                                });
+                            }
+                            console.log("SAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGG")
+                            console.log(tmp);
+                            currentComponent.setState({postCards: tmp});
+                        }
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
+                    
                 }
-                currentComponent.setState({postCards: tmp});
             })
             .catch(function (err) {
                 console.log(err);
@@ -288,16 +327,25 @@ class Profile extends Component {
         const {classes} = this.props;
         console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
         console.log(this.state.info)
+        const handleClose = (event, reason) => {
+            if (reason === 'clickaway') {
+                return;
+            }
+            this.setState({shareCopy:false})
+        }
         return (
             <React.Fragment>
+                <Snackbar open={this.state.shareCopy} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="info">
+                        Share link copied to clipboard!
+                    </Alert>
+                </Snackbar>
                 <CssBaseline/>
                 <Container>
                     <Typography component="div" style={{backgroundColor: 'white', height: '88vh',}}
                                 className="border rounded">
                         <div className="d-flex justify-content-end p-2">
                             {this.formatSetting()}
-                        </div>
-                        <div className="d-flex justify-content-end p-2">
                             <IconButton onClick={() => this.copyToClipboard(window.location.href)}
                                         aria-label="share">
                                 <ShareIcon color={"primary"}/>
@@ -355,7 +403,7 @@ class Profile extends Component {
             document.getSelection().removeAllRanges();
             document.getSelection().addRange(selected);
         }
-        alert("Share link copied to clipboard")
+        this.setState({shareCopy:true})
     };
 }
 

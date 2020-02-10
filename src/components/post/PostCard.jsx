@@ -42,14 +42,84 @@ const styles = theme => (
 
 
 class PostCard extends Component {
+
     state = {
-        avatar: {}
+        avatar: {},
+        post: this.props.postCard
+    }
+
+    constructor(props){
+        super(props)
+        this.likePost=this.likePost.bind(this)
+        this.disLikePost=this.disLikePost.bind(this)
+        this.handleLikePost=this.handleLikePost.bind(this)
+        this.handleDisLikePost=this.handleDisLikePost.bind(this)
+    }
+
+
+    sendPostRequest(url, type) {
+        fetch(url, {
+            method: type,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Origin": "*",
+                'Authorization': 'Bearer ' + localStorage.getItem("access-token")
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw new Error("Server Error!");
+        }).then(function (data) {
+            console.log(data);
+        }).catch(function (error) {
+            console.log(error)
+        })
+    }
+
+    likePost(isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
+        console.log(this.props.postCard.id)
+        let url = "http://localhost:8000/post/like/" + this.props.postCard.id;
+        this.sendPostRequest(url, type)
+    }
+
+    disLikePost(isDelete) {
+        let type = "POST";
+        if (isDelete) {
+            type = "DELETE"
+        }
+        let url = "http://localhost:8000/post/dislike/" + this.props.postCard.id;
+        this.sendPostRequest(url, type)
+    }
+
+    handleLikePost(postId) {
+        const post = this.props.postCard;
+        this.likePost(post.liked);
+        post.liked = !post.liked;
+        if (post.disliked) {
+            post.disliked = !post.disliked;
+        }
+        this.setState({post: post});
+    }
+
+    handleDisLikePost(postId) {
+        const post = this.props.postCard;
+        this.disLikePost(post.disliked);
+        post.disliked = !post.disliked;
+        if (post.liked) {
+            post.liked = !post.liked;
+        }
+        this.setState({post: post});
     }
 
     render() {
         const {classes} = this.props;
         console.log("EEEEEEEEEEEEEEEEEEEZZZZZZZZZZZZZZZZZZZZ")
-        console.log(this.state.avatar)
+        console.log(this.state.post)
         return (
             <Card className={classes.card}>
                 <CardHeader
@@ -86,9 +156,9 @@ class PostCard extends Component {
                 <Divider variant="middle"/>
                 <CardActions>
                     <LikeDisLikeHandler classes={classes}
-                                        onLike={this.props.onLike}
-                                        onDisLike={this.props.onDisLike}
-                                        postCard={this.props.postCard}/>
+                                        onLike={this.handleLikePost}
+                                        onDisLike={this.handleDisLikePost}
+                                        postCard={this.state.post}/>
                     <IconButton id="share" onClick={() => this.copyToClipboard(window.location.href)}
                                 className={classes.link} aria-label="share">
                         <ShareIcon/>
