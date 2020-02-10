@@ -72,8 +72,16 @@ class PostPage extends Component {
             console.log(data);
             myThis.setState({post: data.post});
             let newComments = [];
-            myThis.setComments(data.post.comments, newComments);
-            myThis.setState({comments: data.post.comments})
+            let counter = 0;
+            for (let i = 0; i < data.post.comments.length; i++) {
+                if (data.post.comments[i].parent_comment === null) {
+                    newComments[counter] = data.post.comments[i];
+                    counter += 1;
+                }
+            }
+            let lastcomments = [];
+            myThis.setComments(newComments, lastcomments);
+            myThis.setState({comments: lastcomments})
         }).catch(function (error) {
             console.log(error)
         })
@@ -81,8 +89,12 @@ class PostPage extends Component {
     }
 
     setComments(comments, target) {
+        console.log("comments")
+        console.log(comments)
         for (let i = 0; i < comments.length; i++) {
-            // if (comments[i].reply !== )
+            target.push(comments[i])
+            if (comments[i].replies)
+                this.setComments(comments[i].replies, target)
         }
     }
 
@@ -144,7 +156,7 @@ class PostPage extends Component {
 
 
     state = {
-        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit', user: {id:'100000'}},
+        post: {id: 1, content: 'Hello this is a bullshit text :))', title: 'bullshit', user: {id: '100000'}},
         comments: [],
     };
 
@@ -278,9 +290,7 @@ class PostPage extends Component {
     }
 
     randomAvatarImage() {
-        console.log("IMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGEEEEE")
-        console.log(this.state.post)
-        if(this.state.post.user.profile)
+        if (this.state.post.user.profile)
             return this.state.post.user.profile.image
         else
             return ""

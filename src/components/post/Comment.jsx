@@ -55,8 +55,8 @@ class Comment extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <Container maxWidth={"md"} className="mt-3">
-                <Card>
+            <Container maxWidth={"md"} className={this.isReply()}>
+                <Card className={this.isReplyColor()}>
                     <CardHeader
                         avatar={
                             <Avatar aria-label="recipe" src={this.randomAvatarImage()}
@@ -69,7 +69,7 @@ class Comment extends Component {
                         }
                         title={<Link className={classes.link + " nav-link font-weight-bold font-italic"}
                                      style={{color: 'black'}}
-                                     to={"/profile/" + this.props.comment.name}>{this.props.comment.name}</Link>}
+                                     to={"/profile/" + this.props.comment.user.username}>{this.props.comment.user.username}</Link>}
                         subheader="September 14, 2016"
                     />
                     <CardMedia
@@ -100,6 +100,20 @@ class Comment extends Component {
         );
     }
 
+    isReplyColor() {
+
+        if (this.props.comment.parent_comment !== null) {
+            return 'bg-light'
+        }
+        return ''
+    }
+    isReply(){
+        if (this.props.comment.parent_comment !== null) {
+            return 'mt-3 ml-4'
+        }
+        return 'mt-3'
+    }
+
     isMyComment(loggedInUser, name) {
         const {classes} = this.props;
         console.log("--------------------")
@@ -115,7 +129,7 @@ class Comment extends Component {
     }
 
     randomAvatarImage() {
-        return this.props.comment.profile_image
+        return this.props.comment.user.profile.image
     }
 
     image() {
