@@ -20,18 +20,18 @@ class ChannelDelete extends Component {
             }
         })
         .then(function (response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             window.location.href = "/profile/"+currentComponent.props.info.creator_username;
         })
         .catch(function (err) {
-            console.log(err);
+            //console.log(err);
         })
     }
     render(){

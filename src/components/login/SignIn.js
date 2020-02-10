@@ -25,17 +25,17 @@ class SignIn extends Component {
         var currentComponent=this;
         var data={'username':document.getElementById("username").value,
                     'password':document.getElementById("password").value};
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         fetch("http://localhost:8000/account/login", {
             method: "POST",
             headers: {"Content-Type": "application/json", "Access-Control-Origin": "*"},
             body: JSON.stringify(data)
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
-                    console.log(response)
-                    console.log("access-token: " + localStorage.getItem("access-token"));
+                    //console.log(response)
+                    //console.log("access-token: " + localStorage.getItem("access-token"));
                     //
                     return response.json();
                 }
@@ -43,7 +43,7 @@ class SignIn extends Component {
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log(data)
+                //console.log(data)
                 localStorage.setItem("refresh-token", data.refresh)
                 localStorage.setItem("access-token", data.access)
                 localStorage.setItem("username", document.getElementById("username").value)
@@ -57,42 +57,42 @@ class SignIn extends Component {
                     }
                 })
                     .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         if (response.ok) {
                             return response.json();
                         }
                         throw new Error("Server Error!");
                     })
                     .then(function (data) {
-                        console.log(data);
+                        //console.log(data);
                         localStorage.setItem("userId", data.user.id);
 
                         window.location.href = "/"
                     })
                     .catch(function (err) {
-                        console.log(err);
+                        //console.log(err);
                     })
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
 
     }
 
     forgetPassword() {
         let currentComponent = this;
-        console.log(document.getElementById("password-reset-email").value, "<==============");
+        //console.log(document.getElementById("password-reset-email").value, "<==============");
         let data = {
             'email': document.getElementById("password-reset-email").value,
         }
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         fetch("http://localhost:8000/account/password/reset", {
             method: "POST",
             headers: {"Content-Type": "application/json", "Access-Control-Origin": "*"},
             body: JSON.stringify(data)
         })
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response.ok) {
                     return response.json();
                 }
@@ -103,7 +103,7 @@ class SignIn extends Component {
                 }
             )
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
                 alert("Email not found!")
             })
 

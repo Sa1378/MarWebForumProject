@@ -14,9 +14,9 @@ class ChannelEdit extends Component {
         super(props)
         this.editChannel=this.editChannel.bind(this);
         this.state={users:[],authors:this.props.authors.map(author=>{return {username:author.username,id:author.id}})}
-        console.log("EDDIIIIIIIIITTTTT CHAAAANNNNNNEEEEEELLLLL")
-        console.log(this.props.authors.map(author=>{return {username:author.username,id:author.id}}))
-        console.log(this.props.info)
+        //console.log("EDDIIIIIIIIITTTTT CHAAAANNNNNNEEEEEELLLLL")
+        //console.log(this.props.authors.map(author=>{return {username:author.username,id:author.id}}))
+        //console.log(this.props.info)
     }
 
     state={
@@ -48,8 +48,8 @@ class ChannelEdit extends Component {
             formData.append('authors',authorIds[i])
         }
         if(document.getElementById("description").value)formData.append('description', document.getElementById("description").value)
-        //console.log(data);
-        //console.log(JSON.stringify(data))
+        ////console.log(data);
+        ////console.log(JSON.stringify(data))
         fetch('http://localhost:8000/channel/channel/'+this.props.info.id, {
             method: "PUT",
             headers: {
@@ -58,22 +58,22 @@ class ChannelEdit extends Component {
             body: formData
         })
         .then(function (response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             window.location.href = "/channel/"+currentComponent.props.info.id;
         })
         .catch(function (err) {
-            console.log(err);
+            //console.log(err);
         })
-        console.log(userId)
-        console.log(typeof userId)
-        console.log(this.state.authors.map(author=>author.id))
+        //console.log(userId)
+        //console.log(typeof userId)
+        //console.log(this.state.authors.map(author=>author.id))
         
     }
 
@@ -87,26 +87,26 @@ class ChannelEdit extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("INFOOOOOOOOOOOOOOOOO")
-            console.log(data)
+            //console.log("INFOOOOOOOOOOOOOOOOO")
+            //console.log(data)
             currentComponent.setState({users:data.users.map(user=>{return{username:user.username,id:user.id}})});
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 
     render() {
-        console.log(this.state.users);
-        console.log("|||||||")
-        console.log(this.state.authors);
+        //console.log(this.state.users);
+        //console.log("|||||||")
+        //console.log(this.state.authors);
         return (
             <div style={{backgroundColor: 'white'}} className="p-5">
                 <form noValidate autoComplete="off">
@@ -155,7 +155,7 @@ class ChannelEdit extends Component {
                                         }
                                     }
                                 }
-                                console.log(value)
+                                //console.log(value)
                                 this.setState({authors:value})
                             }}
                             id="authors"

@@ -41,8 +41,8 @@ class MainPage extends Component {
         } else {
             url += "participated-posts";
         }
-        console.log(shownPosts)
-        console.log("access-token: " + localStorage.getItem("access-token"));
+        //console.log(shownPosts)
+        //console.log("access-token: " + localStorage.getItem("access-token"));
         fetch(url, {
             method: 'GET',
             headers: {
@@ -52,7 +52,7 @@ class MainPage extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
@@ -62,11 +62,11 @@ class MainPage extends Component {
                 let tmp = [];
                 data.posts.reverse();
                 let len=data.posts.length;
-                console.log("POOOOOOOOOOOOOOOSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTSSSSSSSSS")
-                console.log(data.posts)
+                //console.log("POOOOOOOOOOOOOOOSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTSSSSSSSSS")
+                //console.log(data.posts)
                 for (let i = 0; i < len; i++) {
                     let post = data.posts[i];
-                    console.log(post);
+                    //console.log(post);
                     fetch("http://localhost:8000/post/post-view/" + post.id, {
                         method: "GET",
                         headers: {
@@ -78,19 +78,19 @@ class MainPage extends Component {
                         if (response.ok) {
                             return response.json()
                         }
-                        window.location.href = "/notfound"
+                    //    window.location.href = "/notfound"
                     }).then(function (data2) {
-                        console.log(data2);
-                        console.log(post.id)
+                        //console.log(data2);
+                        //console.log(post.id)
                         tmp.push(0)
                         post.liked=data2.post.liked;
                         post.disliked=data2.post.disliked;
-                        console.log(post.id);
+                        //console.log(post.id);
                         if(tmp.length==len){
                             tmp=[]
                             for(let i=0;i<len;i++){
                                 let post=data.posts[i];
-                                console.log(post)
+                                //console.log(post)
                                 tmp.push({
                                     id: post.id,
                                     author: post.post_owner,
@@ -101,25 +101,25 @@ class MainPage extends Component {
                                     postMedia: post.media
                                 });
                             }
-                            console.log("SAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGG")
-                            console.log(tmp);
+                            //console.log("SAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGG")
+                            //console.log(tmp);
                             currentComponent.setState({postCards: tmp});
                         }
                     }).catch(function (error) {
-                        console.log(error)
+                        //console.log(error)
                     })
                     
                 }
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 
     render() {
         const {classes} = this.props;
-        console.log("POST CARDS:")
-        console.log(this.state.postCards)
+        //console.log("POST CARDS:")
+        //console.log(this.state.postCards)
         return (
             <Container>
                 <SortBy onChange={this.handleShownPosts}/>

@@ -29,7 +29,7 @@ class EditProfile extends Component {
     }
 
     editProfile(){
-        console.log(localStorage.getItem("userId"))
+        //console.log(localStorage.getItem("userId"))
         const formData = new FormData();
         formData.append('id',localStorage.getItem("userId"))
         if(document.getElementById("firstName"))formData.append('first_name', document.getElementById("firstName").value)
@@ -39,10 +39,10 @@ class EditProfile extends Component {
         if(document.getElementById("telephoneNumber"))formData.append('telephone_number', document.getElementById("telephoneNumber").value)
         formData.append('image',null)
         if(document.getElementById("image"))formData.append('image', document.getElementById("image").files[0])
-     //   if(!isNaN(document.getElementById("age")))console.log("dsdsa");
-        //console.log(formData.get("first_name"))
-        //console.log(data);
-        //console.log(JSON.stringify(data))
+     //   if(!isNaN(document.getElementById("age")))//console.log("dsdsa");
+        ////console.log(formData.get("first_name"))
+        ////console.log(data);
+        ////console.log(JSON.stringify(data))
         fetch('http://localhost:8000/account/profile-update', {
             method: "PUT",
             headers: {
@@ -51,18 +51,18 @@ class EditProfile extends Component {
             body: formData
         })
         .then(function (response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             window.location.href = "/profile/"+localStorage.getItem("username");
         })
         .catch(function (err) {
-            console.log(err);
+            //console.log(err);
         })
     }
 
@@ -71,8 +71,8 @@ class EditProfile extends Component {
         formData.append('password', document.getElementById("password").value)
         formData.append('new_password', document.getElementById("newPassword").value)
         formData.append('repeat_new_password', parseInt(document.getElementById("repeatNewPassword").value))
-        //console.log(data);
-        //console.log(JSON.stringify(data))
+        ////console.log(data);
+        ////console.log(JSON.stringify(data))
         fetch('http://localhost:8000/account/password-update', {
             method: "POST",
             headers: {
@@ -81,18 +81,18 @@ class EditProfile extends Component {
             body: formData
         })
         .then(function (response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             window.location.href = "/login";
         })
         .catch(function (err) {
-            console.log(err);
+            //console.log(err);
         })
     }
 

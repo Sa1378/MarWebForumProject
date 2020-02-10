@@ -46,10 +46,10 @@ class CreateChannel extends Component {
             formData.append('authors',authorIds[i])
         }
         formData.append('description', document.getElementById("description").value)
-        console.log(formData.get("title"))
-        console.log(document.getElementById("title").value)
-        //console.log(data);
-        //console.log(JSON.stringify(data))
+        //console.log(formData.get("title"))
+        //console.log(document.getElementById("title").value)
+        ////console.log(data);
+        ////console.log(JSON.stringify(data))
         fetch('http://localhost:8000/channel/channel/create', {
             method: "POST",
             headers: {
@@ -58,24 +58,24 @@ class CreateChannel extends Component {
             body: formData
         })
         .then(function (response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             currentComponent.setState({channelSuccess:true})
             window.location.href = "/channel/"+data.detail.id;
         })
         .catch(function (err) {
-            console.log(err);
+            //console.log(err);
             currentComponent.setState({channelFail:true})
         })
-        console.log(userId)
-        console.log(typeof userId)
-        console.log(this.state.authors.map(author=>author.id))
+        //console.log(userId)
+        //console.log(typeof userId)
+        //console.log(this.state.authors.map(author=>author.id))
         
     }
 
@@ -89,19 +89,19 @@ class CreateChannel extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("INFOOOOOOOOOOOOOOOOO")
-            console.log(data)
+            //console.log("INFOOOOOOOOOOOOOOOOO")
+            //console.log(data)
             currentComponent.setState({users:data.users.map(user=>{return{username:user.username,id:user.id}})});
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 

@@ -48,19 +48,19 @@ class AccountCard extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-                console.log(data)
+                //console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                //console.log(data)
                 currentComponent.setState({avatar: data.image})
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 

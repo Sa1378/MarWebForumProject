@@ -26,7 +26,7 @@ class LikeDisLikeHandler extends Component {
                 </React.Fragment>
             );
         } else if (this.props.postCard.disliked === true) {
-            console.log("Dislike Kradddddddddddddddddddddddd", this.props.postCard.disliked, this.props.postCard.id);
+            //console.log("Dislike Kradddddddddddddddddddddddd", this.props.postCard.disliked, this.props.postCard.id);
             return (
                 <React.Fragment>
                     <IconButton className={this.props.classes.link}

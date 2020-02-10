@@ -30,14 +30,14 @@ class SignUp extends Component {
                     'telephone_number':document.getElementById("telephoneNumber").value,
                     'first_name':document.getElementById("firstName").value,
                     'last_name':document.getElementById("lastName").value}
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         fetch("http://localhost:8000/account/signup", {
                 method: "POST",
                 headers: {"Content-Type": "application/json", "Access-Control-Origin": "*"},
                 body:  JSON.stringify(data)
         })
         .then(function(response){ 
-            console.log(response)
+            //console.log(response)
             if(response.ok){
                 currentComponent.setState({signupSuccess:true});
                 window.location.href = "/login";
@@ -47,7 +47,7 @@ class SignUp extends Component {
             }
         })
         .then(function(data){
-            console.log(data)
+            //console.log(data)
             var errorsNum=0;
             var str=""
             var errors=["username","age","telephone_number","email","password","repeat_password"]

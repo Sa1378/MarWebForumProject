@@ -31,10 +31,10 @@ class NewComment extends Component {
     insert() {
         const data = new FormData();
         let myThis = this;
-        console.log(this.getId(), this.props.postPage);
+        //console.log(this.getId(), this.props.postPage);
         data.append('body', document.getElementById("body" + this.getId()).value);
         data.append('post_related', parseInt(this.props.postPage));
-        // console.log(this.postPage)
+        // //console.log(this.postPage)
         if (this.props.comment)
             data.append('parent_comment', parseInt(this.props.comment.id));
 
@@ -54,10 +54,10 @@ class NewComment extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-            console.log(data);
+            //console.log(data);
             window.location.reload()
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
     }
 

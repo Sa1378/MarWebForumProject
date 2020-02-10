@@ -31,20 +31,20 @@ class Channel extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("INFOOOOOOOOOOOOOOOOO")
-            console.log(data)
+            //console.log("INFOOOOOOOOOOOOOOOOO")
+            //console.log(data)
             data.channel.image="http://localhost:8000"+data.channel.image;
             currentComponent.setState({info:data.channel})
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
             window.location.href="/notfound";
         })
     }
@@ -59,15 +59,15 @@ class Channel extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("POSTTTSSSSS")
-            console.log(data)
+            //console.log("POSTTTSSSSS")
+            //console.log(data)
             var tmp=[]
             data.posts.reverse();
             for(let i=0;i<data.posts.length;i++){
@@ -75,11 +75,11 @@ class Channel extends Component {
                 tmp.push({id:post.id,author:post.post_owner,title:post.title,postSummary:post.summary,liked:false,disliked:false,
                         postMedia:post.media});
             }
-            console.log(tmp);
+            //console.log(tmp);
             currentComponent.setState({postCards:tmp});
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 
@@ -110,7 +110,7 @@ class Channel extends Component {
     };
 
     follow(){
-        console.log("FOLLOOOWWWWW")
+        //console.log("FOLLOOOWWWWW")
         var currentComponent=this;
         fetch('http://localhost:8000/channel/followchannel/'+this.props.match.params.channelId,{
                 method:"POST",
@@ -120,19 +120,19 @@ class Channel extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("POSTTTSSSSS")
-            console.log(data)
+            //console.log("POSTTTSSSSS")
+            //console.log(data)
             currentComponent.getInfo();
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 
@@ -146,19 +146,19 @@ class Channel extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("POSTTTSSSSS")
-            console.log(data)
+            //console.log("POSTTTSSSSS")
+            //console.log(data)
             currentComponent.getInfo();
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 

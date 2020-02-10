@@ -40,14 +40,14 @@ class ChannelInfo extends Component {
     checkFollowedState() {
         this.setState({followed: false});
         for (let i = 0; i < this.props.info.followers_channel.length; i++) {
-            console.log("||||||||||||||||||||||||||||||||||||")
-            console.log(this.props.info.followers_channel[i].source_name)
+            //console.log("||||||||||||||||||||||||||||||||||||")
+            //console.log(this.props.info.followers_channel[i].source_name)
             if (this.props.info.followers_channel[i].source_name == localStorage.getItem("username")) {
                 this.setState({followed: true});
                 break;
             }
         }
-        console.log("dskskdjksdksadksadksdak " + this.state.followed)
+        //console.log("dskskdjksdksadksadksdak " + this.state.followed)
     }
 
 
@@ -101,7 +101,7 @@ class ChannelInfo extends Component {
 
     followOrUnFollowIcon() {
         var followed = this.state.followed;
-        console.log("FOLOOWWEDDD: " + followed)
+        //console.log("FOLOOWWEDDD: " + followed)
         if (followed) {
             return <RemoveCircleIcon onClick={this.props.unfollow} color={"secondary"}/>
         }

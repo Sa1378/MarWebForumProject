@@ -21,18 +21,18 @@ class Follow extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log(data)
+            //console.log(data)
             currentComponent.props.changeStatus();
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
 
           //  window.location.href="/notfound";
         })
@@ -48,18 +48,18 @@ class Follow extends Component {
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log(data)
+            //console.log(data)
             currentComponent.props.changeStatus();
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
 
           //  window.location.href="/notfound";
         })

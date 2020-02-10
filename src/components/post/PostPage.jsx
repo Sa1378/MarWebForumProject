@@ -35,6 +35,9 @@ const styles = theme => (
         },
         reply: {
             marginLeft: "20px",
+        },
+        comment:{
+            width:'50%',
         }
     }
 );
@@ -68,7 +71,7 @@ class PostPage extends Component {
             }
             window.location.href = "/notfound"
         }).then(function (data) {
-            console.log(data);
+            //console.log(data);
             myThis.setState({post: data.post});
             let newComments = [];
             let counter = 0;
@@ -80,23 +83,23 @@ class PostPage extends Component {
             }
             let lastcomments = [];
             myThis.setComments(newComments, lastcomments);
-            console.log("****")
-            console.log(lastcomments)
-            console.log("****")
+            //console.log("****")
+            //console.log(lastcomments)
+            //console.log("****")
             myThis.setState({comments: lastcomments})
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
-        console.log(this.state.comments)
+        //console.log(this.state.comments)
     }
 
     setComments(comments, target) {
         for (let i = 0; i < comments.length; i++) {
-            console.log("---> " , comments[i].id);
+            //console.log("---> " , comments[i].id);
             target.push(comments[i]);
-            console.log(comments[i]);
+            //console.log(comments[i]);
             if (comments[i].replies) {
-                console.log("===> " , comments[i].id);
+                //console.log("===> " , comments[i].id);
                 this.setComments(comments[i].replies, target)
             }
         }
@@ -116,9 +119,9 @@ class PostPage extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-            console.log(data);
+            //console.log(data);
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
     }
 
@@ -266,7 +269,7 @@ class PostPage extends Component {
                                 </Badge>
                             </CardActions>
                         </Card>
-                        {this.state.comments.map(comment => <Comment
+                        {this.state.comments.map(comment => <Comment className={classes.comment}
                             key={comment.id}
                             comment={comment}
                             post={this.state.post}

@@ -61,29 +61,29 @@ class Profile extends Component {
             }
         })
             .then(function (response) {
-                console.log("Channel response");
-                console.log(response);
+                //console.log("Channel response");
+                //console.log(response);
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("CHAAAANNEEEEEELLLLL")
-                console.log(data)
+                //console.log("CHAAAANNEEEEEELLLLL")
+                //console.log(data)
                 var tmp = []
                 for (let i = 0; i < data.channels.length; i++) {
                     var channel = data.channels[i]
-                    console.log(channel.title)
+                    //console.log(channel.title)
                     if (channel.title == currentComponent.props.match.params.username) continue;
                     tmp.push({id: channel.id, title: channel.title, creator: channel.creator_username})
                 }
-                console.log(tmp);
+                //console.log(tmp);
                 currentComponent.setState({channels: tmp})
 
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 
@@ -98,7 +98,7 @@ class Profile extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
@@ -108,11 +108,11 @@ class Profile extends Component {
                 let tmp = [];
                 data.posts.reverse();
                 let len=data.posts.length;
-                console.log("POOOOOOOOOOOOOOOSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTSSSSSSSSS")
-                console.log(data.posts)
+                //console.log("POOOOOOOOOOOOOOOSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTSSSSSSSSS")
+                //console.log(data.posts)
                 for (let i = 0; i < len; i++) {
                     let post = data.posts[i];
-                    console.log(post);
+                    //console.log(post);
                     fetch("http://localhost:8000/post/post-view/" + post.id, {
                         method: "GET",
                         headers: {
@@ -124,19 +124,19 @@ class Profile extends Component {
                         if (response.ok) {
                             return response.json()
                         }
-                        window.location.href = "/notfound"
+                    //    window.location.href = "/notfound"
                     }).then(function (data2) {
-                        console.log(data2);
-                        console.log(post.id)
+                        //console.log(data2);
+                        //console.log(post.id)
                         tmp.push(0)
                         post.liked=data2.post.liked;
                         post.disliked=data2.post.disliked;
-                        console.log(post.id);
+                        //console.log(post.id);
                         if(tmp.length==len){
                             tmp=[]
                             for(let i=0;i<len;i++){
                                 let post=data.posts[i];
-                                console.log(post)
+                                //console.log(post)
                                 tmp.push({
                                     id: post.id,
                                     author: post.post_owner,
@@ -147,18 +147,18 @@ class Profile extends Component {
                                     postMedia: post.media
                                 });
                             }
-                            console.log("SAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGG")
-                            console.log(tmp);
+                            //console.log("SAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGG")
+                            //console.log(tmp);
                             currentComponent.setState({postCards: tmp});
                         }
                     }).catch(function (error) {
-                        console.log(error)
+                        //console.log(error)
                     })
                     
                 }
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 
@@ -173,16 +173,16 @@ class Profile extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("FOLOWINGSSSSSSSSSSS")
-                console.log(data.followings)
-                console.log()
+                //console.log("FOLOWINGSSSSSSSSSSS")
+                //console.log(data.followings)
+                //console.log()
                 var tmp = []
                 for (let i = 0; i < data.followings.length; i++) {
                     if (data.followings[i].resourcetype == "FollowChannel") continue;
@@ -191,11 +191,11 @@ class Profile extends Component {
                         avatar_src: 'src/static/images/avatar/download.jpeg'
                     })
                 }
-                console.log(tmp)
+                //console.log(tmp)
                 currentComponent.setState({followings: tmp});
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 
@@ -210,32 +210,32 @@ class Profile extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("FOLOWERSSSSSSSSSSSSSSSSSSS")
-                console.log(data)
+                //console.log("FOLOWERSSSSSSSSSSSSSSSSSSS")
+                //console.log(data)
                 var tmp = []
                 for (let i = 0; i < data.followers.length; i++) {
                     if (data.followers[i].resourcetype == "FollowChannel") continue;
                     if (data.followers[i].source_name == localStorage.getItem("username")) {
                         currentComponent.setState({followed: true});
-                        console.log("kjdsjkdsjkdskjdskj")
+                        //console.log("kjdsjkdsjkdskjdskj")
                     }
                     tmp.push({
                         username: data.followers[i].source_name,
                         avatar_src: 'src/static/images/avatar/download.jpeg'
                     })
                 }
-                console.log(tmp)
+                //console.log(tmp)
                 currentComponent.setState({followers: tmp});
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 
@@ -251,19 +251,19 @@ class Profile extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-                console.log(data)
+                //console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                //console.log(data)
                 currentComponent.setState({profile: data})
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
                 window.location.href = "/notfound";
             })
     }
@@ -325,8 +325,8 @@ class Profile extends Component {
 
     render() {
         const {classes} = this.props;
-        console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
-        console.log(this.state.info)
+        //console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+        //console.log(this.state.info)
         const handleClose = (event, reason) => {
             if (reason === 'clickaway') {
                 return;

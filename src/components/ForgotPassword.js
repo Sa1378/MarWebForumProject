@@ -49,7 +49,7 @@ class NotFound extends Component {
             body: JSON.stringify(data)
         })
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response.ok) {
                     return response.json();
                 }
@@ -61,7 +61,7 @@ class NotFound extends Component {
                 }
             )
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
     }
 

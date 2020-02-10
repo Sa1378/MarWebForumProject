@@ -129,7 +129,7 @@ class Header extends Component {
     }
 
     clickNotif() {
-        console.log("hi")
+        //console.log("hi")
         this.sendRequest(this);
         fetch("http://localhost:8000/notification/seen", {
             method: "POST",
@@ -143,7 +143,7 @@ class Header extends Component {
             }
             throw new Error("Server Error!");
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
         this.setState({badgeContent: 0})
     }
@@ -153,7 +153,7 @@ class Header extends Component {
         var searchTextField = document.getElementById("searchTextField");
         searchTextField.addEventListener("keypress", event => {
             var key = event.keyCode;
-            console.log(key);
+            //console.log(key);
             if (key === 13) {
                 window.location.href = "/search/" + searchTextField.value;
                 //    this.props.history.push('/search'); dunno how the fuck to redirect this to search page
@@ -185,7 +185,7 @@ class Header extends Component {
             myThis.setState({badgeContent: data.notifications.length})
 
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
     }
 

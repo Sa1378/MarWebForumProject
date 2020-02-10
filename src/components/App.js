@@ -23,7 +23,6 @@ class App extends Component {
     }
 
     refreshToken(){
-        console.log("refreeeshhh "+localStorage.getItem("refresh-token"))
         var data={refresh:localStorage.getItem("refresh-token")}
         fetch("http://localhost:8000/account/token/refresh", {
                 method: "POST",
@@ -32,24 +31,24 @@ class App extends Component {
                 body: JSON.stringify(data)
         })
         .then(function(response){
-            console.log("refresshhh "+response)
+            //console.log("refresshhh "+response)
             if(response.status=="200"){
-                console.log(response)
+                //console.log(response)
                 //
                 return response.json();
             }
             throw new Error();
         })
         .then(function(data){
-            console.log("||||||||||||||||||||||||||||||||||||||||")
-            console.log(data.access)
-            console.log(localStorage.getItem("access-token"))
+            //console.log("||||||||||||||||||||||||||||||||||||||||")
+            //console.log(data.access)
+            //console.log(localStorage.getItem("access-token"))
             if(localStorage.getItem("access-token")==data.access)return
             localStorage.setItem("access-token",data.access)
         //    window.location.reload();
         })
         .catch(function(){
-            console.log("change page")
+            //console.log("change page")
             window.location.href="login/"
         });
     }

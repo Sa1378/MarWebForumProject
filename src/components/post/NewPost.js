@@ -44,19 +44,19 @@ class NewPost extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log(data.channels)
+                //console.log(data.channels)
                 currentComponent.setState({channels: data.channels})
             })
             .catch(function (err) {
                 //TODO
-                console.log(err);
+                //console.log(err);
             })
 
     }
@@ -69,7 +69,7 @@ class NewPost extends Component {
             }
         }
         const changePlace = (event) => {
-            console.log(event);
+            //console.log(event);
             this.setState({value: event.target.value})
         }
         const {classes} = this.props;
@@ -196,7 +196,7 @@ class NewPost extends Component {
                 throw new Error("Server Error!");
             })
             .then(function (data) {
-                console.log(data);
+                //console.log(data);
                 currentComponent.setState({snackBar: true});
                 // if (this.props.edit) {
                 //     window.location.reload()
@@ -206,7 +206,7 @@ class NewPost extends Component {
                 window.location.reload()
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
             })
 
 

@@ -88,15 +88,15 @@ class Sidebar extends Component{
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("INFOOOOOOOOOOOOOOOOO")
-            console.log(data)
+            //console.log("INFOOOOOOOOOOOOOOOOO")
+            //console.log(data)
             var tmp=[]
             for(let i=0;i<5;i++){
                 if(i==data.users.length)break;
@@ -105,7 +105,7 @@ class Sidebar extends Component{
             currentComponent.setState({users:tmp});
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 
@@ -119,15 +119,15 @@ class Sidebar extends Component{
                     'Authorization': 'Bearer ' + localStorage.getItem("access-token")
         }})
         .then(function(response) {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Server Error!");
         })
         .then(function(data) {
-            console.log("INFOOOOOOOOOOOOOOOOO")
-            console.log(data)
+            //console.log("INFOOOOOOOOOOOOOOOOO")
+            //console.log(data)
             var tmp=[]
             for(let i=0;i<data.channels.length;i++){
                 if(tmp.length==5)break;
@@ -138,7 +138,7 @@ class Sidebar extends Component{
             currentComponent.setState({channels:tmp});
         })
         .catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 

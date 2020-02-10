@@ -71,9 +71,9 @@ class PostCard extends Component {
             }
             throw new Error("Server Error!");
         }).then(function (data) {
-            console.log(data);
+            //console.log(data);
         }).catch(function (error) {
-            console.log(error)
+            //console.log(error)
         })
     }
 
@@ -82,7 +82,7 @@ class PostCard extends Component {
         if (isDelete) {
             type = "DELETE"
         }
-        console.log(this.props.postCard.id)
+        //console.log(this.props.postCard.id)
         let url = "http://localhost:8000/post/like/" + this.props.postCard.id;
         this.sendPostRequest(url, type)
     }
@@ -118,8 +118,8 @@ class PostCard extends Component {
 
     render() {
         const {classes} = this.props;
-        console.log("EEEEEEEEEEEEEEEEEEEZZZZZZZZZZZZZZZZZZZZ")
-        console.log(this.state.post)
+        //console.log("EEEEEEEEEEEEEEEEEEEZZZZZZZZZZZZZZZZZZZZ")
+        //console.log(this.state.post)
         return (
             <Card className={classes.card}>
                 <CardHeader
@@ -172,8 +172,8 @@ class PostCard extends Component {
     }
 
     showMedia() {
-        console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa");
-        console.log(this.props.postMedia);
+        //console.log("MMMMMEEDDDIIIAAAAAAAAAAAAAAAAAAAAAa");
+        //console.log(this.props.postMedia);
         return (
             <img src={this.props.postMedia} width={'100%'} style={{maxWidth: "600px", minWidth: "600px"}}
                  alt="Can't be shown."/>
@@ -191,7 +191,7 @@ class PostCard extends Component {
             }
         })
             .then(function (response) {
-                console.log(response)
+                //console.log(response)
                 if (response.ok) {
                     return response.json();
                 }
@@ -199,13 +199,13 @@ class PostCard extends Component {
             })
             .then(function (data) {
 
-                console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa");
-                console.log(data.image);
+                //console.log("DAAAATTAAAAAAAAAAAAAAAAAAAAAAAAAAa");
+                //console.log(data.image);
                 currentComponent.setState({avatar: data.image});
 
             })
             .catch(function (err) {
-                console.log(err);
+                //console.log(err);
                 //    window.location.href="/notfound";
             })
     }

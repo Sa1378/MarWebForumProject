@@ -66,7 +66,7 @@ class MainPage extends Component {
             }
         })
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response.ok) {
                     return response.json();
                 }
@@ -104,12 +104,12 @@ class MainPage extends Component {
                         avatar_src: data.accounts[i].profile.image
                     })
                 }
-                console.log(accounts);
+                //console.log(accounts);
                 currentComponent.setState({accounts: accounts});
             })
             .catch(function (err) {
-                console.log(err);
-                window.location.href = "/notfound";
+                //console.log(err);
+            //    window.location.href = "/notfound";
             })
     }
 
@@ -119,7 +119,7 @@ class MainPage extends Component {
     }
 
     showData() {
-        console.log(this.state);
+        //console.log(this.state);
         if (this.state.dataShowKind === "posts") {
             return (
                 <React.Fragment>

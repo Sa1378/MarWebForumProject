@@ -35,7 +35,7 @@ class ImageAvatar extends Component {
         }
     }
     smallOrLarge(){
-        console.log(this.props);
+        //console.log(this.props);
         if (this.props.isList === 'true'){
             return this.small;
         }else return this.large;
@@ -51,8 +51,8 @@ class ImageAvatar extends Component {
     }
 
     randomAvatarImage() {
-        console.log("AVAAATTTTAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRR")
-        console.log(this.props.avatarSrc)
+        //console.log("AVAAATTTTAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRR")
+        //console.log(this.props.avatarSrc)
         let number = (Math.floor(Math.random() * 9)) + 3;
    /*     if (number === 3) {
             return img3
