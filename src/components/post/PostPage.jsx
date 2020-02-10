@@ -50,7 +50,6 @@ class PostPage extends Component {
     }
 
     componentDidMount() {
-        console.log("-----");
         this.getPost()
     }
 
@@ -81,6 +80,9 @@ class PostPage extends Component {
             }
             let lastcomments = [];
             myThis.setComments(newComments, lastcomments);
+            console.log("****")
+            console.log(lastcomments)
+            console.log("****")
             myThis.setState({comments: lastcomments})
         }).catch(function (error) {
             console.log(error)
@@ -89,12 +91,14 @@ class PostPage extends Component {
     }
 
     setComments(comments, target) {
-        console.log("comments")
-        console.log(comments)
         for (let i = 0; i < comments.length; i++) {
-            target.push(comments[i])
-            if (comments[i].replies)
+            console.log("---> " , comments[i].id);
+            target.push(comments[i]);
+            console.log(comments[i]);
+            if (comments[i].replies) {
+                console.log("===> " , comments[i].id);
                 this.setComments(comments[i].replies, target)
+            }
         }
     }
 

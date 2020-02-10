@@ -8,8 +8,6 @@ class LikeDisLikeHandler extends Component {
 
 
     render() {
-        console.log(this.props.postCard)
-        console.log(this.props.postCard.liked)
         if (this.props.postCard.liked === true) {
             return (
                 <React.Fragment>
