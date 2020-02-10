@@ -18,6 +18,8 @@ import EditDeletePost from "./EditDeletePost";
 import LikeDisLikeHandler from "./LikeDisLikeHandler";
 import Badge from "@material-ui/core/Badge/Badge";
 import ScoreIcon from '@material-ui/icons/Score';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 
 
 const styles = theme => (
@@ -80,9 +82,6 @@ class PostPage extends Component {
             }
             let lastcomments = [];
             myThis.setComments(newComments, lastcomments);
-            console.log("****")
-            console.log(lastcomments)
-            console.log("****")
             myThis.setState({comments: lastcomments})
         }).catch(function (error) {
             console.log(error)
@@ -92,17 +91,18 @@ class PostPage extends Component {
 
     setComments(comments, target) {
         for (let i = 0; i < comments.length; i++) {
-            console.log("---> " , comments[i].id);
+            console.log("---> ", comments[i].id);
             target.push(comments[i]);
             console.log(comments[i]);
             if (comments[i].replies) {
-                console.log("===> " , comments[i].id);
+                console.log("===> ", comments[i].id);
                 this.setComments(comments[i].replies, target)
             }
         }
     }
 
     sendPostRequest(url, type) {
+        let myThis=this
         fetch(url, {
             method: type,
             headers: {
@@ -117,6 +117,8 @@ class PostPage extends Component {
             throw new Error("Server Error!");
         }).then(function (data) {
             console.log(data);
+
+            myThis.getPost()
         }).catch(function (error) {
             console.log(error)
         })
@@ -204,22 +206,12 @@ class PostPage extends Component {
 
     handleLikePost(postId) {
         const post = this.state.post;
-        this.likePost(post.liked);
-        post.liked = !post.liked;
-        if (post.disliked) {
-            post.disliked = !post.disliked;
-        }
-        this.setState({post: post});
+        this.likePost(post.liked)
     }
 
     handleDisLikePost(postId) {
         const post = this.state.post;
         this.disLikePost(post.disliked);
-        post.disliked = !post.disliked;
-        if (post.liked) {
-            post.liked = !post.liked;
-        }
-        this.setState({post: post});
     }
 
     render() {
@@ -253,6 +245,7 @@ class PostPage extends Component {
                             </CardContent>
                             <Divider variant="middle"/>
                             <CardActions disableSpacing>
+
                                 <LikeDisLikeHandler classes={classes}
                                                     onLike={this.handleLikePost}
                                                     onDisLike={this.handleDisLikePost}
@@ -261,8 +254,13 @@ class PostPage extends Component {
                                             className={classes.link} aria-label="share">
                                     <ShareIcon/>
                                 </IconButton>
-                                <Badge badgeContent={120} color={'primary'}>
-                                    <ScoreIcon/>
+                                <Badge badgeContent={this.state.post.likes}
+                                       color={'primary'}>
+                                    <ThumbUpAltIcon/>
+                                </Badge>
+                                <Badge style={{marginLeft: '20px'}} badgeContent={this.state.post.dislikes}
+                                       color={'primary'}>
+                                    <ThumbDownAltIcon/>
                                 </Badge>
                             </CardActions>
                         </Card>
